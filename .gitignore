@@ -1,0 +1,15 @@
+# Godot editor and import output
+.godot/
+.import/
+*.import
+
+# Android and export output
+*.apk
+*.aab
+*.keystore
+*.jks
+export/android/
+
+# OS and editor files
+.DS_Store
+*.swp

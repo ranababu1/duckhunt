@@ -9,7 +9,7 @@ M0 (Project foundation) is in progress. The repository now has a Godot 4 project
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: none (repository has no commits yet)
+- Latest commit: `b1deb71` (`Initial Godot greybox prototype`)
 
 ## Implemented features
 

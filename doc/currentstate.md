@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `a9a6ee3` (`Correct project history references`).
+- Latest commit: `be87e92` (`Record Android and visual QA blockers`); sprite-timed terminal animations are in progress.
 
 ## Implemented features
 
@@ -17,6 +17,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Original code-drawn greybox range with a moving target.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
 - Retired targets stop processing after their terminal animation completes.
+- Hit/escape target lifetime follows assigned SpriteFrames timing, with a 0.35 second placeholder fallback.
 - Separate weapon, run, and round controllers for two-round magazines, automatic reload, counters, score, hit quota, and escape allowance.
 - Tap/click shooting within the playfield with one-target-per-shot resolution and basic hit/miss/reload feedback.
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
@@ -54,6 +55,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot 4.7.2 headless project import.
 - Passed: Godot 4.7.2 headless game launch for two seconds, with no parse or runtime errors after the controller split.
 - Passed: headless gameplay logic tests for reload behavior, zero-shot accuracy, round completion/failure, one-time duck terminal states, 10-round progression, scoring, and lives.
+- Passed: sprite-backed duck test confirms terminal lifetime matches three 10 FPS animation frames before retirement.
 - Passed: pause/resume/title state checks and headless project launch after UI flow implementation.
 - Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
 - Passed: malformed settings values fall back to defaults while a valid best score remains readable; malformed best score safely loads as zero.

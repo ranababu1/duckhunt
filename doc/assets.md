@@ -233,7 +233,7 @@ For each delivery:
 - Assign `sky`, `far_hills`, `tree_line`, and `foreground` textures there. Each is drawn over a 960 × 540 canvas; the sky should be opaque and the three nearer layers should use transparency where needed. The game keeps the geometric range if any required background layer is missing.
 - Assign optional 32 × 32 `shot_effect` and 64 × 64 `hit_spark` textures for tap and hit feedback. Missing textures keep the drawn shot ring and duck outline; reduced-flash hides both effects.
 - Assign optional `title_logo` artwork to replace the text title on the title screen. Leave it empty to retain the working-title text.
-- Assign `duck_frames` as a `SpriteFrames` resource with `fly`, `hit`, and `escape` animations. The duck keeps its geometric fallback for any missing animation. Use a short terminal animation near the current 0.35 second lifecycle duration.
+- Assign `duck_frames` as a `SpriteFrames` resource with `fly`, `hit`, and `escape` animations. The duck keeps its geometric fallback for any missing or empty animation. Hit/escape lifetime follows the animation's frame durations and speed; without those animations it uses a 0.35 second fallback.
 - Optionally assign a `Theme` to `ui_theme` to provide original panel/button styles and typography. When a theme is assigned, built-in panel/button style overrides are omitted so Theme styles can take effect.
 - Music and effect streams remain assigned on the main scene's `AudioManager` child. No asset paths are hard-coded into gameplay scripts.
 

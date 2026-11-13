@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Sprite-timed duck terminal states (in progress)
+
+### Changed
+
+- Hit and escape lifetimes now follow assigned `SpriteFrames` frame durations and playback speed, with the existing 0.35 second fallback when animation data is absent.
+- Empty animation states retain the geometric duck fallback.
+
+### Tests
+
+- Passed sprite-backed three-frame, 10 FPS lifecycle regression check, gameplay logic tests, ten-round game-flow test, and headless scene launch.
+
+### Follow-up
+
+- Verify the timing against supplied hit/escape artwork when available.
+
 ## 2026-11-13 — `bc07bfb`
 
 ### Tests

@@ -17,6 +17,7 @@ func _init() -> void:
 	_test_accuracy_with_zero_shots()
 	_test_round_outcomes()
 	_test_duck_terminal_states()
+	_test_sprite_animation_lifecycle()
 	_test_classic_round_progression()
 	_test_finite_round_waves()
 	_test_scoring_and_lives()
@@ -86,6 +87,23 @@ func _test_duck_terminal_states() -> void:
 	_assert(not duck.try_hit(duck.position), "escaped duck must reject attempted hits")
 	duck.deactivate()
 	_assert(duck.state == duck.State.OFFSCREEN and not duck.try_hit(duck.position), "deactivated target must not move or accept hits")
+	duck.free()
+
+func _test_sprite_animation_lifecycle() -> void:
+	var frames := SpriteFrames.new()
+	frames.add_animation("hit")
+	frames.set_animation_speed("hit", 10.0)
+	for _index in 3:
+		frames.add_frame("hit", PlaceholderTexture2D.new())
+	var duck = DuckScript.new()
+	duck.set_sprite_frames(frames)
+	duck.start_flight(Vector2(120.0, 272.0), Rect2(0.0, 0.0, 960.0, 540.0), Vector2.ZERO)
+	_assert(duck.try_hit(Vector2(120.0, 272.0)), "sprite-backed target should accept a valid hit")
+	_assert(is_equal_approx(duck.terminal_animation_duration, 0.3), "terminal lifetime should match the supplied sprite animation")
+	duck._process(0.29)
+	_assert(duck.state == duck.State.HIT, "sprite-backed target should remain until its animation duration elapses")
+	duck._process(0.02)
+	_assert(duck.state == duck.State.OFFSCREEN, "sprite-backed target should retire after its animation completes")
 	duck.free()
 
 func _test_classic_round_progression() -> void:

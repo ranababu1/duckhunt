@@ -15,6 +15,7 @@ var flight_velocity := Vector2(180.0, 0.0)
 var playfield := Rect2(24.0, 76.0, 912.0, 420.0)
 var flight_time := 0.0
 var terminal_time := 0.0
+var terminal_animation_duration := TERMINAL_ANIMATION_DURATION
 var resolution_sent := false
 var movement_pattern := "sine"
 var base_y := 272.0
@@ -45,6 +46,7 @@ func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: V
 	movement_pattern = new_pattern
 	flight_time = 0.0
 	terminal_time = 0.0
+	terminal_animation_duration = TERMINAL_ANIMATION_DURATION
 	resolution_sent = false
 	state = State.ENTERING
 	_play_visual_animation("fly")
@@ -84,7 +86,7 @@ func _process(delta: float) -> void:
 			terminal_time += delta
 			if state == State.HIT:
 				position.y += 110.0 * delta
-			if terminal_time >= TERMINAL_ANIMATION_DURATION:
+			if terminal_time >= terminal_animation_duration:
 				state = State.OFFSCREEN
 				set_process(false)
 				if animated_visual != null:
@@ -111,10 +113,19 @@ func _resolve_escape() -> void:
 	resolved_escape.emit(self)
 
 func _play_visual_animation(animation_name: String) -> void:
-	var has_animation := visual_frames != null and visual_frames.has_animation(animation_name)
+	var has_animation := visual_frames != null and visual_frames.has_animation(animation_name) and visual_frames.get_frame_count(animation_name) > 0
 	placeholder_visible = not has_animation
 	if animated_visual == null:
 		return
+	if animation_name == "hit" or animation_name == "escape":
+		terminal_animation_duration = TERMINAL_ANIMATION_DURATION
+		if has_animation:
+			var animation_speed := visual_frames.get_animation_speed(animation_name)
+			if animation_speed > 0.0:
+				var animation_ticks := 0.0
+				for frame_index in visual_frames.get_frame_count(animation_name):
+					animation_ticks += visual_frames.get_frame_duration(animation_name, frame_index)
+				terminal_animation_duration = animation_ticks / animation_speed
 	animated_visual.visible = has_animation
 	if has_animation:
 		animated_visual.play(animation_name)

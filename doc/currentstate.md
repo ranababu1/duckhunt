@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for Inspector-ready audio slots and run documentation.
+- Latest implementation commit: `d1df331` (`Prepare asset handoff and local workflow`).
 
 ## Implemented features
 

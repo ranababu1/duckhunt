@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — `cc6d241`
+## 2026-11-13 — `036b640`
 
 ### Added
 
@@ -20,7 +20,7 @@
 
 - Integrate original visual/audio assets when supplied and verify on physical Android devices.
 
-## 2026-11-13 — Earlier finite-wave implementation
+## 2026-11-13 — `cc6d241`
 
 ### Added
 

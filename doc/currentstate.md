@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for full game-flow smoke coverage and lifecycle fixes.
+- Latest implementation commit: `036b640` (`Cover complete round flow`).
 
 ## Implemented features
 

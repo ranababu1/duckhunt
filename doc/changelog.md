@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Tutorial escape rules (in progress)
+## 2026-11-13 — `f3b1192`
 
 ### Changed
 

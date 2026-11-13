@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `5960b1b` (`Record target lifecycle fix`); tutorial escape-rule clarification is in progress.
+- Latest implementation commit: `f3b1192` (`Clarify escape rules in tutorial`).
 
 ## Implemented features
 

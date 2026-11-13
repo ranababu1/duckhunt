@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for finite waves and audio routing.
+- Latest implementation commit: `cc6d241` (`Add finite multi-target rounds`).
 
 ## Implemented features
 

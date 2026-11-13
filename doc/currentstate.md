@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `53a79eb` (`Reject non-finite audio settings`).
+- Latest commit: `903134d` (`Record non-finite settings validation`); base-viewport layout geometry coverage is in progress.
 
 ## Implemented features
 
@@ -70,6 +70,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: end-to-end flow confirms the remaining-target count decreases after a hit.
 - Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.
 - Passed: end-to-end flow confirms the main scene's art resource slot loads and incomplete art retains the geometric fallback.
+- Passed: generated menu panels and their content fit within their panel bounds and the 960×540 base viewport.
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion with translation and non-uniform scaling.

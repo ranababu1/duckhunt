@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-13 — Base-viewport layout checks (in progress)
+
+### Tests
+
+- Game-flow test now checks title/tutorial/pause/round-clear/results/settings panels stay within 960×540 and their content minimum height fits the cards.
+- Passed gameplay logic, complete game-flow, and headless launch checks.
+
+### Follow-up
+
+- Visual review and physical landscape aspect-ratio checks remain outstanding.
+
 ## 2026-11-13 — `53a79eb`
 
 ### Fixed

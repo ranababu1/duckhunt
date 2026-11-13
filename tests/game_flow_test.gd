@@ -16,6 +16,12 @@ func _run_flow() -> void:
 	_assert(not main._draw_art_background(), "incomplete background layers should keep the geometric fallback")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
+	for screen_name in ["title", "tutorial", "pause", "round_clear", "results", "settings"]:
+		var card := main.ui.screens[screen_name].get_child(0) as PanelContainer
+		var content := card.get_child(0) as VBoxContainer
+		var required_height: float = content.get_combined_minimum_size().y
+		_assert(Rect2(Vector2.ZERO, Vector2(960.0, 540.0)).encloses(card.get_rect()), "%s panel should stay inside the base landscape viewport" % screen_name)
+		_assert(required_height <= card.size.y - 44.0, "%s content should fit inside its panel" % screen_name)
 	var title_text := ""
 	for label in main.ui.screens["title"].find_children("*", "Label", true, false):
 		title_text += label.text + " "

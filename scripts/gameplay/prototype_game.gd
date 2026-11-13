@@ -15,6 +15,8 @@ const GameUIScript = preload("res://scripts/ui/game_ui.gd")
 const SaveServiceScript = preload("res://scripts/core/save_service.gd")
 const InputControllerScript = preload("res://scripts/gameplay/input_controller.gd")
 
+@export var art_assets: Resource
+
 var ui
 var audio
 var input_controller
@@ -243,6 +245,10 @@ func _on_setting_changed(key: String, value: Variant) -> void:
 
 func _create_duck():
 	var duck = DuckScript.new()
+	var duck_frames: SpriteFrames
+	if art_assets != null:
+		duck_frames = art_assets.get("duck_frames") as SpriteFrames
+	duck.set_sprite_frames(duck_frames)
 	duck.process_mode = Node.PROCESS_MODE_PAUSABLE
 	duck.state = DuckScript.State.OFFSCREEN
 	duck.set_reduced_flash(bool(ui.current_settings().get("reduced_flash", false)))
@@ -301,17 +307,34 @@ func _show_feedback(message: String) -> void:
 	feedback_time = 0.65
 
 func _draw() -> void:
-	# Original geometric greybox environment; final pixel artwork is deferred.
-	draw_rect(Rect2(Vector2.ZERO, Vector2(960.0, 540.0)), Color("79c8e8"))
-	draw_circle(Vector2(808.0, 136.0), 42.0, Color("ffe59a"))
-	draw_colored_polygon(PackedVector2Array([Vector2(0, 270), Vector2(180, 168), Vector2(370, 270), Vector2(550, 154), Vector2(760, 270), Vector2(960, 182), Vector2(960, 370), Vector2(0, 370)]), Color("5d9f75"))
-	draw_rect(Rect2(0, 366, 960, 174), Color("4c8243"))
+	if not _draw_art_background():
+		# Original geometric greybox environment; final pixel artwork is deferred.
+		draw_rect(Rect2(Vector2.ZERO, Vector2(960.0, 540.0)), Color("79c8e8"))
+		draw_circle(Vector2(808.0, 136.0), 42.0, Color("ffe59a"))
+		draw_colored_polygon(PackedVector2Array([Vector2(0, 270), Vector2(180, 168), Vector2(370, 270), Vector2(550, 154), Vector2(760, 270), Vector2(960, 182), Vector2(960, 370), Vector2(0, 370)]), Color("5d9f75"))
+		draw_rect(Rect2(0, 366, 960, 174), Color("4c8243"))
 	draw_rect(PLAYFIELD, Color("173b4b"), false, 3.0)
 	_draw_hud()
 	if shot_marker_time > 0.0:
 		draw_arc(shot_marker, 18.0, 0.0, TAU, 16, Color("fff4b5"), 3.0)
 	if feedback_time > 0.0:
 		_draw_centered_text(feedback, Vector2(480.0, 122.0), 24, Color("fff4b5"))
+
+func _draw_art_background() -> bool:
+	if art_assets == null:
+		return false
+	var sky := art_assets.get("sky") as Texture2D
+	var far_hills := art_assets.get("far_hills") as Texture2D
+	var tree_line := art_assets.get("tree_line") as Texture2D
+	var foreground := art_assets.get("foreground") as Texture2D
+	if sky == null or far_hills == null or tree_line == null or foreground == null:
+		return false
+	var bounds := Rect2(Vector2.ZERO, Vector2(960.0, 540.0))
+	draw_texture_rect(sky, bounds, false)
+	draw_texture_rect(far_hills, bounds, false)
+	draw_texture_rect(tree_line, bounds, false)
+	draw_texture_rect(foreground, bounds, false)
+	return true
 
 func _draw_hud() -> void:
 	draw_rect(Rect2(18, 14, 924, 50), Color("18334d"))

@@ -11,6 +11,9 @@ func _run_flow() -> void:
 	var main = MainScene.instantiate()
 	root.add_child(main)
 	await process_frame
+	_assert(main.art_assets != null, "main scene should expose an ArtAssetSet for future original art")
+	_assert(main.art_assets.get("sky") == null, "empty art slots should preserve the geometric fallback")
+	_assert(not main._draw_art_background(), "incomplete background layers should keep the geometric fallback")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
 	main.ui.tutorial_requested.emit()
@@ -22,6 +25,7 @@ func _run_flow() -> void:
 	main.ui.play_requested.emit()
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING, "Play should start a run")
 	_assert(main.round.active_ducks == 1, "first round should spawn its opening target")
+	_assert(main.ducks[0].placeholder_visible, "duck should use its geometric fallback until animation frames are assigned")
 	_assert(main._hud_status_text() == "HITS 0/2   ESCAPES 0/2   COMBO 0   LIVES 3", "HUD should show the current escape allowance")
 	var duck = main.ducks[0]
 	duck.position = Vector2(420.0, 280.0)

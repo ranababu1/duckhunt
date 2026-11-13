@@ -28,7 +28,7 @@ Settings and the local best score are stored offline in `user://duckhunt_arcade.
 
 ## Assets
 
-The current scene uses original code-drawn placeholder art and has empty audio-stream slots. When supplying files, follow [doc/assets.md](doc/assets.md). Music and SFX can be assigned to the `AudioManager` child of the main scene in the Godot Inspector; keep all art and audio original or commercially licensed.
+The current scene uses geometric placeholder art and has empty audio-stream slots. When supplying files, follow [doc/assets.md](doc/assets.md). Assign the `ArtAssetSet` resource at `resources/art/open_range_art_set.tres` for the background layers and duck animations, and assign music/SFX on the `AudioManager` child of the main scene in the Godot Inspector. Keep all art and audio original or commercially licensed.
 
 ## Android release status
 

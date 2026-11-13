@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `f3b1192` (`Clarify escape rules in tutorial`).
+- Latest commit: `1784f50` (`Record tutorial escape rule update`); art assignment slots are in progress.
 
 ## Implemented features
 
@@ -32,6 +32,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Finite round duck counts, timed wave spawning, later-round simultaneous pairs, and sine/diagonal movement patterns.
 - Closest-target shot resolution when hit areas overlap.
 - Music and SFX buses with event playback hooks ready for provided original audio streams.
+- Main scene exposes an `ArtAssetSet` resource for four background layers and named duck animation states, with geometric fallbacks until assets are assigned.
 - App background/window focus loss automatically pauses active play, and remaining targets are retired when a new round starts.
 - Dedicated input controller converts viewport taps through the inverse canvas transform and emits shots only for unhandled playfield touches.
 - Initial Godot-oriented folder layout and ignore rules.
@@ -57,6 +58,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
 - Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.
+- Passed: end-to-end flow confirms the main scene's art resource slot loads and incomplete art retains the geometric fallback.
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion using a non-zero canvas offset.

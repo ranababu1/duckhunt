@@ -227,6 +227,13 @@ For each delivery:
 
 ## 8. Integration and QA checklist
 
+### Godot assignment slots
+
+- The main scene references `resources/art/open_range_art_set.tres`, an `ArtAssetSet` resource exposed as `art_assets` on the root `PrototypeGame` node.
+- Assign `sky`, `far_hills`, `tree_line`, and `foreground` textures there. Each is drawn over a 960 × 540 canvas; the sky should be opaque and the three nearer layers should use transparency where needed. The game keeps the geometric range if any required background layer is missing.
+- Assign `duck_frames` as a `SpriteFrames` resource with `fly`, `hit`, and `escape` animations. The duck keeps its geometric fallback for any missing animation. Use a short terminal animation near the current 0.35 second lifecycle duration.
+- Music and effect streams remain assigned on the main scene's `AudioManager` child. No asset paths are hard-coded into gameplay scripts.
+
 - Verify every referenced asset path exists.
 - Check import settings use nearest filtering for pixel art.
 - Verify animation frame order and playback speed.

@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13 — Art assignment slots (in progress)
+
+### Added
+
+- `ArtAssetSet` resource with sky, distant hills, tree line, foreground, and duck `SpriteFrames` slots.
+- Main-scene wiring for the art resource, named `fly`/`hit`/`escape` duck animations, and geometric fallbacks for unassigned or incomplete art.
+- Asset handoff notes describing resource assignment and expected animation names.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+- Flow test confirms the resource loads and incomplete background art keeps the fallback.
+
+### Follow-up
+
+- Assign the user's original art and audio files when provided, then complete Android validation.
+
 ## 2026-11-13 — `f3b1192`
 
 ### Changed

@@ -19,6 +19,19 @@ var resolution_sent := false
 var movement_pattern := "sine"
 var base_y := 272.0
 var reduced_flash := false
+var visual_frames: SpriteFrames
+var animated_visual: AnimatedSprite2D
+var placeholder_visible := true
+
+func set_sprite_frames(frames: SpriteFrames) -> void:
+	visual_frames = frames
+	if visual_frames == null:
+		return
+	animated_visual = AnimatedSprite2D.new()
+	animated_visual.name = "AnimatedVisual"
+	animated_visual.sprite_frames = visual_frames
+	animated_visual.visible = false
+	add_child(animated_visual)
 
 func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2, new_pattern := "sine") -> void:
 	position = start_position
@@ -30,12 +43,15 @@ func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: V
 	terminal_time = 0.0
 	resolution_sent = false
 	state = State.ENTERING
+	_play_visual_animation("fly")
 	queue_redraw()
 
 func deactivate() -> void:
 	state = State.OFFSCREEN
 	resolution_sent = true
 	set_process(false)
+	if animated_visual != null:
+		animated_visual.visible = false
 	queue_redraw()
 
 func set_reduced_flash(enabled: bool) -> void:
@@ -67,6 +83,8 @@ func _process(delta: float) -> void:
 			if terminal_time >= TERMINAL_ANIMATION_DURATION:
 				state = State.OFFSCREEN
 				set_process(false)
+				if animated_visual != null:
+					animated_visual.visible = false
 				terminal_animation_finished.emit(self)
 	queue_redraw()
 
@@ -76,6 +94,7 @@ func _resolve_hit() -> void:
 	resolution_sent = true
 	state = State.HIT
 	terminal_time = 0.0
+	_play_visual_animation("hit")
 	resolved_hit.emit(self)
 
 func _resolve_escape() -> void:
@@ -84,10 +103,20 @@ func _resolve_escape() -> void:
 	resolution_sent = true
 	state = State.ESCAPING
 	terminal_time = 0.0
+	_play_visual_animation("escape")
 	resolved_escape.emit(self)
 
+func _play_visual_animation(animation_name: String) -> void:
+	var has_animation := visual_frames != null and visual_frames.has_animation(animation_name)
+	placeholder_visible = not has_animation
+	if animated_visual == null:
+		return
+	animated_visual.visible = has_animation
+	if has_animation:
+		animated_visual.play(animation_name)
+
 func _draw() -> void:
-	if state == State.OFFSCREEN:
+	if state == State.OFFSCREEN or not placeholder_visible:
 		return
 	var flap := sin(flight_time * 12.0) * 8.0
 	var body_color := Color("31475e") if state != State.HIT else Color("ca5d58")

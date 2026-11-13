@@ -1,0 +1,26 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/ducks/duck_fly_1.svg" id="1_fly_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ducks/duck_fly_2.svg" id="2_fly_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ducks/duck_fly_3.svg" id="3_fly_c"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ducks/duck_hit_1.svg" id="4_hit_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ducks/duck_hit_2.svg" id="5_hit_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ducks/duck_escape.svg" id="6_escape"]
+
+[resource]
+animations = [{
+"frames": [{"duration": 1.0, "texture": ExtResource("1_fly_a")}, {"duration": 1.0, "texture": ExtResource("2_fly_b")}, {"duration": 1.0, "texture": ExtResource("3_fly_c")}],
+"loop": true,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("4_hit_a")}, {"duration": 1.0, "texture": ExtResource("5_hit_b")}],
+"loop": false,
+"name": &"hit",
+"speed": 12.0
+}, {
+"frames": [{"duration": 1.0, "texture": ExtResource("6_escape")}],
+"loop": false,
+"name": &"escape",
+"speed": 5.0
+}]

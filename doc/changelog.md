@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13 — Original duck animation and effects
+
+### Added
+
+- Five original 64 × 48 duck poses with a three-frame wing-flap cycle, two-frame hit reaction, and escape animation, authored on a crisp four-pixel grid.
+- Original shot-flash and hit-spark textures integrated into the art resource.
+- Flow assertions covering target animation frame counts and effect texture loading.
+
+### Tests
+
+- Passed Godot import and game-flow checks for the new animation and effects resources.
+- Passed Android export and emulator launch; the original target sprite rendered in Classic Mode with no startup script errors.
+
+### Follow-up
+
+- Review the target against final supplied art and tune visual hit feedback on a physical handset.
+
 ## 2026-11-13 — `b3d7e03` Procedural original music and effects
 
 ### Added

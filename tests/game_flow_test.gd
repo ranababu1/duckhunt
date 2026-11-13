@@ -16,6 +16,9 @@ func _run_flow() -> void:
 	_assert(main.art_assets != null, "main scene should expose an ArtAssetSet for future original art")
 	var background := main.art_assets.get("background") as Texture2D
 	_assert(background != null and background.get_width() > 0 and background.get_height() > 0, "main scene should load the original full-scene background")
+	var duck_frames := main.art_assets.get("duck_frames") as SpriteFrames
+	_assert(duck_frames != null and duck_frames.get_frame_count("fly") == 3 and duck_frames.get_frame_count("hit") == 2 and duck_frames.get_frame_count("escape") == 1, "main scene should load the original duck lifecycle animations")
+	_assert(main.art_assets.get("shot_effect") != null and main.art_assets.get("hit_spark") != null, "main scene should load original shot and hit effects")
 	_assert(main.art_assets.get("sky") == null, "separate parallax layers should remain available for supplied art")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
@@ -44,7 +47,8 @@ func _run_flow() -> void:
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING, "Play should start a run")
 	_assert(main.audio.active_context == "gameplay" and main.audio.music_player.stream == main.audio.gameplay_music, "starting a run should switch to gameplay music")
 	_assert(main.round.active_ducks == 1, "first round should spawn its opening target")
-	_assert(main.ducks[0].placeholder_visible, "duck should use its geometric fallback until animation frames are assigned")
+	_assert(not main.ducks[0].placeholder_visible, "duck should use its assigned original fly sprite animation")
+	_assert(main.ducks[0].animated_visual != null and main.ducks[0].animated_visual.sprite_frames.get_frame_count("fly") == 3, "duck should load all three fly animation frames")
 	_assert(main._hud_status_text() == "HITS 0/2   ESCAPES 0/2   LEFT 3   COMBO 0   LIVES 3", "HUD should show the current escape allowance and remaining targets")
 	var duck = main.ducks[0]
 	duck.position = Vector2(420.0, 280.0)

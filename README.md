@@ -28,7 +28,7 @@ Settings and the local best score are stored offline in `user://duckhunt_arcade.
 
 ## Assets
 
-The current scene uses an original pixel-art daytime background, procedural chiptune music and effects, and replaceable geometric target fallbacks. Regenerate the original music/SFX with `python3 tools/generate_audio.py`. When supplying files, follow [doc/assets.md](doc/assets.md). Assign the `ArtAssetSet` resource at `resources/art/open_range_art_set.tres` for a full background or separate parallax layers, duck animations, action effects, title logo, and an optional UI Theme; music/SFX streams are wired on the `AudioManager` child of the main scene. Keep all art and audio original or commercially licensed.
+The current scene uses an original pixel-art daytime background, duck animations, action effects, and procedural chiptune music/SFX. Regenerate the original music/SFX with `python3 tools/generate_audio.py`. When supplying files, follow [doc/assets.md](doc/assets.md). Assign the `ArtAssetSet` resource at `resources/art/open_range_art_set.tres` for a full background or separate parallax layers, duck animations, action effects, title logo, and an optional UI Theme; music/SFX streams are wired on the `AudioManager` child of the main scene. Keep all art and audio original or commercially licensed.
 
 ## Android debug build
 

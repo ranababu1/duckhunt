@@ -1,8 +1,14 @@
-[gd_resource type="Resource" script_class="ArtAssetSet" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="ArtAssetSet" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/art_asset_set.gd" id="1_art_set"]
 [ext_resource type="Texture2D" path="res://assets/backgrounds/open_range_day.png" id="2_background"]
+[ext_resource type="SpriteFrames" path="res://resources/art/duck_sprite_frames.tres" id="3_duck_frames"]
+[ext_resource type="Texture2D" path="res://assets/effects/shot_flash.svg" id="4_shot_effect"]
+[ext_resource type="Texture2D" path="res://assets/effects/hit_spark.svg" id="5_hit_spark"]
 
 [resource]
 script = ExtResource("1_art_set")
 background = ExtResource("2_background")
+duck_frames = ExtResource("3_duck_frames")
+shot_effect = ExtResource("4_shot_effect")
+hit_spark = ExtResource("5_hit_spark")

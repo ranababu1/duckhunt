@@ -4,12 +4,12 @@
 
 ## Milestone and status
 
-M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, and audio routing are implemented with replaceable greybox presentation; production assets and Android/device validation remain outstanding.
+M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, an original background, and synthesized music/effects are implemented. Original duck animation/UI art and physical-device QA remain outstanding.
 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `a33fea2` (`Integrate original pixel-art range background`).
+- Latest implementation commit: `4c3b6c3` (`Record original background integration`).
 
 ## Implemented features
 
@@ -17,6 +17,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
 - Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
 - Original pixel-art daytime range background integrated through the replaceable `ArtAssetSet.background` slot; separate parallax-layer slots remain available for future supplied art.
+- Original menu/gameplay chiptune loops and eight sound effects, generated deterministically from `tools/generate_audio.py` using only Python's standard library and wired into the scene's `AudioManager`.
 - Original code-drawn greybox range with a moving target.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
 - Retired targets stop processing after their terminal animation completes.
@@ -74,12 +75,14 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
 - Passed: end-to-end flow confirms the remaining-target count decreases after a hit.
 - Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.
-- Passed: end-to-end flow confirms the main scene's art resource slot loads and incomplete art retains the geometric fallback.
+- Passed: end-to-end flow confirms the main scene loads its configured full-scene background resource.
 - Passed: generated menu panels and their content fit within their panel bounds and the 960×540 base viewport.
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion with translation and non-uniform scaling.
 - Passed: the game-flow test loads the configured original full-scene background texture; Android export and emulator rendering were confirmed.
+- Passed: flow test verifies all ten generated music/effect resources load, menu/gameplay music contexts switch, and an SFX event starts playback.
+- Passed: audio-enabled Android APK exported, signed, installed, and launched in the Pixel 6 API 35 emulator without Godot startup errors.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 - Passed: Android debug APK exported and verified as signed; package ID and landscape manifest orientation inspected.
 - Passed: APK installed and launched in a Pixel 6 API 35 emulator; entered Classic Mode, fired at a target, and observed hit/quota/reload HUD updates with no Godot script errors in startup logs.
@@ -88,11 +91,11 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 - The agreed original art/audio files have not been supplied yet.
 - No physical Android handset has been tested; emulator validation does not replace device coverage.
-- Original production art and audio have not been supplied; the game still uses geometric placeholder visuals and empty sound slots.
+- Final duck animation/effects and branded UI artwork have not been supplied; targets and action feedback still use geometric placeholders.
 
 ## Exact next actions
 
-1. Integrate the user-provided original art and audio files, assign them through the main scene's `AudioManager`, and update `assets.md`.
+1. Integrate the user-provided original duck/UI art and replace any preferred audio through the documented resource slots, updating `assets.md`.
 2. Run the Android build on at least one physical handset and review touch, pause/background behavior, and common landscape aspect ratios.
 3. Choose and clear the public title/branding; keep release signing credentials local and outside Git.
 

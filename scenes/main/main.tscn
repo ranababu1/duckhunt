@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scripts/gameplay/prototype_game.gd" id="1_prototype"]
 [ext_resource type="Script" path="res://scripts/core/audio_manager.gd" id="2_audio_manager"]
 [ext_resource type="Resource" path="res://resources/art/open_range_art_set.tres" id="3_art_set"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/mus_menu.wav" id="4_menu_music"]
+[ext_resource type="AudioStream" path="res://assets/audio/music/mus_gameplay.wav" id="5_game_music"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_shot.wav" id="6_shot"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_hit.wav" id="7_hit"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_miss.wav" id="8_miss"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_escape.wav" id="9_escape"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_reload.wav" id="10_reload"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_round_clear.wav" id="11_round_clear"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_game_over.wav" id="12_game_over"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sfx_button.wav" id="13_button"]
 
 [node name="PrototypeGame" type="Node2D"]
 script = ExtResource("1_prototype")
@@ -10,3 +20,13 @@ art_assets = ExtResource("3_art_set")
 
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("2_audio_manager")
+menu_music = ExtResource("4_menu_music")
+gameplay_music = ExtResource("5_game_music")
+shot_sound = ExtResource("6_shot")
+hit_sound = ExtResource("7_hit")
+miss_sound = ExtResource("8_miss")
+escape_sound = ExtResource("9_escape")
+reload_sound = ExtResource("10_reload")
+round_clear_sound = ExtResource("11_round_clear")
+game_over_sound = ExtResource("12_game_over")
+button_sound = ExtResource("13_button")

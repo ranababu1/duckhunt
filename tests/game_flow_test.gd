@@ -19,6 +19,11 @@ func _run_flow() -> void:
 	_assert(main.art_assets.get("sky") == null, "separate parallax layers should remain available for supplied art")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
+	_assert(main.audio.menu_music != null and main.audio.gameplay_music != null, "main scene should assign both original music loops")
+	_assert(main.audio.music_player.playing and main.audio.active_context == "menu", "menu context should start its assigned music")
+	_assert(main.audio._event_stream("shot") != null and main.audio._event_stream("round_clear") != null, "main scene should assign original gameplay event sounds")
+	main.audio.play_event("button")
+	_assert(main.audio.sfx_players[0].playing, "UI event should play through the SFX player pool")
 	for screen_name in ["title", "tutorial", "pause", "round_clear", "results", "settings"]:
 		var card := main.ui.screens[screen_name].get_child(0) as PanelContainer
 		var content := card.get_child(0) as VBoxContainer
@@ -37,6 +42,7 @@ func _run_flow() -> void:
 	_assert(tutorial_text.contains("allowance") and tutorial_text.contains("run ends"), "tutorial should explain the round escape limit")
 	main.ui.play_requested.emit()
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING, "Play should start a run")
+	_assert(main.audio.active_context == "gameplay" and main.audio.music_player.stream == main.audio.gameplay_music, "starting a run should switch to gameplay music")
 	_assert(main.round.active_ducks == 1, "first round should spawn its opening target")
 	_assert(main.ducks[0].placeholder_visible, "duck should use its geometric fallback until animation frames are assigned")
 	_assert(main._hud_status_text() == "HITS 0/2   ESCAPES 0/2   LEFT 3   COMBO 0   LIVES 3", "HUD should show the current escape allowance and remaining targets")

@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-11-13 — Procedural original music and effects
+
+### Added
+
+- Deterministic standard-library generator for original chiptune menu/gameplay loops and shot, hit, miss, escape, reload, round-clear, game-over, and button effects.
+- Assigned all generated WAV streams to the main scene's `AudioManager`.
+- Flow assertions for menu/gameplay music context switching and event-stream playback.
+- Audio provenance and regeneration instructions in `assets.md`.
+
+### Tests
+
+- Passed audio generation, Godot asset import, gameplay logic tests, and game-flow test including music/SFX wiring.
+- Passed Android debug export/signature and emulator install/launch with no Godot startup errors.
+
+### Follow-up
+
+- Listen-test and balance the sounds on physical device speakers; replace with user-provided cleared audio if desired.
+
 ## 2026-11-13 — `a33fea2` Original background art integration
 
 ### Added

@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `12a95fb` (`Persist best score on title return`); save-data hardening is in progress.
+- Latest implementation commit: `e295114` (`Harden local save data validation`).
 
 ## Implemented features
 

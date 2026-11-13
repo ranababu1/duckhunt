@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Save-data validation (in progress)
+## 2026-11-13 — `e295114`
 
 ### Changed
 

@@ -4,39 +4,43 @@
 
 ## Milestone and status
 
-M0 (Project foundation) is in progress. The repository now has a Godot 4 project and a desktop-playable greybox prototype; Android/device validation remains outstanding.
+M1 (Core shooting prototype) is in progress. The repository has a Godot 4 project and a controller-based greybox shooting range; Android/device validation remains outstanding.
 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `b1deb71` (`Initial Godot greybox prototype`)
+- Latest commit: `405fdac` (`Update implementation state`)
 
 ## Implemented features
 
 - Landscape 960 x 540 Godot project configuration with canvas-item stretching and nearest texture filtering.
 - Original code-drawn greybox range with a moving target.
-- Tap/click shooting within the playfield, two-round magazine, automatic reload, and basic hit/miss counters.
+- Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
+- Separate weapon, run, and round controllers for two-round magazines, automatic reload, counters, score, hit quota, and escape allowance.
+- Tap/click shooting within the playfield with one-target-per-shot resolution and basic hit/miss/reload feedback.
 - Initial Godot-oriented folder layout and ignore rules.
 
 ## Known limitations
 
-- The prototype is a single temporary script, not the final M1 controller architecture.
-- No Android build/device test, menus, persistence, audio, or final assets exist yet.
-- The target loops rather than exercising escape/round rules.
+- The presentation script remains a temporary M1 greybox; menus, persistence, audio, final assets, and full run state are not implemented.
+- Round clear/failure is reported but does not yet transition screens or load the next data-driven round.
+- No Android build/device test has been performed.
 
 ## Tests run
 
-- Not run: no Godot executable was detected in the shell environment.
+- Passed: Godot 4.7.2 headless project import.
+- Passed: Godot 4.7.2 headless game launch for two seconds, with no parse or runtime errors after the controller split.
+- GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers
 
-- Godot editor/headless executable and an Android test device are unavailable in this environment.
+- An Android test device is not available in this environment.
 
 ## Exact next actions
 
-1. Open the project in Godot 4 and verify import, parse, and landscape rendering.
-2. Verify touch input and safe bounds on a physical Android device.
-3. Replace the M0 greybox script with separated duck, weapon, input, and run controllers for M1.
+1. Add data-driven round configurations and high-level run states for the remainder of M1/M2.
+2. Add automated gameplay logic tests for weapon, duck terminal states, and round outcomes.
+3. Verify touch input and safe bounds on a physical Android device.
 
 ## Decisions awaiting approval
 

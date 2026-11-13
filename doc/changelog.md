@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Added
+
+- Focused `Duck`, `WeaponController`, `RunController`, and `RoundController` gameplay scripts.
+- One-time duck hit/escape terminal transitions and terminal-animation completion before respawn.
+- Round quota and escape accounting, plus controller-owned weapon reload and score counters.
+
+### Changed
+
+- Reworked the greybox scene to delegate gameplay ownership to the new controllers.
+
+### Tests
+
+- Passed Godot 4.7.2 headless import and two-second game-launch smoke test with no script errors.
+
+### Follow-up
+
+- Add data-driven rounds, high-level state transitions, and automated gameplay tests.
+
 ## 2026-11-13 — `b1deb71`
 
 ### Added

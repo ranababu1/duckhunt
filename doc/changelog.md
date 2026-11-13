@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13 — Round-local clear scoring (in progress)
+
+### Fixed
+
+- Round accuracy now resets per round and contributes to the clear bonus.
+- Perfect-round bonus now requires zero escapes, independent of earlier run accuracy.
+- Documented the scoring formula in the game concept.
+
+### Tests
+
+- Passed logic tests for zero-shot round accuracy, accuracy-scaled bonus, and escape-gated perfect bonus.
+- Passed full ten-round prototype flow and three-second headless scene launch.
+
+### Follow-up
+
+- Tune scoring values after playtesting with the finished art/audio.
+
 ## 2026-11-13 — `0d30f84`
 
 ### Tests

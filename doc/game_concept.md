@@ -107,8 +107,8 @@ Ducks should not change direction so abruptly that touch targeting feels unfair.
 Initial scoring proposal:
 - Standard hit: 100 points.
 - Consecutive hits: small combo bonus, capped to prevent runaway scoring.
-- Round clear: completion bonus based on remaining escapes and accuracy.
-- Optional perfect-round bonus when no duck escapes.
+- Round clear: 150 base points, 25 points per unused escape allowance, and up to 50 points from that round's shot accuracy.
+- Perfect-round bonus: 50 points when no duck escapes.
 
 Keep score values in a central configuration resource.
 

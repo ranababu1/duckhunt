@@ -56,9 +56,12 @@ func _test_accuracy_with_zero_shots() -> void:
 func _test_round_outcomes() -> void:
 	var cleared_round = RoundControllerScript.new()
 	cleared_round.required_hits = 1
+	_assert(is_equal_approx(cleared_round.accuracy_percent(), 0.0), "round accuracy should safely report zero before shots")
+	cleared_round.register_shot()
 	cleared_round.register_hit()
 	_assert(cleared_round.is_finished, "hit quota should finish the round")
 	_assert(cleared_round.round_hits == 1, "finished round must retain its hit count")
+	_assert(is_equal_approx(cleared_round.accuracy_percent(), 100.0), "round accuracy should use only that round's shots")
 	cleared_round.register_escape()
 	_assert(cleared_round.escapes == 0, "finished round must ignore later escapes")
 	cleared_round.free()
@@ -130,7 +133,9 @@ func _test_finite_round_waves() -> void:
 func _test_scoring_and_lives() -> void:
 	_assert(ScoreServiceScript.points_for_hit(0) == 100, "first hit must award standard points")
 	_assert(ScoreServiceScript.points_for_hit(99) == 200, "combo bonus must be capped")
-	_assert(ScoreServiceScript.round_clear_bonus(2, 100.0) == 300, "perfect round bonus should be applied")
+	_assert(ScoreServiceScript.round_clear_bonus(2, 100.0, 0) == 300, "clean, accurate round bonus should be applied")
+	_assert(ScoreServiceScript.round_clear_bonus(1, 100.0, 1) == 225, "round with an escape must not receive the perfect-round bonus")
+	_assert(ScoreServiceScript.round_clear_bonus(2, 50.0, 0) == 275, "round accuracy should contribute to its completion bonus")
 	var run = RunControllerScript.new()
 	run.reset_run()
 	run.record_hit(ScoreServiceScript.points_for_hit(run.combo))

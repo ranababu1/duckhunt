@@ -131,6 +131,7 @@ func _try_fire(shot_position: Vector2) -> void:
 
 func _resolve_shot(shot_position: Vector2) -> void:
 	run.record_shot()
+	round.register_shot()
 	shot_marker = shot_position
 	shot_marker_time = 0.0 if bool(ui.current_settings().get("reduced_flash", false)) else 0.12
 	var target = _closest_target(shot_position)
@@ -160,7 +161,7 @@ func _on_duck_terminal_finished(_duck: Node2D) -> void:
 
 func _on_round_cleared() -> void:
 	var remaining_escapes: int = round.allowed_escapes - round.escapes
-	var bonus: int = ScoreServiceScript.round_clear_bonus(remaining_escapes, run.accuracy_percent())
+	var bonus: int = ScoreServiceScript.round_clear_bonus(remaining_escapes, round.accuracy_percent(), round.escapes)
 	run.add_score(bonus)
 	audio.play_event("round_clear")
 	_trigger_haptic(28)

@@ -12,6 +12,7 @@ signal round_failed()
 
 var round_hits := 0
 var escapes := 0
+var shots_fired := 0
 var is_finished := false
 var total_ducks := 3
 var ducks_per_wave := 1
@@ -31,6 +32,7 @@ func start_round(config: Resource) -> void:
 	spawn_interval = config.spawn_interval
 	round_hits = 0
 	escapes = 0
+	shots_fired = 0
 	is_finished = false
 	ducks_remaining_to_spawn = total_ducks
 	active_ducks = 0
@@ -57,6 +59,16 @@ func register_hit() -> void:
 		round_cleared.emit()
 	else:
 		_check_for_exhaustion()
+
+func register_shot() -> void:
+	if is_finished:
+		return
+	shots_fired += 1
+
+func accuracy_percent() -> float:
+	if shots_fired == 0:
+		return 0.0
+	return float(round_hits) / float(shots_fired) * 100.0
 
 func register_escape() -> void:
 	if is_finished:

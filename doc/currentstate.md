@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `0d30f84` (`Exercise complete ten-round game flow`).
+- Latest commit: `544515a` (`Record full campaign flow coverage`); round-local scoring corrections are in progress.
 
 ## Implemented features
 
@@ -22,6 +22,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
 - Gameplay HUD shows the active round's hit quota, escape allowance, and remaining targets alongside combo and lives.
+- Round-clear bonuses use that round's shot accuracy, unused escape allowance, and a perfect-round bonus only when no targets escaped.
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
 - Tutorial explains life loss, the per-round escape limit, automatic reload, and the hit quota.
 - Title screen displays the locally saved best score; returning to title saves the run's current best.
@@ -60,6 +61,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end prototype flow completes the configured quotas across all ten rounds and presents results with `10 / 10` rounds cleared.
+- Passed: scoring checks cover round-local accuracy, the accuracy-scaled clear bonus, and suppression of the perfect bonus after an escape.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
 - Passed: end-to-end flow confirms the remaining-target count decreases after a hit.
 - Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.

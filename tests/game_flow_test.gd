@@ -55,7 +55,8 @@ func _run_flow() -> void:
 	main._notification(main.NOTIFICATION_APPLICATION_PAUSED)
 	_assert(main.game_manager.state == main.game_manager.State.PAUSED and paused, "backgrounding should automatically pause active play")
 	main.ui.resume_requested.emit()
-	main.round.register_hit()
+	main.run.record_shot()
+	main._on_duck_hit(null)
 	_assert(main.game_manager.state == main.game_manager.State.ROUND_CLEAR, "meeting quota should enter round clear")
 	_assert(main.ui.screens["round_clear"].visible and paused, "round clear should present its screen and freeze gameplay")
 	main.ui.continue_requested.emit()
@@ -66,6 +67,7 @@ func _run_flow() -> void:
 		var quota_remaining: int = main.round.required_hits - main.round.round_hits
 		for _hit_index in quota_remaining:
 			main.run.record_shot()
+			main.round.register_shot()
 			main._on_duck_hit(null)
 		if main.game_manager.state == main.game_manager.State.RUN_COMPLETE:
 			break

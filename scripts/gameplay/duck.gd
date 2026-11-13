@@ -16,11 +16,15 @@ var playfield := Rect2(24.0, 76.0, 912.0, 420.0)
 var flight_time := 0.0
 var terminal_time := 0.0
 var resolution_sent := false
+var movement_pattern := "sine"
+var base_y := 272.0
 
-func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2) -> void:
+func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2, new_pattern := "sine") -> void:
 	position = start_position
 	playfield = new_playfield
 	flight_velocity = new_velocity
+	base_y = start_position.y
+	movement_pattern = new_pattern
 	flight_time = 0.0
 	terminal_time = 0.0
 	resolution_sent = false
@@ -41,8 +45,9 @@ func _process(delta: float) -> void:
 			flight_time += delta
 			state = State.FLYING
 			position += flight_velocity * delta
-			position.y = 272.0 + sin(flight_time * 3.0) * 72.0
-			if position.x > playfield.end.x + HIT_RADIUS:
+			if movement_pattern == "sine":
+				position.y = base_y + sin(flight_time * 3.0) * 42.0
+			if not playfield.grow(HIT_RADIUS).has_point(position):
 				_resolve_escape()
 		State.HIT, State.ESCAPING:
 			terminal_time += delta

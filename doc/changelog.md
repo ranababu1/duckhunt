@@ -4,6 +4,30 @@
 
 ### Added
 
+- Finite target counts, configurable spawn intervals, and one- or two-target waves.
+- Sine and diagonal duck movement patterns selected from each round’s configuration.
+- Closest-hit resolution for overlapping target hit areas.
+- Audio bus manager with event hooks for music, SFX, and UI feedback.
+- Android back request behavior across gameplay, pause, settings, tutorial, results, and title.
+
+### Changed
+
+- The full ten-round campaign now progresses through configured target counts instead of respawning indefinitely.
+- Music and SFX settings now control separate runtime audio buses.
+
+### Tests
+
+- Passed gameplay logic suite, including finite spawn counts and complete ten-round progression.
+- Passed three-second headless scene smoke test with no script errors.
+
+### Follow-up
+
+- Integrate user-provided original art/audio; verify device behavior and aspect ratios on Android.
+
+## 2026-11-13 — Uncommitted
+
+### Added
+
 - Title, tutorial, pause, round-clear, results, and settings screens with button navigation.
 - Return-to-title confirmation from pause and retry flow from results.
 - Local settings and best-score persistence using `ConfigFile`.

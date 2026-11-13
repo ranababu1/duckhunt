@@ -10,6 +10,7 @@ signal tutorial_requested()
 signal settings_requested()
 signal settings_closed()
 signal setting_changed(key: String, value: Variant)
+signal ui_action()
 
 const SCREEN_SIZE := Vector2(960.0, 540.0)
 const SaveServiceScript = preload("res://scripts/core/save_service.gd")
@@ -46,6 +47,7 @@ func show_tutorial() -> void:
 
 func show_pause() -> void:
 	title_confirm_visible = false
+	_set_title_confirmation(false)
 	_show("pause")
 
 func show_settings() -> void:
@@ -132,6 +134,7 @@ func _create_gameplay_hud() -> void:
 	pause_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	pause_button.add_theme_font_size_override("font_size", 26)
 	pause_button.pressed.connect(func() -> void: pause_requested.emit())
+	pause_button.pressed.connect(func() -> void: ui_action.emit())
 	overlay.add_child(pause_button)
 
 func _make_screen(screen_id: String, heading: String, subtitle: String, detail_name := "") -> Control:
@@ -178,6 +181,7 @@ func _add_button(panel: Control, text: String, callback: Callable) -> void:
 	button.add_theme_stylebox_override("hover", _button_style(Color("ffe49a")))
 	button.add_theme_stylebox_override("pressed", _button_style(Color("d99545")))
 	button.pressed.connect(callback)
+	button.pressed.connect(func() -> void: ui_action.emit())
 	content.add_child(button)
 
 func _add_slider(panel: Control, title: String, key: String) -> void:

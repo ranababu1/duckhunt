@@ -17,6 +17,7 @@ func _init() -> void:
 	_test_round_outcomes()
 	_test_duck_terminal_states()
 	_test_classic_round_progression()
+	_test_finite_round_waves()
 	_test_scoring_and_lives()
 	_test_pause_navigation()
 	_test_save_persistence()
@@ -93,7 +94,28 @@ func _test_classic_round_progression() -> void:
 	_assert(manager.state == manager.State.ROUND_CLEAR, "round clear should wait for player continuation")
 	manager.continue_round()
 	_assert(manager.current_round_index == 1, "cleared round should advance to the next round")
+	for _round_index in 9:
+		manager.on_round_cleared()
+		manager.continue_round()
+	_assert(manager.state == manager.State.RUN_COMPLETE, "clearing all ten rounds should complete the run")
 	manager.free()
+
+func _test_finite_round_waves() -> void:
+	var config = RoundCatalogScript.classic_mode()[0]
+	var round = RoundControllerScript.new()
+	var emitted_waves: Array[int] = []
+	round.spawn_wave.connect(func(count: int) -> void: emitted_waves.append(count))
+	round.start_round(config)
+	_assert(emitted_waves == [1], "round should spawn the first configured wave")
+	_assert(round.ducks_remaining_to_spawn == 2 and round.active_ducks == 1, "round should track finite remaining and active ducks")
+	round.register_hit()
+	round.register_terminal_animation_finished()
+	round._process(config.spawn_interval)
+	_assert(emitted_waves.size() == 2, "round should spawn the next duck after its interval and terminal animation")
+	_assert(round.ducks_remaining_to_spawn == 1, "each wave should decrement the remaining duck count")
+	round.register_hit()
+	_assert(round.is_finished, "required quota should finish the finite round")
+	round.free()
 
 func _test_scoring_and_lives() -> void:
 	_assert(ScoreServiceScript.points_for_hit(0) == 100, "first hit must award standard points")

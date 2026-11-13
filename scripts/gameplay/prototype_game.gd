@@ -13,9 +13,11 @@ const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
 const GameUIScript = preload("res://scripts/ui/game_ui.gd")
 const SaveServiceScript = preload("res://scripts/core/save_service.gd")
+const AudioManagerScript = preload("res://scripts/core/audio_manager.gd")
 
 var ui
-var duck
+var audio
+var ducks: Array = []
 var weapon
 var run
 var round
@@ -32,27 +34,28 @@ func _ready() -> void:
 	run = RunControllerScript.new()
 	round = RoundControllerScript.new()
 	game_manager = GameManagerScript.new()
-	duck = DuckScript.new()
 	ui = GameUIScript.new()
+	audio = AudioManagerScript.new()
 	add_child(weapon)
 	add_child(run)
 	add_child(round)
 	add_child(game_manager)
-	add_child(duck)
 	add_child(ui)
+	add_child(audio)
 	weapon.process_mode = Node.PROCESS_MODE_PAUSABLE
-	duck.process_mode = Node.PROCESS_MODE_PAUSABLE
+	round.process_mode = Node.PROCESS_MODE_PAUSABLE
 	game_manager.process_mode = Node.PROCESS_MODE_ALWAYS
-	duck.state = DuckScript.State.OFFSCREEN
-	duck.set_process(false)
+	for _index in 2:
+		_create_duck()
 	weapon.shot_fired.connect(_resolve_shot)
-	weapon.reload_started.connect(func() -> void: _show_feedback("RELOADING"))
+	weapon.reload_started.connect(func() -> void:
+		audio.play_event("reload")
+		_show_feedback("RELOADING")
+	)
 	weapon.reload_finished.connect(func() -> void: _show_feedback("RELOADED"))
-	duck.resolved_hit.connect(_on_duck_hit)
-	duck.resolved_escape.connect(_on_duck_escaped)
-	duck.terminal_animation_finished.connect(_on_duck_terminal_finished)
 	round.round_cleared.connect(_on_round_cleared)
 	round.round_failed.connect(_on_round_failed)
+	round.spawn_wave.connect(_spawn_wave)
 	run.life_depleted.connect(game_manager.on_lives_depleted)
 	game_manager.round_started.connect(_apply_round_config)
 	game_manager.state_changed.connect(_on_game_state_changed)
@@ -64,8 +67,15 @@ func _ready() -> void:
 	ui.continue_requested.connect(_continue_round)
 	ui.tutorial_requested.connect(ui.show_tutorial)
 	ui.setting_changed.connect(_on_setting_changed)
+	ui.setting_changed.connect(audio.apply_setting)
+	ui.ui_action.connect(func() -> void: audio.play_event("button"))
+	weapon.shot_fired.connect(func(_position: Vector2) -> void: audio.play_event("shot"))
 	game_manager.run_completed.connect(_on_run_completed)
 	game_manager.configure(RoundCatalogScript.classic_mode())
+	var saved_settings: Dictionary = ui.current_settings()
+	audio.apply_setting("music_volume", saved_settings.music_volume)
+	audio.apply_setting("sfx_volume", saved_settings.sfx_volume)
+	audio.set_context("menu")
 	ui.show_title()
 	queue_redraw()
 
@@ -80,14 +90,25 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		_try_fire(event.position)
 	elif event.is_action_pressed("pause"):
-		if game_manager.state == game_manager.State.PLAYING:
-			_pause_run()
-		elif game_manager.state == game_manager.State.PAUSED:
-			_resume_run()
-		elif ui.screens.get("settings", null).visible:
-			ui.back_from_settings()
-		elif ui.screens.get("tutorial", null).visible:
-			ui.show_title()
+		_handle_back_navigation()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST and is_inside_tree():
+		_handle_back_navigation()
+
+func _handle_back_navigation() -> void:
+	if ui.screens["settings"].visible:
+		ui.back_from_settings()
+	elif ui.screens["tutorial"].visible:
+		ui.show_title()
+	elif game_manager.state == game_manager.State.PLAYING:
+		_pause_run()
+	elif game_manager.state == game_manager.State.PAUSED:
+		_resume_run()
+	elif game_manager.state == game_manager.State.ROUND_CLEAR or game_manager.state == game_manager.State.GAME_OVER or game_manager.state == game_manager.State.RUN_COMPLETE:
+		_return_to_title()
+	else:
+		get_tree().quit()
 
 func _try_fire(shot_position: Vector2) -> void:
 	if not PLAYFIELD.has_point(shot_position):
@@ -102,12 +123,15 @@ func _try_fire(shot_position: Vector2) -> void:
 func _resolve_shot(shot_position: Vector2) -> void:
 	run.record_shot()
 	shot_marker = shot_position
-	shot_marker_time = 0.12
-	if not duck.try_hit(shot_position):
+	shot_marker_time = 0.0 if bool(ui.current_settings().get("reduced_flash", false)) else 0.12
+	var target = _closest_target(shot_position)
+	if target == null or not target.try_hit(shot_position):
+		audio.play_event("miss")
 		run.record_miss()
 		_show_feedback("MISS")
 
 func _on_duck_hit(_duck: Node2D) -> void:
+	audio.play_event("hit")
 	var points: int = ScoreServiceScript.points_for_hit(run.combo)
 	run.record_hit(points)
 	round.register_hit()
@@ -115,19 +139,20 @@ func _on_duck_hit(_duck: Node2D) -> void:
 	_show_feedback("HIT +%d" % points)
 
 func _on_duck_escaped(_duck: Node2D) -> void:
+	audio.play_event("escape")
 	run.record_escape()
 	round.register_escape()
 	_trigger_haptic(12)
 	_show_feedback("ESCAPED")
 
 func _on_duck_terminal_finished(_duck: Node2D) -> void:
-	if game_manager.state == game_manager.State.PLAYING and not round.is_finished:
-		_spawn_duck()
+	round.register_terminal_animation_finished()
 
 func _on_round_cleared() -> void:
 	var remaining_escapes: int = round.allowed_escapes - round.escapes
 	var bonus: int = ScoreServiceScript.round_clear_bonus(remaining_escapes, run.accuracy_percent())
 	run.add_score(bonus)
+	audio.play_event("round_clear")
 	game_manager.on_round_cleared()
 
 func _on_round_failed() -> void:
@@ -137,19 +162,25 @@ func _apply_round_config(config: Resource) -> void:
 	active_round_config = config
 	round.start_round(config)
 	weapon.configure(config.ammo_per_magazine, config.reload_duration)
-	_spawn_duck()
 
 func _on_game_state_changed(_previous_state: int, new_state: int) -> void:
 	match new_state:
 		game_manager.State.MENU:
+			audio.set_context("menu")
 			get_tree().paused = false
-			duck.set_process(false)
+			for target in ducks:
+				target.set_process(false)
 			weapon.set_process(false)
+			round.set_process(false)
 			ui.show_title()
 		game_manager.State.PLAYING:
+			audio.set_context("gameplay")
 			get_tree().paused = false
-			duck.set_process(true)
+			for target in ducks:
+				if target.state != DuckScript.State.OFFSCREEN:
+					target.set_process(true)
 			weapon.set_process(true)
+			round.set_process(true)
 			ui.show_gameplay()
 		game_manager.State.PAUSED:
 			get_tree().paused = true
@@ -158,6 +189,7 @@ func _on_game_state_changed(_previous_state: int, new_state: int) -> void:
 			get_tree().paused = true
 			ui.show_round_clear(active_round_config.round_number, run.score)
 		game_manager.State.GAME_OVER:
+			audio.play_event("game_over")
 			get_tree().paused = true
 			_show_results("GAME OVER")
 		game_manager.State.RUN_COMPLETE:
@@ -197,15 +229,59 @@ func _on_setting_changed(key: String, value: Variant) -> void:
 	if key == "reduced_flash" and bool(value):
 		shot_marker_time = 0.0
 
+func _create_duck():
+	var duck = DuckScript.new()
+	duck.process_mode = Node.PROCESS_MODE_PAUSABLE
+	duck.state = DuckScript.State.OFFSCREEN
+	duck.set_process(false)
+	duck.resolved_hit.connect(_on_duck_hit)
+	duck.resolved_escape.connect(_on_duck_escaped)
+	duck.terminal_animation_finished.connect(_on_duck_terminal_finished)
+	add_child(duck)
+	ducks.append(duck)
+	return duck
+
+func _spawn_wave(count: int) -> void:
+	var spawned := 0
+	for _index in count:
+		var duck = _find_available_duck()
+		if duck == null:
+			duck = _create_duck()
+		var pattern_pool: Array = active_round_config.movement_pattern_pool
+		var pattern: String = pattern_pool[randi_range(0, pattern_pool.size() - 1)]
+		var direction := 1.0 if (spawned % 2) == 0 else -1.0
+		var y := 205.0 + float(spawned) * 150.0
+		var start_x := PLAYFIELD.position.x - DUCK_RADIUS if direction > 0.0 else PLAYFIELD.end.x + DUCK_RADIUS
+		var speed := randf_range(active_round_config.min_flight_speed, active_round_config.max_flight_speed)
+		var vertical_speed := 0.0
+		if pattern == "diagonal":
+			vertical_speed = -70.0 if spawned % 2 == 0 else 70.0
+		duck.scale.x = direction
+		duck.start_flight(Vector2(start_x, y), PLAYFIELD, Vector2(speed * direction, vertical_speed), pattern)
+		duck.set_process(true)
+		spawned += 1
+
+func _find_available_duck():
+	for duck in ducks:
+		if duck.state == DuckScript.State.OFFSCREEN:
+			return duck
+	return null
+
+func _closest_target(shot_position: Vector2):
+	var selected = null
+	var selected_distance := INF
+	for duck in ducks:
+		if duck.state != DuckScript.State.ENTERING and duck.state != DuckScript.State.FLYING:
+			continue
+		var distance: float = shot_position.distance_to(duck.global_position)
+		if distance <= DuckScript.HIT_RADIUS and distance < selected_distance:
+			selected = duck
+			selected_distance = distance
+	return selected
+
 func _trigger_haptic(duration_ms: int) -> void:
 	if bool(ui.current_settings().get("haptics", true)) and OS.has_feature("mobile"):
 		Input.vibrate_handheld(duration_ms)
-
-func _spawn_duck() -> void:
-	var speed: float = active_round_config.min_flight_speed
-	duck.state = DuckScript.State.ENTERING
-	duck.set_process(true)
-	duck.start_flight(Vector2(PLAYFIELD.position.x - DUCK_RADIUS, 272.0), PLAYFIELD, Vector2(speed, 0.0))
 
 func _show_feedback(message: String) -> void:
 	feedback = message

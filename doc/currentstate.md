@@ -4,12 +4,12 @@
 
 ## Milestone and status
 
-M3 (Menus, UX, and persistence) is in progress. The game now starts at a title screen and includes tutorial, pause, round-clear, results, and settings flows. Android/device validation remains outstanding.
+M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, and audio routing are implemented with replaceable greybox presentation; production assets and Android/device validation remain outstanding.
 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for M3 UI and persistence flow.
+- Latest implementation commit: pending commit for finite waves and audio routing.
 
 ## Implemented features
 
@@ -23,12 +23,15 @@ M3 (Menus, UX, and persistence) is in progress. The game now starts at a title s
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
 - Back/escape navigation for pause, settings, and tutorial; gameplay timers pause behind modal screens.
+- Finite round duck counts, timed wave spawning, later-round simultaneous pairs, and sine/diagonal movement patterns.
+- Closest-target shot resolution when hit areas overlap.
+- Music and SFX buses with event playback hooks ready for provided original audio streams.
 - Initial Godot-oriented folder layout and ignore rules.
 
 ## Known limitations
 
 - Presentation uses replaceable code-created art and UI; production art/audio assets have been deferred until provided.
-- Music and SFX volume values persist, but audio playback integration is deferred until original audio assets are supplied.
+- Audio playback hooks are connected but the project is silent until the original music and sound assets are supplied.
 - Round transitions are greybox-only; results/menu screens and full multi-target waves are not implemented.
 - No Android build/device test has been performed.
 
@@ -39,6 +42,8 @@ M3 (Menus, UX, and persistence) is in progress. The game now starts at a title s
 - Passed: headless gameplay logic tests for reload behavior, zero-shot accuracy, round completion/failure, one-time duck terminal states, 10-round progression, scoring, and lives.
 - Passed: pause/resume/title state checks and headless project launch after UI flow implementation.
 - Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
+- Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
+- Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers
@@ -47,9 +52,9 @@ M3 (Menus, UX, and persistence) is in progress. The game now starts at a title s
 
 ## Exact next actions
 
-1. Implement simultaneous targets/waves and configured movement patterns.
-2. Connect audio buses and event playback, ready for provided audio assets.
-3. Verify touch input and safe bounds on physical Android devices and common landscape ratios.
+1. Integrate the user-provided original art and audio files and update `assets.md` provenance.
+2. Add settings-accessible first-run tutorial tracking and polish score/results details.
+3. Verify touch input, pause/background behavior, and layouts on Android devices at common landscape ratios.
 
 ## Decisions awaiting approval
 

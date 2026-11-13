@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Ten-round end-to-end coverage (in progress)
+## 2026-11-13 — `0d30f84`
 
 ### Tests
 

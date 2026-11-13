@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `e0539e4` (`Record remaining-target HUD count`); complete-run flow coverage is in progress.
+- Latest implementation commit: `0d30f84` (`Exercise complete ten-round game flow`).
 
 ## Implemented features
 

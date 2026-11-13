@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Original duck animation and effects
+## 2026-11-13 — `a1eab44` Original duck animation and effects
 
 ### Added
 

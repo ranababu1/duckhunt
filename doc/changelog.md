@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Procedural original music and effects
+## 2026-11-13 — `b3d7e03` Procedural original music and effects
 
 ### Added
 

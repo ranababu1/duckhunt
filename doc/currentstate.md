@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `4c3b6c3` (`Record original background integration`).
+- Latest implementation commit: `b3d7e03` (`Add original chiptune music and game sounds`).
 
 ## Implemented features
 

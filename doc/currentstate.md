@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `41dcd0b` (`Use round-local clear scoring`).
+- Latest commit: `0d0373e` (`Record round-local scoring fix`); escape-limit failure coverage is in progress.
 
 ## Implemented features
 
@@ -47,7 +47,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Audio playback hooks are connected but the project is silent until the original music and sound assets are supplied.
 - Art and audio remain temporary/empty placeholders while waiting for the user-provided originals.
 - The UI layout has only been headless-smoke-tested; native visual inspection did not complete in this environment.
-- No Android build/device test has been performed.
+- No Android build/device test has been performed; the Android export SDK and a Java runtime are unavailable.
 
 ## Tests run
 
@@ -61,6 +61,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end prototype flow completes the configured quotas across all ten rounds and presents results with `10 / 10` rounds cleared.
+- Passed: end-to-end flow confirms exceeding a round's escape allowance ends the run even when lives remain, while using the allowance itself is permitted.
 - Passed: scoring checks cover round-local accuracy, the accuracy-scaled clear bonus, and suppression of the perfect bonus after an escape.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
 - Passed: end-to-end flow confirms the remaining-target count decreases after a hit.
@@ -75,12 +76,13 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 - The agreed original art/audio files have not been supplied yet.
 - No Android device or `adb` executable is available for physical-device validation.
+- Godot Android export templates are installed, but `/Users/imran/Library/Android/sdk` is missing and no Java runtime is available.
 
 ## Exact next actions
 
 1. Integrate the user-provided original art and audio files, assign them through the main scene's `AudioManager`, and update `assets.md`.
-2. Prepare a legal-cleared package identity and Android export configuration after the product title is decided.
-3. Verify touch input, pause/background behavior, and layouts on Android devices at common landscape ratios.
+2. Install/configure Android SDK and Java, then set a legal-cleared package identity and Android export preset after the product title is decided.
+3. Build and install the Android package, then verify touch input, pause/background behavior, and layouts on physical devices at common landscape ratios.
 
 ## Decisions awaiting approval
 

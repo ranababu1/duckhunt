@@ -56,6 +56,7 @@ func _run_flow() -> void:
 	_assert(main.game_manager.state == main.game_manager.State.PAUSED and paused, "backgrounding should automatically pause active play")
 	main.ui.resume_requested.emit()
 	main.run.record_shot()
+	main.round.register_shot()
 	main._on_duck_hit(null)
 	_assert(main.game_manager.state == main.game_manager.State.ROUND_CLEAR, "meeting quota should enter round clear")
 	_assert(main.ui.screens["round_clear"].visible and paused, "round clear should present its screen and freeze gameplay")
@@ -78,6 +79,20 @@ func _run_flow() -> void:
 	_assert(main.ui.screens["results"].find_child("results_summary", true, false).text.contains("ROUNDS  10 / 10"), "complete-run results should report all ten rounds")
 	paused = false
 	main.queue_free()
+	await process_frame
+	var failed_game = MainScene.instantiate()
+	root.add_child(failed_game)
+	await process_frame
+	failed_game.ui.play_requested.emit()
+	failed_game.run.lives = 5
+	failed_game._on_duck_escaped(null)
+	failed_game._on_duck_escaped(null)
+	_assert(failed_game.game_manager.state == failed_game.game_manager.State.PLAYING, "using the full escape allowance should not fail the round")
+	failed_game._on_duck_escaped(null)
+	_assert(failed_game.game_manager.state == failed_game.game_manager.State.GAME_OVER, "exceeding escape allowance should end the run even with lives remaining")
+	_assert(failed_game.run.lives == 2 and failed_game.ui.screens["results"].visible, "escape-limit failure should preserve remaining lives and show results")
+	paused = false
+	failed_game.queue_free()
 	await process_frame
 	if failures.is_empty():
 		print("PASS: full game flow smoke test")

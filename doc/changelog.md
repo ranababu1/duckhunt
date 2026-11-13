@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-13 — Escape-limit failure flow (in progress)
+
+### Tests
+
+- Integrated flow confirms the round ends at the configured escape limit while lives remain, and the run ends only after that limit is exceeded.
+- Re-ran gameplay logic tests, ten-round game-flow checks, and the headless scene launch successfully.
+
+### Follow-up
+
+- Android build remains unverified because this environment has no configured SDK or Java runtime.
+
 ## 2026-11-13 — `41dcd0b`
 
 ### Fixed

@@ -9,7 +9,7 @@ M1 (Core shooting prototype) is in progress. The repository has a Godot 4 projec
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `405fdac` (`Update implementation state`)
+- Latest implementation commit: `7c45856` (`Add gameplay logic tests`)
 
 ## Implemented features
 

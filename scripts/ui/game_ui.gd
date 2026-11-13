@@ -81,7 +81,7 @@ func _create_title() -> void:
 	_add_button(panel, "SETTINGS", func() -> void: _open_settings())
 
 func _create_tutorial() -> void:
-	var panel := _make_screen("tutorial", "HOW TO PLAY", "Tap anywhere in the field to shoot.\nA hit earns points. An escaped target costs a life.\nYour magazine holds two shots, then reloads automatically.\nClear the hit quota before you run out of lives.")
+	var panel := _make_screen("tutorial", "HOW TO PLAY", "Tap in the field to fire. Hits earn points.\nEscapes cost a life; exceed this round's allowance and the run ends.\nTwo shots per magazine, then automatic reload.\nHit the quota before all targets are gone.")
 	_add_button(panel, "PLAY", func() -> void: play_requested.emit())
 	_add_button(panel, "BACK", func() -> void: _show("title"))
 

@@ -13,6 +13,12 @@ func _run_flow() -> void:
 	await process_frame
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
+	main.ui.tutorial_requested.emit()
+	_assert(main.ui.screens["tutorial"].visible, "How to Play should open from the title screen")
+	var tutorial_text := ""
+	for label in main.ui.screens["tutorial"].find_children("*", "Label", true, false):
+		tutorial_text += label.text + " "
+	_assert(tutorial_text.contains("allowance") and tutorial_text.contains("run ends"), "tutorial should explain the round escape limit")
 	main.ui.play_requested.emit()
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING, "Play should start a run")
 	_assert(main.round.active_ducks == 1, "first round should spawn its opening target")

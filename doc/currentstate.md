@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `ffb77a1` (`Stop retired targets from processing`).
+- Latest commit: `5960b1b` (`Record target lifecycle fix`); tutorial escape-rule clarification is in progress.
 
 ## Implemented features
 
@@ -23,6 +23,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
 - Gameplay HUD shows the active round's hit quota and escape allowance alongside combo and lives.
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
+- Tutorial explains life loss, the per-round escape limit, automatic reload, and the hit quota.
 - Title screen displays the locally saved best score; returning to title saves the run's current best.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
 - Save-data loaders reject malformed preference types and retain safe defaults rather than coercing invalid values.
@@ -55,6 +56,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
+- Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion using a non-zero canvas offset.

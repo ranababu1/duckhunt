@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-11-13 — Tutorial escape rules (in progress)
+
+### Changed
+
+- Tutorial now explains that escapes cost lives and exceeding the round allowance ends the run.
+- Clarified that the round hit quota must be met before the configured targets are gone.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+- Flow test confirms the tutorial opens from the title and states the escape limit.
+
+### Follow-up
+
+- Continue toward original art/audio integration and Android validation.
+
 ## 2026-11-13 — `ffb77a1`
 
 ### Fixed

@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `bc07bfb` (`Cover escape limit game over flow`).
+- Latest commit: `24f1bba` (`Record escape-limit flow coverage`).
 
 ## Implemented features
 

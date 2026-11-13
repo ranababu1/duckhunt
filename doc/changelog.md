@@ -293,7 +293,7 @@
 
 - Integrate user-provided original art/audio; verify device behavior and aspect ratios on Android.
 
-## 2026-11-13 — Uncommitted
+## 2026-11-13 — `f50de2a`
 
 ### Added
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Title logo slot (in progress)
+## 2026-11-13 — `47c9670`
 
 ### Added
 

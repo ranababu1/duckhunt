@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `23b0803` (`Record action effect asset slots`); title-logo slot is in progress.
+- Latest implementation commit: `47c9670` (`Add replaceable title logo slot`).
 
 ## Implemented features
 

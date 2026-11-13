@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Scaled touch-coordinate QA (in progress)
+## 2026-11-13 — `3bfedb7`
 
 ### Tests
 

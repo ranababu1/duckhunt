@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `92ba0dd` (`Record sprite-timed target lifecycle`); scaled touch-coordinate coverage is in progress.
+- Latest implementation commit: `3bfedb7` (`Cover scaled touch coordinate conversion`).
 
 ## Implemented features
 

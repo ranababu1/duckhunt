@@ -4,6 +4,20 @@
 
 ### Added
 
+- Regression checks for nearest target selection, paired waves, automatic background pause, and resume without duplicate wave starts.
+
+### Tests
+
+- Passed updated gameplay logic suite, full game-flow smoke test, and headless scene launch.
+
+### Follow-up
+
+- Integrate supplied art/audio and proceed to Android device QA.
+
+## 2026-11-13 — Previous flow test increment
+
+### Added
+
 - End-to-end game-flow smoke test covering title, first shot, pause/settings/resume, round clear, and next-round state.
 - Automatic pause on mobile background and window focus loss.
 

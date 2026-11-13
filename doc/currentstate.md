@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `036b640` (`Cover complete round flow`).
+- Latest implementation commit: pending commit for expanded collision/wave/background tests.
 
 ## Implemented features
 
@@ -45,7 +45,8 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
 - Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
-- Passed: end-to-end headless flow from title through shooting, pause/settings/resume, round clear, and next-round reset.
+- Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
+- Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers

@@ -118,6 +118,12 @@ func _test_finite_round_waves() -> void:
 	round.register_hit()
 	_assert(round.is_finished, "required quota should finish the finite round")
 	round.free()
+	var paired_round = RoundControllerScript.new()
+	var paired_waves: Array[int] = []
+	paired_round.spawn_wave.connect(func(count: int) -> void: paired_waves.append(count))
+	paired_round.start_round(RoundCatalogScript.classic_mode()[6])
+	_assert(paired_waves == [2], "later campaign rounds should spawn configured simultaneous pairs")
+	paired_round.free()
 
 func _test_scoring_and_lives() -> void:
 	_assert(ScoreServiceScript.points_for_hit(0) == 100, "first hit must award standard points")
@@ -135,11 +141,14 @@ func _test_scoring_and_lives() -> void:
 func _test_pause_navigation() -> void:
 	var manager = GameManagerScript.new()
 	manager.configure(RoundCatalogScript.classic_mode())
+	var started_rounds := [0]
+	manager.round_started.connect(func(_config: Resource) -> void: started_rounds[0] += 1)
 	manager.start_run()
 	manager.pause_run()
 	_assert(manager.state == manager.State.PAUSED, "pause request should enter paused state")
 	manager.resume_run()
 	_assert(manager.state == manager.State.PLAYING, "resume should restore playing state")
+	_assert(started_rounds[0] == 1, "resume must not emit a duplicate round start")
 	manager.return_to_title()
 	_assert(manager.state == manager.State.MENU, "return-to-title request should enter menu state")
 	manager.free()

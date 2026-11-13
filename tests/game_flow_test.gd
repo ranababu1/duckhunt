@@ -18,6 +18,11 @@ func _run_flow() -> void:
 	_assert(main.round.active_ducks == 1, "first round should spawn its opening target")
 	var duck = main.ducks[0]
 	duck.position = Vector2(420.0, 280.0)
+	var overlapping_duck = main.ducks[1]
+	overlapping_duck.position = Vector2(428.0, 280.0)
+	overlapping_duck.state = overlapping_duck.State.FLYING
+	_assert(main._closest_target(Vector2(427.0, 280.0)) == overlapping_duck, "overlapping targets should select the closest hit area")
+	overlapping_duck.deactivate()
 	_assert(main.weapon.request_fire(duck.global_position), "weapon should accept the test shot")
 	_assert(main.run.hits == 1 and main.run.score == 100, "shot should resolve through the main scene")
 	duck._process(duck.TERMINAL_ANIMATION_DURATION)
@@ -30,6 +35,9 @@ func _run_flow() -> void:
 	_assert(main.game_manager.state == main.game_manager.State.PAUSED, "returning from pause settings should remain paused")
 	main.ui.resume_requested.emit()
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING and not paused, "resume should restore play")
+	main._notification(main.NOTIFICATION_APPLICATION_PAUSED)
+	_assert(main.game_manager.state == main.game_manager.State.PAUSED and paused, "backgrounding should automatically pause active play")
+	main.ui.resume_requested.emit()
 	main.round.register_hit()
 	_assert(main.game_manager.state == main.game_manager.State.ROUND_CLEAR, "meeting quota should enter round clear")
 	_assert(main.ui.screens["round_clear"].visible and paused, "round clear should present its screen and freeze gameplay")

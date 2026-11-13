@@ -38,8 +38,9 @@ func _ready() -> void:
 	_create_gameplay_hud()
 	_show("title")
 
-func show_title() -> void:
+func show_title(best_score: int = 0) -> void:
 	title_confirm_visible = false
+	_set_label("title_best", "BEST SCORE  %06d" % best_score)
 	_show("title")
 
 func show_tutorial() -> void:
@@ -74,7 +75,7 @@ func current_settings() -> Dictionary:
 	return settings.duplicate(true)
 
 func _create_title() -> void:
-	var panel := _make_screen("title", "OPEN RANGE", "A quick arcade shooting game")
+	var panel := _make_screen("title", "OPEN RANGE", "A quick arcade shooting game", "title_best")
 	_add_button(panel, "PLAY CLASSIC", func() -> void: play_requested.emit())
 	_add_button(panel, "HOW TO PLAY", func() -> void: tutorial_requested.emit())
 	_add_button(panel, "SETTINGS", func() -> void: _open_settings())

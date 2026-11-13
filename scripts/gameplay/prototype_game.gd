@@ -79,7 +79,7 @@ func _ready() -> void:
 	audio.apply_setting("music_volume", saved_settings.music_volume)
 	audio.apply_setting("sfx_volume", saved_settings.sfx_volume)
 	audio.set_context("menu")
-	ui.show_title()
+	ui.show_title(SaveServiceScript.load_best_score())
 	queue_redraw()
 
 func _process(delta: float) -> void:
@@ -104,7 +104,7 @@ func _handle_back_navigation() -> void:
 	if ui.screens["settings"].visible:
 		ui.back_from_settings()
 	elif ui.screens["tutorial"].visible:
-		ui.show_title()
+		ui.show_title(SaveServiceScript.load_best_score())
 	elif game_manager.state == game_manager.State.PLAYING:
 		_pause_run()
 	elif game_manager.state == game_manager.State.PAUSED:
@@ -180,7 +180,7 @@ func _on_game_state_changed(_previous_state: int, new_state: int) -> void:
 				target.set_process(false)
 			weapon.set_process(false)
 			round.set_process(false)
-			ui.show_title()
+			ui.show_title(SaveServiceScript.load_best_score())
 		game_manager.State.PLAYING:
 			audio.set_context("gameplay")
 			get_tree().paused = false
@@ -220,6 +220,7 @@ func _continue_round() -> void:
 
 func _return_to_title() -> void:
 	get_tree().paused = false
+	SaveServiceScript.save_best_score(run.score)
 	game_manager.return_to_title()
 
 func _show_results(heading: String) -> void:

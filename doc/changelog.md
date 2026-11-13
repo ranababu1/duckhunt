@@ -4,6 +4,20 @@
 
 ### Changed
 
+- Returning to title now records the run’s best score and the title screen displays the saved record.
+
+### Tests
+
+- Passed gameplay logic, end-to-end flow, and headless scene smoke tests.
+
+### Follow-up
+
+- Integrate the supplied original art/audio and Android validation.
+
+## 2026-11-13 — `d4661dd` feedback settings
+
+### Changed
+
 - Reduced-flash settings now suppress target hit sparks as well as shot markers.
 - Optional haptics now cover miss and round-clear feedback in addition to hits and escapes.
 

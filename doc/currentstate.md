@@ -21,6 +21,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
+- Title screen displays the locally saved best score; returning to title saves the run's current best.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
 - Reduced-flash suppresses shot markers and hit sparks; optional haptics cover hits, misses, escapes, and round clears.
 - Back/escape navigation for pause, settings, and tutorial; gameplay timers pause behind modal screens.

@@ -1,0 +1,17 @@
+class_name ScoreService
+extends RefCounted
+
+const STANDARD_HIT_POINTS := 100
+const COMBO_STEP_POINTS := 25
+const MAX_COMBO_BONUS := 100
+const ROUND_CLEAR_BASE_POINTS := 150
+const PERFECT_ROUND_BONUS := 100
+
+static func points_for_hit(current_combo: int) -> int:
+	return STANDARD_HIT_POINTS + mini(current_combo * COMBO_STEP_POINTS, MAX_COMBO_BONUS)
+
+static func round_clear_bonus(remaining_escapes: int, accuracy_percent: float) -> int:
+	var bonus := ROUND_CLEAR_BASE_POINTS + maxi(remaining_escapes, 0) * 25
+	if is_equal_approx(accuracy_percent, 100.0):
+		bonus += PERFECT_ROUND_BONUS
+	return bonus

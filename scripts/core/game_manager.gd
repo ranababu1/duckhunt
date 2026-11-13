@@ -35,6 +35,10 @@ func on_round_failed() -> void:
 	if state == State.PLAYING:
 		_transition_to(State.GAME_OVER)
 
+func on_lives_depleted() -> void:
+	if state == State.PLAYING:
+		_transition_to(State.GAME_OVER)
+
 func _process(delta: float) -> void:
 	if state != State.ROUND_CLEAR:
 		return

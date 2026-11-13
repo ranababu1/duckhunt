@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Added
+
+- Three-life run tracking, capped combo scoring, and round-clear/perfect-round score bonuses.
+
+### Changed
+
+- Greybox HUD now displays combo and lives, and hit feedback reports the awarded points.
+
+### Tests
+
+- Extended headless gameplay tests to cover standard/capped combo scores, perfect-round bonus, and escape life loss.
+
+### Follow-up
+
+- Implement results/menu screens and multi-target waves.
+
 ## 2026-11-13 — `2f26197`
 
 ### Added

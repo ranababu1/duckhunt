@@ -11,6 +11,7 @@ const RunControllerScript = preload("res://scripts/gameplay/run_controller.gd")
 const RoundControllerScript = preload("res://scripts/gameplay/round_controller.gd")
 const GameManagerScript = preload("res://scripts/core/game_manager.gd")
 const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
+const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
 
 var duck
 var weapon
@@ -42,6 +43,7 @@ func _ready() -> void:
 	duck.terminal_animation_finished.connect(_on_duck_terminal_finished)
 	round.round_cleared.connect(_on_round_cleared)
 	round.round_failed.connect(_on_round_failed)
+	run.life_depleted.connect(game_manager.on_lives_depleted)
 	game_manager.round_started.connect(_apply_round_config)
 	game_manager.state_changed.connect(_on_game_state_changed)
 	game_manager.configure(RoundCatalogScript.classic_mode())
@@ -81,11 +83,13 @@ func _resolve_shot(shot_position: Vector2) -> void:
 		_show_feedback("MISS")
 
 func _on_duck_hit(_duck: Node2D) -> void:
-	run.record_hit()
+	var points: int = ScoreServiceScript.points_for_hit(run.combo)
+	run.record_hit(points)
 	round.register_hit()
-	_show_feedback("HIT +100")
+	_show_feedback("HIT +%d" % points)
 
 func _on_duck_escaped(_duck: Node2D) -> void:
+	run.record_escape()
 	round.register_escape()
 	_show_feedback("ESCAPED")
 
@@ -94,6 +98,9 @@ func _on_duck_terminal_finished(_duck: Node2D) -> void:
 		_spawn_duck()
 
 func _on_round_cleared() -> void:
+	var remaining_escapes: int = round.allowed_escapes - round.escapes
+	var bonus: int = ScoreServiceScript.round_clear_bonus(remaining_escapes, run.accuracy_percent())
+	run.add_score(bonus)
 	game_manager.on_round_cleared()
 
 func _on_round_failed() -> void:
@@ -146,7 +153,7 @@ func _draw_hud() -> void:
 	if weapon.is_reloading:
 		_draw_centered_text("RELOADING", Vector2(480, 520), 16, Color("fff4b5"))
 	else:
-		_draw_centered_text("HITS %d/%d  MISSES %d  SHOTS %d" % [round.round_hits, round.required_hits, run.misses, run.shots_fired], Vector2(480, 520), 16, Color("d9f0ff"))
+		_draw_centered_text("HITS %d/%d  COMBO %d  LIVES %d" % [round.round_hits, round.required_hits, run.combo, run.lives], Vector2(480, 520), 16, Color("d9f0ff"))
 
 func _draw_text(text: String, position: Vector2, font_size: int, color: Color) -> void:
 	draw_string(ThemeDB.fallback_font, position, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)

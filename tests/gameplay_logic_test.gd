@@ -6,6 +6,7 @@ const RunControllerScript = preload("res://scripts/gameplay/run_controller.gd")
 const RoundControllerScript = preload("res://scripts/gameplay/round_controller.gd")
 const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 const GameManagerScript = preload("res://scripts/core/game_manager.gd")
+const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
 
 var failures: Array[String] = []
 
@@ -15,6 +16,7 @@ func _init() -> void:
 	_test_round_outcomes()
 	_test_duck_terminal_states()
 	_test_classic_round_progression()
+	_test_scoring_and_lives()
 	if failures.is_empty():
 		print("PASS: gameplay logic tests")
 		quit(0)
@@ -41,7 +43,7 @@ func _test_accuracy_with_zero_shots() -> void:
 	var run = RunControllerScript.new()
 	_assert(is_equal_approx(run.accuracy_percent(), 0.0), "zero shots must report zero accuracy")
 	run.record_shot()
-	run.record_hit()
+	run.record_hit(100)
 	_assert(is_equal_approx(run.accuracy_percent(), 100.0), "one hit from one shot must report 100 percent")
 	run.free()
 
@@ -88,6 +90,19 @@ func _test_classic_round_progression() -> void:
 	manager._process(manager.ROUND_TRANSITION_DURATION)
 	_assert(manager.current_round_index == 1, "cleared round should advance to the next round")
 	manager.free()
+
+func _test_scoring_and_lives() -> void:
+	_assert(ScoreServiceScript.points_for_hit(0) == 100, "first hit must award standard points")
+	_assert(ScoreServiceScript.points_for_hit(99) == 200, "combo bonus must be capped")
+	_assert(ScoreServiceScript.round_clear_bonus(2, 100.0) == 300, "perfect round bonus should be applied")
+	var run = RunControllerScript.new()
+	run.reset_run()
+	run.record_hit(ScoreServiceScript.points_for_hit(run.combo))
+	run.record_hit(ScoreServiceScript.points_for_hit(run.combo))
+	_assert(run.score == 225, "consecutive hits should receive a combo bonus")
+	run.record_escape()
+	_assert(run.combo == 0 and run.lives == 2, "escape should reset combo and consume one life")
+	run.free()
 
 func _assert(condition: bool, description: String) -> void:
 	if not condition:

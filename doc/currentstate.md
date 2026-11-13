@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for accessibility feedback options.
+- Latest implementation commit: `d4661dd` (`Complete reduced flash and haptic feedback`).
 
 ## Implemented features
 

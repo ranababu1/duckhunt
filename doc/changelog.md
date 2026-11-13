@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Uncommitted
+## 2026-11-13 — `d4661dd`
 
 ### Changed
 

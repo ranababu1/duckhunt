@@ -10,6 +10,7 @@
 
 - Re-exported and signed the Android debug APK; inspected its manifest and confirmed package `dev.imrn.duckhunt`, version name `0.1.0-dev`, and version code `1`.
 - Installed and launched the new APK in the visible Pixel API 35 AVD.
+- Confirmed the APK requests no Android permissions and its signature verifies with APK v2/v3.
 
 ## 2026-11-13 — `9829d05` Android development icon and boot splash
 

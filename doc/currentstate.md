@@ -54,7 +54,6 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Known limitations
 
 - Presentation uses original project art and audio, which remain replaceable by the user's final asset pack.
-- The UI layout has only been headless-smoke-tested; native visual inspection could not start because the Godot desktop app bundle is unavailable here.
 - No Android handset has been tested; the local Pixel emulator is the current Android device check.
 
 ## Tests run
@@ -88,9 +87,10 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 - Passed: Android export and emulator launch display the original duck animation over the new background without startup script errors.
 - Passed: flow test verifies all ten generated music/effect resources load, menu/gameplay music contexts switch, and an SFX event starts playback.
 - Passed: audio-enabled Android APK exported, signed, installed, and launched in the Pixel 6 API 35 emulator without Godot startup errors.
-- GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 - Passed: Android debug APK exported and signed with the configured development keystore; original launcher icon resources were included.
-- Passed: APK installed and launched in the Pixel API 35 emulator; main loop started without script/runtime errors. Gameplay hit/quota/reload was visually checked in an earlier emulator pass.
+- Passed: exported APK requests no Android permissions, including network access.
+- Passed: APK signature verified with Android v2/v3 schemes.
+- Passed: APK installed and launched in the visible Pixel API 35 emulator; main loop started without script/runtime errors. Title screen visually reviewed at the emulator's wide landscape ratio.
 
 ## Current blockers
 

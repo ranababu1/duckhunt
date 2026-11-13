@@ -30,6 +30,7 @@ M1 (Core shooting prototype) is in progress. The repository has a Godot 4 projec
 
 - Passed: Godot 4.7.2 headless project import.
 - Passed: Godot 4.7.2 headless game launch for two seconds, with no parse or runtime errors after the controller split.
+- Passed: headless gameplay logic tests for reload behavior, zero-shot accuracy, round completion/failure, and one-time duck terminal states.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers

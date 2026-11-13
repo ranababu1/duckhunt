@@ -15,10 +15,11 @@
 ### Tests
 
 - Passed Godot 4.7.2 headless import and two-second game-launch smoke test with no script errors.
+- Passed headless gameplay logic tests for reload behavior, zero-shot accuracy, round outcomes, and duck terminal states.
 
 ### Follow-up
 
-- Add data-driven rounds, high-level state transitions, and automated gameplay tests.
+- Add data-driven rounds and high-level state transitions.
 
 ## 2026-11-13 — `b1deb71`
 

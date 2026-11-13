@@ -362,11 +362,13 @@ func _draw_hud() -> void:
 		_draw_centered_text(_hud_status_text(), Vector2(480, 520), 16, Color("d9f0ff"))
 
 func _hud_status_text() -> String:
-	return "HITS %d/%d   ESCAPES %d/%d   COMBO %d   LIVES %d" % [
+	var targets_left: int = maxi(round.total_ducks - round.round_hits - round.escapes, 0)
+	return "HITS %d/%d   ESCAPES %d/%d   LEFT %d   COMBO %d   LIVES %d" % [
 		round.round_hits,
 		round.required_hits,
 		round.escapes,
 		round.allowed_escapes,
+		targets_left,
 		run.combo,
 		run.lives
 	]

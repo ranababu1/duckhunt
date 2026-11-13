@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `47c9670` (`Add replaceable title logo slot`).
+- Latest commit: `e3b8cec` (`Record title logo asset slot`); remaining-target HUD count is in progress.
 
 ## Implemented features
 
@@ -21,7 +21,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Tap/click shooting within the playfield with one-target-per-shot resolution and basic hit/miss/reload feedback.
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
-- Gameplay HUD shows the active round's hit quota and escape allowance alongside combo and lives.
+- Gameplay HUD shows the active round's hit quota, escape allowance, and remaining targets alongside combo and lives.
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
 - Tutorial explains life loss, the per-round escape limit, automatic reload, and the hit quota.
 - Title screen displays the locally saved best score; returning to title saves the run's current best.
@@ -60,6 +60,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
+- Passed: end-to-end flow confirms the remaining-target count decreases after a hit.
 - Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.
 - Passed: end-to-end flow confirms the main scene's art resource slot loads and incomplete art retains the geometric fallback.
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.

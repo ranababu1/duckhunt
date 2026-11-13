@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Remaining-target HUD count (in progress)
+
+### Changed
+
+- Gameplay HUD now shows unresolved targets remaining, including active and not-yet-spawned ducks.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+- Flow test verifies the remaining count starts at the configured total and decreases after a hit.
+
+### Follow-up
+
+- Verify HUD text sizing with final UI art on common landscape device ratios.
+
 ## 2026-11-13 — `47c9670`
 
 ### Added

@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `3bfedb7` (`Cover scaled touch coordinate conversion`).
+- Latest commit: `99000ff` (`Record scaled touch coordinate QA`); non-finite save-value validation is in progress.
 
 ## Implemented features
 
@@ -59,6 +59,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: pause/resume/title state checks and headless project launch after UI flow implementation.
 - Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
 - Passed: malformed settings values fall back to defaults while a valid best score remains readable; malformed best score safely loads as zero.
+- Passed: NaN volume values fall back to a finite default before audio bus application.
 - Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.

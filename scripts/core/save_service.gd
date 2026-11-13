@@ -51,7 +51,10 @@ static func _read_volume(config: ConfigFile, key: String, fallback: float) -> fl
 	var value: Variant = config.get_value(SECTION_SETTINGS, key, fallback)
 	if typeof(value) != TYPE_FLOAT and typeof(value) != TYPE_INT:
 		return fallback
-	return clampf(float(value), 0.0, 1.0)
+	var volume := float(value)
+	if not is_finite(volume):
+		return fallback
+	return clampf(volume, 0.0, 1.0)
 
 static func _read_bool(config: ConfigFile, key: String, fallback: bool) -> bool:
 	var value: Variant = config.get_value(SECTION_SETTINGS, key, fallback)

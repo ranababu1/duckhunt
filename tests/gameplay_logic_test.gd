@@ -188,6 +188,8 @@ func _test_save_persistence() -> void:
 	_assert(SaveServiceScript.load_best_score(test_save_path) == 1200, "best score should remain persistent and monotonic")
 	var malformed_config := ConfigFile.new()
 	_assert(malformed_config.load(test_save_path) == OK, "saved config should remain readable before corruption check")
+	malformed_config.set_value("settings", "music_volume", NAN)
+	_assert(is_equal_approx(SaveServiceScript._read_volume(malformed_config, "music_volume", 0.7), 0.7), "non-finite volume should fall back to its default")
 	malformed_config.set_value("settings", "music_volume", "loud")
 	malformed_config.set_value("settings", "haptics", "yes")
 	_assert(malformed_config.save(test_save_path) == OK, "test should write malformed preference values")

@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-13 — Non-finite settings validation (in progress)
+
+### Fixed
+
+- Non-finite volume values now use the safe default instead of reaching the audio server.
+
+### Tests
+
+- Passed a NaN volume regression check, gameplay logic, complete campaign flow, and headless scene launch.
+
+### Follow-up
+
+- Recheck Android export and audio settings once the missing SDK/JDK are available.
+
 ## 2026-11-13 — `3bfedb7`
 
 ### Tests

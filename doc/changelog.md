@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Target lifecycle cleanup (in progress)
+## 2026-11-13 — `ffb77a1`
 
 ### Fixed
 

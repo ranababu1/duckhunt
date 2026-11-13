@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `f9ce7cb` (`Record HUD escape quota update`); target lifecycle cleanup is in progress.
+- Latest implementation commit: `ffb77a1` (`Stop retired targets from processing`).
 
 ## Implemented features
 

@@ -206,6 +206,10 @@ func _test_input_coordinate_conversion() -> void:
 	var canvas_transform := Transform2D(0.0, Vector2(100.0, 50.0))
 	var playfield_position := InputControllerScript.viewport_to_canvas(Vector2(420.0, 300.0), canvas_transform)
 	_assert(playfield_position == Vector2(320.0, 250.0), "viewport touch should be converted through the inverse canvas transform")
+	var scaled_transform := Transform2D(Vector2(2.0, 0.0), Vector2(0.0, 1.5), Vector2(100.0, 50.0))
+	var scaled_viewport_position := scaled_transform * Vector2(320.0, 250.0)
+	var scaled_playfield_position := InputControllerScript.viewport_to_canvas(scaled_viewport_position, scaled_transform)
+	_assert(scaled_playfield_position.is_equal_approx(Vector2(320.0, 250.0)), "touch coordinate conversion should account for viewport scaling")
 
 func _assert(condition: bool, description: String) -> void:
 	if not condition:

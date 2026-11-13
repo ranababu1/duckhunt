@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-13 — Scaled touch-coordinate QA (in progress)
+
+### Tests
+
+- Extended viewport-to-canvas conversion coverage to include non-uniform scaling plus translation.
+- Passed gameplay logic tests, complete game-flow test, and headless scene launch.
+
+### Follow-up
+
+- Verify touch targets and safe margins on real Android aspect ratios when the SDK and devices are available.
+
 ## 2026-11-13 — `481b8ec`
 
 ### Changed

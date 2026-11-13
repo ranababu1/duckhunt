@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `481b8ec` (`Match duck lifetime to sprite animation`).
+- Latest commit: `92ba0dd` (`Record sprite-timed target lifecycle`); scaled touch-coordinate coverage is in progress.
 
 ## Implemented features
 
@@ -71,7 +71,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: end-to-end flow confirms the main scene's art resource slot loads and incomplete art retains the geometric fallback.
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
-- Passed: viewport-to-canvas touch coordinate conversion using a non-zero canvas offset.
+- Passed: viewport-to-canvas touch coordinate conversion with translation and non-uniform scaling.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers

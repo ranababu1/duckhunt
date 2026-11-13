@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Android development icon and boot splash
+## 2026-11-13 — `9829d05` Android development icon and boot splash
 
 ### Added
 

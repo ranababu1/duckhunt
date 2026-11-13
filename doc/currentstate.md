@@ -9,7 +9,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for Android development icon and boot splash.
+- Latest implementation commit: `9829d05` (`Add Android development icon and boot splash`).
 
 ## Implemented features
 

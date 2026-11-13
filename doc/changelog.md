@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Base-viewport layout checks (in progress)
+## 2026-11-13 — `7afa5f2`
 
 ### Tests
 

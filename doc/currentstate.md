@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `903134d` (`Record non-finite settings validation`); base-viewport layout geometry coverage is in progress.
+- Latest implementation commit: `7afa5f2` (`Check menu bounds at base viewport`).
 
 ## Implemented features
 

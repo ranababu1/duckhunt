@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `e3b8cec` (`Record title logo asset slot`); remaining-target HUD count is in progress.
+- Latest implementation commit: `67b888b` (`Show remaining targets in HUD`).
 
 ## Implemented features
 

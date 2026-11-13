@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Remaining-target HUD count (in progress)
+## 2026-11-13 — `67b888b`
 
 ### Changed
 

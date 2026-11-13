@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `2d949f0` (`Add touch input coordinate controller`).
+- Latest implementation commit: pending commit for accessibility feedback options.
 
 ## Implemented features
 
@@ -22,6 +22,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
+- Reduced-flash suppresses shot markers and hit sparks; optional haptics cover hits, misses, escapes, and round clears.
 - Back/escape navigation for pause, settings, and tutorial; gameplay timers pause behind modal screens.
 - Finite round duck counts, timed wave spawning, later-round simultaneous pairs, and sine/diagonal movement patterns.
 - Closest-target shot resolution when hit areas overlap.

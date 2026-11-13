@@ -132,6 +132,7 @@ func _resolve_shot(shot_position: Vector2) -> void:
 	if target == null or not target.try_hit(shot_position):
 		audio.play_event("miss")
 		run.record_miss()
+		_trigger_haptic(8)
 		_show_feedback("MISS")
 
 func _on_duck_hit(_duck: Node2D) -> void:
@@ -157,6 +158,7 @@ func _on_round_cleared() -> void:
 	var bonus: int = ScoreServiceScript.round_clear_bonus(remaining_escapes, run.accuracy_percent())
 	run.add_score(bonus)
 	audio.play_event("round_clear")
+	_trigger_haptic(28)
 	game_manager.on_round_cleared()
 
 func _on_round_failed() -> void:
@@ -234,11 +236,15 @@ func _on_run_completed() -> void:
 func _on_setting_changed(key: String, value: Variant) -> void:
 	if key == "reduced_flash" and bool(value):
 		shot_marker_time = 0.0
+	if key == "reduced_flash":
+		for target in ducks:
+			target.set_reduced_flash(bool(value))
 
 func _create_duck():
 	var duck = DuckScript.new()
 	duck.process_mode = Node.PROCESS_MODE_PAUSABLE
 	duck.state = DuckScript.State.OFFSCREEN
+	duck.set_reduced_flash(bool(ui.current_settings().get("reduced_flash", false)))
 	duck.set_process(false)
 	duck.resolved_hit.connect(_on_duck_hit)
 	duck.resolved_escape.connect(_on_duck_escaped)

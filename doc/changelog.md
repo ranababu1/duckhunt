@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Changed
+
+- Reduced-flash settings now suppress target hit sparks as well as shot markers.
+- Optional haptics now cover miss and round-clear feedback in addition to hits and escapes.
+
+### Tests
+
+- Passed gameplay, end-to-end game-flow, and full scene smoke tests.
+
+### Follow-up
+
+- Integrate the supplied original art/audio and validate the Android build on device.
+
 ## 2026-11-13 — `2d949f0`
 
 ### Added

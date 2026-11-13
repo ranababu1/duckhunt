@@ -18,6 +18,7 @@ var terminal_time := 0.0
 var resolution_sent := false
 var movement_pattern := "sine"
 var base_y := 272.0
+var reduced_flash := false
 
 func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2, new_pattern := "sine") -> void:
 	position = start_position
@@ -35,6 +36,10 @@ func deactivate() -> void:
 	state = State.OFFSCREEN
 	resolution_sent = true
 	set_process(false)
+	queue_redraw()
+
+func set_reduced_flash(enabled: bool) -> void:
+	reduced_flash = enabled
 	queue_redraw()
 
 func try_hit(shot_position: Vector2) -> bool:
@@ -90,5 +95,5 @@ func _draw() -> void:
 	draw_colored_polygon(PackedVector2Array([Vector2(-6, -4), Vector2(-34, -20 + flap), Vector2(-26, 11)]), Color("f4e3bf"))
 	draw_colored_polygon(PackedVector2Array([Vector2(32, -7), Vector2(48, 0), Vector2(32, 5)]), Color("f08a45"))
 	draw_circle(Vector2(25, -11), 2.5, Color("17212e"))
-	if state == State.HIT:
+	if state == State.HIT and not reduced_flash:
 		draw_arc(Vector2.ZERO, 30.0, 0.0, TAU, 12, Color("fff4b5"), 3.0)

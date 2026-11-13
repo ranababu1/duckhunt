@@ -28,6 +28,7 @@ func _run_flow() -> void:
 	_assert(main.run.hits == 1 and main.run.score == 100, "shot should resolve through the main scene")
 	_assert(main._hud_status_text().begins_with("HITS 1/2   ESCAPES 0/2"), "HUD should update hit quota after a successful shot")
 	duck._process(duck.TERMINAL_ANIMATION_DURATION)
+	_assert(not duck.is_processing(), "retired target should stop processing after its terminal animation")
 	main.round._process(main.round.spawn_interval)
 	_assert(main.round.active_ducks == 1, "completed target should be replaced by the next scheduled target")
 	main.ui.pause_requested.emit()

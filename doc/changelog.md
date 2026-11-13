@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Target lifecycle cleanup (in progress)
+
+### Fixed
+
+- Retired ducks now stop processing and redrawing after their terminal animation finishes.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+- Flow test confirms retired targets stop processing after animation completion.
+
+### Follow-up
+
+- Continue toward original art/audio integration and Android validation.
+
 ## 2026-11-13 — `60c6eac`
 
 ### Changed

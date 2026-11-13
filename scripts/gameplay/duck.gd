@@ -66,6 +66,7 @@ func _process(delta: float) -> void:
 				position.y += 110.0 * delta
 			if terminal_time >= TERMINAL_ANIMATION_DURATION:
 				state = State.OFFSCREEN
+				set_process(false)
 				terminal_animation_finished.emit(self)
 	queue_redraw()
 

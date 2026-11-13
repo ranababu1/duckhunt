@@ -9,13 +9,14 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `60c6eac` (`Show round escape allowance in HUD`).
+- Latest commit: `f9ce7cb` (`Record HUD escape quota update`); target lifecycle cleanup is in progress.
 
 ## Implemented features
 
 - Landscape 960 x 540 Godot project configuration with canvas-item stretching and nearest texture filtering.
 - Original code-drawn greybox range with a moving target.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
+- Retired targets stop processing after their terminal animation completes.
 - Separate weapon, run, and round controllers for two-round magazines, automatic reload, counters, score, hit quota, and escape allowance.
 - Tap/click shooting within the playfield with one-target-per-shot resolution and basic hit/miss/reload feedback.
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
@@ -54,6 +55,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
+- Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion using a non-zero canvas offset.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.

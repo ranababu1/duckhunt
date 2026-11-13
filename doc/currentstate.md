@@ -9,7 +9,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for faster duck movement and package ID update.
+- Latest implementation commit: `03201b5` (`Speed up duck flights with sharp reroutes`).
 
 ## Implemented features
 

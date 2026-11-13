@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Faster, rerouting duck flights and package ID update
+## 2026-11-13 — `03201b5` Faster, rerouting duck flights and package ID update
 
 ### Changed
 

@@ -156,15 +156,27 @@ func _test_pause_navigation() -> void:
 	manager.free()
 
 func _test_save_persistence() -> void:
-	const TEST_SAVE_PATH := "user://duckhunt_test_settings.cfg"
+	var test_save_path := "/tmp/duckhunt_test_settings_%d.cfg" % OS.get_process_id()
 	var expected_settings := {"music_volume": 0.35, "sfx_volume": 0.6, "haptics": false, "reduced_flash": true}
-	_assert(SaveServiceScript.save_settings(expected_settings, TEST_SAVE_PATH) == OK, "settings should save successfully")
-	_assert(SaveServiceScript.load_settings(TEST_SAVE_PATH) == expected_settings, "settings should survive a save/load cycle")
-	_assert(SaveServiceScript.save_best_score(1200, TEST_SAVE_PATH) == OK, "best score should save successfully")
-	_assert(SaveServiceScript.save_best_score(900, TEST_SAVE_PATH) == OK, "lower score should not replace the best")
-	_assert(SaveServiceScript.load_best_score(TEST_SAVE_PATH) == 1200, "best score should remain persistent and monotonic")
-	var absolute_path := ProjectSettings.globalize_path(TEST_SAVE_PATH)
-	if FileAccess.file_exists(TEST_SAVE_PATH):
+	_assert(SaveServiceScript.save_settings(expected_settings, test_save_path) == OK, "settings should save successfully")
+	_assert(SaveServiceScript.load_settings(test_save_path) == expected_settings, "settings should survive a save/load cycle")
+	_assert(SaveServiceScript.save_best_score(1200, test_save_path) == OK, "best score should save successfully")
+	_assert(SaveServiceScript.save_best_score(900, test_save_path) == OK, "lower score should not replace the best")
+	_assert(SaveServiceScript.load_best_score(test_save_path) == 1200, "best score should remain persistent and monotonic")
+	var malformed_config := ConfigFile.new()
+	_assert(malformed_config.load(test_save_path) == OK, "saved config should remain readable before corruption check")
+	malformed_config.set_value("settings", "music_volume", "loud")
+	malformed_config.set_value("settings", "haptics", "yes")
+	_assert(malformed_config.save(test_save_path) == OK, "test should write malformed preference values")
+	var recovered_settings: Dictionary = SaveServiceScript.load_settings(test_save_path)
+	_assert(is_equal_approx(recovered_settings.music_volume, 0.7), "malformed volume should fall back to its default")
+	_assert(recovered_settings.haptics, "malformed boolean preference should fall back to its default")
+	_assert(SaveServiceScript.load_best_score(test_save_path) == 1200, "malformed preferences must not discard a valid best score")
+	malformed_config.set_value("progress", "best_score", "many")
+	_assert(malformed_config.save(test_save_path) == OK, "test should write a malformed best score")
+	_assert(SaveServiceScript.load_best_score(test_save_path) == 0, "malformed best score should safely fall back to zero")
+	if FileAccess.file_exists(test_save_path):
+		var absolute_path := ProjectSettings.globalize_path(test_save_path)
 		DirAccess.remove_absolute(absolute_path)
 
 func _test_input_coordinate_conversion() -> void:

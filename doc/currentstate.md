@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `d4661dd` (`Complete reduced flash and haptic feedback`).
+- Latest implementation commit: `12a95fb` (`Persist best score on title return`); save-data hardening is in progress.
 
 ## Implemented features
 
@@ -23,6 +23,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
 - Title screen displays the locally saved best score; returning to title saves the run's current best.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
+- Save-data loaders reject malformed preference types and retain safe defaults rather than coercing invalid values.
 - Reduced-flash suppresses shot markers and hit sparks; optional haptics cover hits, misses, escapes, and round clears.
 - Back/escape navigation for pause, settings, and tutorial; gameplay timers pause behind modal screens.
 - Finite round duck counts, timed wave spawning, later-round simultaneous pairs, and sine/diagonal movement patterns.
@@ -47,6 +48,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: headless gameplay logic tests for reload behavior, zero-shot accuracy, round completion/failure, one-time duck terminal states, 10-round progression, scoring, and lives.
 - Passed: pause/resume/title state checks and headless project launch after UI flow implementation.
 - Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
+- Passed: malformed settings values fall back to defaults while a valid best score remains readable; malformed best score safely loads as zero.
 - Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.

@@ -1,6 +1,21 @@
 # Changelog
 
-## 2026-11-13 — `d4661dd`
+## 2026-11-13 — Save-data validation (in progress)
+
+### Changed
+
+- Settings and saved scores now validate stored value types and use safe defaults for malformed fields.
+
+### Tests
+
+- Passed gameplay logic tests, including malformed preference and best-score recovery.
+- Passed full game-flow smoke test and three-second headless scene launch.
+
+### Follow-up
+
+- Integrate the supplied original art/audio and complete Android validation.
+
+## 2026-11-13 — `12a95fb`
 
 ### Changed
 

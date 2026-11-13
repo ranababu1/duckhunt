@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Added
+
+- Local run, test, save-data, asset-assignment, and Android release-status notes in `README.md`.
+- AudioManager scene node with Inspector-editable stream slots for original music and effects.
+
+### Tests
+
+- Passed the headless logic suite, end-to-end game-flow smoke test, and full scene smoke test after scene wiring.
+
+### Follow-up
+
+- Receive the user's original art/audio assets and prepare Android packaging when the public title is cleared.
+
 ## 2026-11-13 — `3904314`
 
 ### Added

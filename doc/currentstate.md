@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `3904314` (`Test background and wave edge cases`).
+- Latest implementation commit: pending commit for Inspector-ready audio slots and run documentation.
 
 ## Implemented features
 
@@ -33,7 +33,8 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 - Presentation uses replaceable code-created art and UI; production art/audio assets have been deferred until provided.
 - Audio playback hooks are connected but the project is silent until the original music and sound assets are supplied.
-- Round transitions are greybox-only; results/menu screens and full multi-target waves are not implemented.
+- Art and audio remain temporary/empty placeholders while waiting for the user-provided originals.
+- The UI layout has only been headless-smoke-tested; native visual inspection did not complete in this environment.
 - No Android build/device test has been performed.
 
 ## Tests run
@@ -51,14 +52,16 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 ## Current blockers
 
-- An Android test device is not available in this environment.
+- The agreed original art/audio files have not been supplied yet.
+- No Android device or `adb` executable is available for physical-device validation.
 
 ## Exact next actions
 
-1. Integrate the user-provided original art and audio files and update `assets.md` provenance.
-2. Add settings-accessible first-run tutorial tracking and polish score/results details.
+1. Integrate the user-provided original art and audio files, assign them through the main scene's `AudioManager`, and update `assets.md`.
+2. Prepare a legal-cleared package identity and Android export configuration after the product title is decided.
 3. Verify touch input, pause/background behavior, and layouts on Android devices at common landscape ratios.
 
 ## Decisions awaiting approval
 
 - Public game title requires legal clearance; “Duck Hunt Arcade” remains a working title.
+- Android package identity and signing setup remain release decisions; signing secrets must stay local.

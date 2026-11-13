@@ -13,7 +13,6 @@ const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
 const GameUIScript = preload("res://scripts/ui/game_ui.gd")
 const SaveServiceScript = preload("res://scripts/core/save_service.gd")
-const AudioManagerScript = preload("res://scripts/core/audio_manager.gd")
 
 var ui
 var audio
@@ -35,13 +34,12 @@ func _ready() -> void:
 	round = RoundControllerScript.new()
 	game_manager = GameManagerScript.new()
 	ui = GameUIScript.new()
-	audio = AudioManagerScript.new()
+	audio = get_node("AudioManager")
 	add_child(weapon)
 	add_child(run)
 	add_child(round)
 	add_child(game_manager)
 	add_child(ui)
-	add_child(audio)
 	weapon.process_mode = Node.PROCESS_MODE_PAUSABLE
 	round.process_mode = Node.PROCESS_MODE_PAUSABLE
 	game_manager.process_mode = Node.PROCESS_MODE_ALWAYS

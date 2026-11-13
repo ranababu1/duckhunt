@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/gameplay/prototype_game.gd" id="1_prototype"]
+[ext_resource type="Script" path="res://scripts/core/audio_manager.gd" id="2_audio_manager"]
 
 [node name="PrototypeGame" type="Node2D"]
 script = ExtResource("1_prototype")
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("2_audio_manager")

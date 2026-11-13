@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — HUD escape quota (in progress)
+## 2026-11-13 — `60c6eac`
 
 ### Changed
 

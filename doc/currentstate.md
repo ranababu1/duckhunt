@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `e295114` (`Harden local save data validation`).
+- Latest implementation commit: `60c6eac` (`Show round escape allowance in HUD`).
 
 ## Implemented features
 

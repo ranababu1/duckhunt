@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Isolated integration-test saves (in progress)
+
+### Changed
+
+- Game/UI save paths can be configured, with the normal production default unchanged.
+- End-to-end tests persist settings and scores to a process-specific temporary file and remove it afterward.
+
+### Tests
+
+- Passed gameplay logic, complete ten-round and escape-failure flow, and headless launch checks.
+
+### Follow-up
+
+- Keep player profile data isolated from automated QA runs.
+
 ## 2026-11-13 — `7afa5f2`
 
 ### Tests

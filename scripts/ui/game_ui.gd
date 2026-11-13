@@ -20,12 +20,13 @@ var screens: Dictionary = {}
 var settings: Dictionary = {}
 var custom_theme: Theme
 var title_logo: Texture2D
+var save_path: String = SaveServiceScript.SAVE_PATH
 var settings_return_screen := "title"
 var title_confirm_visible := false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	settings = SaveServiceScript.load_settings()
+	settings = SaveServiceScript.load_settings(save_path)
 	root = Control.new()
 	root.name = "Overlay"
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -59,7 +60,7 @@ func show_settings() -> void:
 	_show("settings")
 
 func back_from_settings() -> void:
-	SaveServiceScript.save_settings(settings)
+	SaveServiceScript.save_settings(settings, save_path)
 	_show(settings_return_screen)
 
 func show_gameplay() -> void:
@@ -130,7 +131,7 @@ func _create_settings() -> void:
 	_add_toggle(panel, "Haptics", "haptics")
 	_add_toggle(panel, "Reduced flashes", "reduced_flash")
 	_add_button(panel, "BACK", func() -> void:
-		SaveServiceScript.save_settings(settings)
+		SaveServiceScript.save_settings(settings, save_path)
 		settings_closed.emit()
 		_show(settings_return_screen)
 	)
@@ -213,7 +214,7 @@ func _add_slider(panel: Control, title: String, key: String) -> void:
 	slider.value = float(settings[key])
 	slider.value_changed.connect(func(value: float) -> void:
 		settings[key] = value
-		SaveServiceScript.save_settings(settings)
+		SaveServiceScript.save_settings(settings, save_path)
 		setting_changed.emit(key, value)
 	)
 	content.add_child(slider)
@@ -226,7 +227,7 @@ func _add_toggle(panel: Control, title: String, key: String) -> void:
 	toggle.add_theme_font_size_override("font_size", 18)
 	toggle.toggled.connect(func(enabled: bool) -> void:
 		settings[key] = enabled
-		SaveServiceScript.save_settings(settings)
+		SaveServiceScript.save_settings(settings, save_path)
 		setting_changed.emit(key, enabled)
 	)
 	content.add_child(toggle)

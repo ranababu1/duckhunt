@@ -8,7 +8,9 @@ func _init() -> void:
 	call_deferred("_run_flow")
 
 func _run_flow() -> void:
+	var test_save_path := "/tmp/duckhunt_flow_test_%d.cfg" % OS.get_process_id()
 	var main = MainScene.instantiate()
+	main.save_path = test_save_path
 	root.add_child(main)
 	await process_frame
 	_assert(main.art_assets != null, "main scene should expose an ArtAssetSet for future original art")
@@ -87,6 +89,7 @@ func _run_flow() -> void:
 	main.queue_free()
 	await process_frame
 	var failed_game = MainScene.instantiate()
+	failed_game.save_path = test_save_path
 	root.add_child(failed_game)
 	await process_frame
 	failed_game.ui.play_requested.emit()
@@ -100,6 +103,8 @@ func _run_flow() -> void:
 	paused = false
 	failed_game.queue_free()
 	await process_frame
+	if FileAccess.file_exists(test_save_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_save_path))
 	if failures.is_empty():
 		print("PASS: full game flow smoke test")
 		quit(0)

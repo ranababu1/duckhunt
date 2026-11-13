@@ -16,6 +16,7 @@ const SaveServiceScript = preload("res://scripts/core/save_service.gd")
 const InputControllerScript = preload("res://scripts/gameplay/input_controller.gd")
 
 @export var art_assets: Resource
+@export var save_path: String = SaveServiceScript.SAVE_PATH
 
 var ui
 var audio
@@ -41,6 +42,7 @@ func _ready() -> void:
 	if art_assets != null:
 		ui.custom_theme = art_assets.get("ui_theme") as Theme
 		ui.title_logo = art_assets.get("title_logo") as Texture2D
+	ui.save_path = save_path
 	audio = get_node("AudioManager")
 	input_controller = InputControllerScript.new()
 	add_child(weapon)
@@ -84,7 +86,7 @@ func _ready() -> void:
 	audio.apply_setting("music_volume", saved_settings.music_volume)
 	audio.apply_setting("sfx_volume", saved_settings.sfx_volume)
 	audio.set_context("menu")
-	ui.show_title(SaveServiceScript.load_best_score())
+	ui.show_title(SaveServiceScript.load_best_score(save_path))
 	queue_redraw()
 
 func _process(delta: float) -> void:
@@ -109,7 +111,7 @@ func _handle_back_navigation() -> void:
 	if ui.screens["settings"].visible:
 		ui.back_from_settings()
 	elif ui.screens["tutorial"].visible:
-		ui.show_title(SaveServiceScript.load_best_score())
+		ui.show_title(SaveServiceScript.load_best_score(save_path))
 	elif game_manager.state == game_manager.State.PLAYING:
 		_pause_run()
 	elif game_manager.state == game_manager.State.PAUSED:
@@ -186,7 +188,7 @@ func _on_game_state_changed(_previous_state: int, new_state: int) -> void:
 				target.set_process(false)
 			weapon.set_process(false)
 			round.set_process(false)
-			ui.show_title(SaveServiceScript.load_best_score())
+			ui.show_title(SaveServiceScript.load_best_score(save_path))
 		game_manager.State.PLAYING:
 			audio.set_context("gameplay")
 			get_tree().paused = false
@@ -226,12 +228,12 @@ func _continue_round() -> void:
 
 func _return_to_title() -> void:
 	get_tree().paused = false
-	SaveServiceScript.save_best_score(run.score)
+	SaveServiceScript.save_best_score(run.score, save_path)
 	game_manager.return_to_title()
 
 func _show_results(heading: String) -> void:
-	var best := maxi(run.score, SaveServiceScript.load_best_score())
-	SaveServiceScript.save_best_score(best)
+	var best := maxi(run.score, SaveServiceScript.load_best_score(save_path))
+	SaveServiceScript.save_best_score(best, save_path)
 	var rounds_cleared: int = game_manager.current_round_index
 	if game_manager.state == game_manager.State.RUN_COMPLETE:
 		rounds_cleared = game_manager.round_configs.size()

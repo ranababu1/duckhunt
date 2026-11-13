@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `7afa5f2` (`Check menu bounds at base viewport`).
+- Latest commit: `643b3fe` (`Record base viewport layout checks`); game-flow save isolation is in progress.
 
 ## Implemented features
 
@@ -29,6 +29,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Title screen displays the locally saved best score; returning to title saves the run's current best.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
 - Save-data loaders reject malformed preference types and retain safe defaults rather than coercing invalid values.
+- Game and UI save paths are configurable; integration flow tests use a temporary file instead of modifying player data.
 - Reduced-flash suppresses shot markers and hit sparks; optional haptics cover hits, misses, escapes, and round clears.
 - Back/escape navigation for pause, settings, and tutorial; gameplay timers pause behind modal screens.
 - Finite round duck counts, timed wave spawning, later-round simultaneous pairs, and sine/diagonal movement patterns.
@@ -64,6 +65,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: end-to-end prototype flow completes the configured quotas across all ten rounds and presents results with `10 / 10` rounds cleared.
+- Passed: complete game-flow tests isolate settings and best-score writes to a temporary save file and remove it after the run.
 - Passed: end-to-end flow confirms exceeding a round's escape allowance ends the run even when lives remain, while using the allowance itself is permitted.
 - Passed: scoring checks cover round-local accuracy, the accuracy-scaled clear bonus, and suppression of the perfect bonus after an escape.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.

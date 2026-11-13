@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — UI Theme assignment (in progress)
+## 2026-11-13 — `6af1611`
 
 ### Added
 

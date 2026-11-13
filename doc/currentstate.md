@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `017a05a` (`Record art assignment scaffold`); optional UI Theme integration is in progress.
+- Latest implementation commit: `6af1611` (`Allow original UI theme assignment`).
 
 ## Implemented features
 

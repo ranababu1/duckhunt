@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `24f1bba` (`Record escape-limit flow coverage`).
+- Latest commit: `a9a6ee3` (`Correct project history references`).
 
 ## Implemented features
 
@@ -46,7 +46,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Presentation uses replaceable code-created art and UI; production art/audio assets have been deferred until provided.
 - Audio playback hooks are connected but the project is silent until the original music and sound assets are supplied.
 - Art and audio remain temporary/empty placeholders while waiting for the user-provided originals.
-- The UI layout has only been headless-smoke-tested; native visual inspection did not complete in this environment.
+- The UI layout has only been headless-smoke-tested; native visual inspection could not start because the Godot desktop app bundle is unavailable here.
 - No Android build/device test has been performed; the Android export SDK and a Java runtime are unavailable.
 
 ## Tests run

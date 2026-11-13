@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `643b3fe` (`Record base viewport layout checks`); game-flow save isolation is in progress.
+- Latest implementation commit: `292e39e` (`Isolate game flow saves from player data`).
 
 ## Implemented features
 

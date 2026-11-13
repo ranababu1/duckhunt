@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Isolated integration-test saves (in progress)
+## 2026-11-13 — `292e39e`
 
 ### Changed
 

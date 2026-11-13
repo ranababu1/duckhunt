@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `be87e92` (`Record Android and visual QA blockers`); sprite-timed terminal animations are in progress.
+- Latest implementation commit: `481b8ec` (`Match duck lifetime to sprite animation`).
 
 ## Implemented features
 

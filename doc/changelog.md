@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Sprite-timed duck terminal states (in progress)
+## 2026-11-13 — `481b8ec`
 
 ### Changed
 

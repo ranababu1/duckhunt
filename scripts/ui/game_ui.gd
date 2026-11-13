@@ -18,6 +18,7 @@ const SaveServiceScript = preload("res://scripts/core/save_service.gd")
 var root: Control
 var screens: Dictionary = {}
 var settings: Dictionary = {}
+var custom_theme: Theme
 var settings_return_screen := "title"
 var title_confirm_visible := false
 
@@ -28,6 +29,7 @@ func _ready() -> void:
 	root.name = "Overlay"
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.theme = custom_theme
 	add_child(root)
 	_create_title()
 	_create_tutorial()
@@ -133,7 +135,8 @@ func _create_gameplay_hud() -> void:
 	pause_button.position = Vector2(886, 75)
 	pause_button.size = Vector2(54, 48)
 	pause_button.mouse_filter = Control.MOUSE_FILTER_STOP
-	pause_button.add_theme_font_size_override("font_size", 26)
+	if custom_theme == null:
+		pause_button.add_theme_font_size_override("font_size", 26)
 	pause_button.pressed.connect(func() -> void: pause_requested.emit())
 	pause_button.pressed.connect(func() -> void: ui_action.emit())
 	overlay.add_child(pause_button)
@@ -149,7 +152,8 @@ func _make_screen(screen_id: String, heading: String, subtitle: String, detail_n
 	var card := PanelContainer.new()
 	card.position = Vector2(250.0, 50.0)
 	card.size = Vector2(460.0, 440.0)
-	card.add_theme_stylebox_override("panel", _panel_style())
+	if custom_theme == null:
+		card.add_theme_stylebox_override("panel", _panel_style())
 	dim.add_child(card)
 	var content := VBoxContainer.new()
 	content.add_theme_constant_override("separation", 12)
@@ -176,11 +180,12 @@ func _add_button(panel: Control, text: String, callback: Callable) -> void:
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size = Vector2(340.0, 44.0)
-	button.add_theme_font_size_override("font_size", 20)
-	button.add_theme_color_override("font_color", Color("18334d"))
-	button.add_theme_stylebox_override("normal", _button_style(Color("f0c15b")))
-	button.add_theme_stylebox_override("hover", _button_style(Color("ffe49a")))
-	button.add_theme_stylebox_override("pressed", _button_style(Color("d99545")))
+	if custom_theme == null:
+		button.add_theme_font_size_override("font_size", 20)
+		button.add_theme_color_override("font_color", Color("18334d"))
+		button.add_theme_stylebox_override("normal", _button_style(Color("f0c15b")))
+		button.add_theme_stylebox_override("hover", _button_style(Color("ffe49a")))
+		button.add_theme_stylebox_override("pressed", _button_style(Color("d99545")))
 	button.pressed.connect(callback)
 	button.pressed.connect(func() -> void: ui_action.emit())
 	content.add_child(button)

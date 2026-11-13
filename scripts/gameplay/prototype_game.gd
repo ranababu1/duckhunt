@@ -38,6 +38,8 @@ func _ready() -> void:
 	round = RoundControllerScript.new()
 	game_manager = GameManagerScript.new()
 	ui = GameUIScript.new()
+	if art_assets != null:
+		ui.custom_theme = art_assets.get("ui_theme") as Theme
 	audio = get_node("AudioManager")
 	input_controller = InputControllerScript.new()
 	add_child(weapon)

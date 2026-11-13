@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `8a5a32c` (`Add replaceable art asset slots`).
+- Latest commit: `017a05a` (`Record art assignment scaffold`); optional UI Theme integration is in progress.
 
 ## Implemented features
 
@@ -33,6 +33,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Closest-target shot resolution when hit areas overlap.
 - Music and SFX buses with event playback hooks ready for provided original audio streams.
 - Main scene exposes an `ArtAssetSet` resource for four background layers and named duck animation states, with geometric fallbacks until assets are assigned.
+- Assigned art sets can supply an optional Godot Theme for menu and HUD control styling.
 - App background/window focus loss automatically pauses active play, and remaining targets are retired when a new round starts.
 - Dedicated input controller converts viewport taps through the inverse canvas transform and emits shots only for unhandled playfield touches.
 - Initial Godot-oriented folder layout and ignore rules.

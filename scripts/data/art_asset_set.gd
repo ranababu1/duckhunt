@@ -10,3 +10,6 @@ extends Resource
 
 ## SpriteFrames animations are named `fly`, `hit`, and `escape`.
 @export var duck_frames: SpriteFrames
+
+## Optional Godot Theme for menu, HUD controls, and typography.
+@export var ui_theme: Theme

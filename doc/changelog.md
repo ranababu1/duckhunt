@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — UI Theme assignment (in progress)
+
+### Added
+
+- Optional Theme assignment through `ArtAssetSet`, applied to generated menus and HUD controls.
+- Default code styles remain active until a custom Theme is assigned.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+
+### Follow-up
+
+- Apply the supplied original UI Theme/art when available and verify its layout visually.
+
 ## 2026-11-13 — `8a5a32c`
 
 ### Added

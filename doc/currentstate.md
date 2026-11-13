@@ -4,12 +4,12 @@
 
 ## Milestone and status
 
-M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, original background/target/effect art, an arcade UI theme, and synthesized music/effects are implemented. Final branding and physical-device QA remain outstanding.
+M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, original background/target/effect art, an arcade UI theme, synthesized music/effects, and a signed local Android debug export are implemented. Final branding and physical-device QA remain outstanding.
 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `444f8f8` (`Add rectangular arcade UI theme`).
+- Latest implementation commit: pending commit for Android development icon and boot splash.
 
 ## Implemented features
 
@@ -17,6 +17,8 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
 - Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
 - Original pixel-art daytime range background integrated through the replaceable `ArtAssetSet.background` slot; separate parallax-layer slots remain available for future supplied art.
+- Original no-text development app icon assigned to Godot and the Android debug preset; public store branding remains provisional.
+- Original range background is configured as the engine boot splash with nearest-neighbor scaling.
 - Original 64 × 48 pixel-grid duck fly/hit/escape sprites, shot-flash/hit-spark effects, and a rectangular arcade Theme, assigned through the existing art resource.
 - Original menu/gameplay chiptune loops and eight sound effects, generated deterministically from `tools/generate_audio.py` using only Python's standard library and wired into the scene's `AudioManager`.
 - Original pixel-art target and feedback animation, with code-drawn fallbacks retained for unassigned resources.
@@ -50,11 +52,9 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 ## Known limitations
 
-- Presentation uses replaceable code-created art and UI; production art/audio assets have been deferred until provided.
-- Audio playback hooks are connected but the project is silent until the original music and sound assets are supplied.
-- Art and audio remain temporary/empty placeholders while waiting for the user-provided originals.
+- Presentation uses original project art and audio, which remain replaceable by the user's final asset pack.
 - The UI layout has only been headless-smoke-tested; native visual inspection could not start because the Godot desktop app bundle is unavailable here.
-- No Android build/device test has been performed; the Android export SDK and a Java runtime are unavailable.
+- No Android handset has been tested; the local Pixel emulator is the current Android device check.
 
 ## Tests run
 
@@ -88,14 +88,13 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: flow test verifies all ten generated music/effect resources load, menu/gameplay music contexts switch, and an SFX event starts playback.
 - Passed: audio-enabled Android APK exported, signed, installed, and launched in the Pixel 6 API 35 emulator without Godot startup errors.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
-- Passed: Android debug APK exported and verified as signed; package ID and landscape manifest orientation inspected.
-- Passed: APK installed and launched in a Pixel 6 API 35 emulator; entered Classic Mode, fired at a target, and observed hit/quota/reload HUD updates with no Godot script errors in startup logs.
+- Passed: Android debug APK exported and signed with the configured development keystore; original launcher icon resources were included.
+- Passed: APK installed and launched in the Pixel API 35 emulator; main loop started without script/runtime errors. Gameplay hit/quota/reload was visually checked in an earlier emulator pass.
 
 ## Current blockers
 
-- The agreed original art/audio files have not been supplied yet.
 - No physical Android handset has been tested; emulator validation does not replace device coverage.
-- No user-supplied final asset pack, logo, or app icon is available yet; current original project art uses the generated background, authored SVG sprites/theme, and geometric gameplay fallback.
+- No user-supplied final asset pack or legally cleared logo is available yet; the current app icon is an original no-text development mark.
 
 ## Exact next actions
 

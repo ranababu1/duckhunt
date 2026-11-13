@@ -230,6 +230,7 @@ For each delivery:
 ### Godot assignment slots
 
 - The main scene references `resources/art/open_range_art_set.tres`, an `ArtAssetSet` resource exposed as `art_assets` on the root `PrototypeGame` node.
+- The project and Android debug export use `assets/ui/open_range_app_icon.svg`, an original no-text development icon composed on the same pixel grid. Replace it with legally cleared final branding before public release.
 - Assign `background` for one complete 960 × 540 composition, or use the separate sky/hills/tree/foreground layers below. The current original AI-generated daytime range composition is `assets/backgrounds/open_range_day.png` (1672 × 941 PNG); it is stretched to the logical viewport with pixel-friendly filtering. Its provenance is OpenAI image generation for this project; no third-party source assets are included.
 - Original synthesized audio is generated reproducibly by `tools/generate_audio.py` and assigned on the main scene's `AudioManager`: two looping 22.05 kHz mono WAV chiptune themes plus eight short event effects. The generator uses Python's standard library, oscillator waveforms, and seeded noise; it contains no samples or third-party audio. Replace any of these streams with cleared supplied tracks when available.
 - Assign `sky`, `far_hills`, `tree_line`, and `foreground` textures there. Each is drawn over a 960 × 540 canvas; the sky should be opaque and the three nearer layers should use transparency where needed. The game keeps the geometric range if any required background layer is missing.

@@ -4,8 +4,14 @@ config_version=5
 
 [application]
 config/name="Duck Hunt Arcade"
+config/icon="res://assets/ui/open_range_app_icon.svg"
 run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
+boot_splash/image="res://assets/backgrounds/open_range_day.png"
+boot_splash/bg_color=Color(0.1333, 0.7882, 0.7922, 1)
+boot_splash/show_image=true
+boot_splash/stretch_mode=1
+boot_splash/use_filter=false
 
 [display]
 

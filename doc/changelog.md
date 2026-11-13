@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-11-13 — Android development icon and boot splash
+
+### Added
+
+- Original no-text pixel-grid development icon assigned to the Godot project and Android launcher export.
+- Original range background configured as the pixel-filtered engine boot splash.
+
+### Verified
+
+- Gameplay logic and full game-flow checks pass.
+- Android debug APK exported and signed, installed, and launched in the Pixel API 35 emulator; Godot main loop started without script/runtime errors.
+
+### Follow-up
+
+- Replace provisional development branding after public title clearance and review on a physical Android device.
+
 ## 2026-11-13 — `444f8f8` Original rectangular arcade UI theme
 
 ### Added

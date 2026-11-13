@@ -9,7 +9,7 @@ M2 (Complete Classic Mode loop) is in progress. The repository has a controller-
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `7c45856` (`Add gameplay logic tests`)
+- Latest implementation commit: `2f26197` (`Add classic round progression`)
 
 ## Implemented features
 

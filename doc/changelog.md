@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Escape-limit failure flow (in progress)
+## 2026-11-13 — `bc07bfb`
 
 ### Tests
 

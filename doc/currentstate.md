@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `0d0373e` (`Record round-local scoring fix`); escape-limit failure coverage is in progress.
+- Latest commit: `bc07bfb` (`Cover escape limit game over flow`).
 
 ## Implemented features
 

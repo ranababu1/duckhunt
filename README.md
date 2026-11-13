@@ -20,7 +20,7 @@ godot --headless --path . --script res://tests/game_flow_test.gd
 godot --headless --path . --quit-after 3
 ```
 
-The project is currently validated with Godot 4.7.2 on desktop. Android export and device behavior have not been validated yet.
+The project is currently validated with Godot 4.7.2 on desktop and in a local Pixel 6 API 35 Android emulator. Run the logic/flow checks above and a short headless launch after code changes.
 
 ## Save data
 
@@ -30,6 +30,12 @@ Settings and the local best score are stored offline in `user://duckhunt_arcade.
 
 The current scene uses geometric placeholder art and has empty audio-stream slots. When supplying files, follow [doc/assets.md](doc/assets.md). Assign the `ArtAssetSet` resource at `resources/art/open_range_art_set.tres` for backgrounds, duck animations, action effects, title logo, and an optional UI Theme; assign music/SFX on the `AudioManager` child of the main scene in the Godot Inspector. Keep all art and audio original or commercially licensed.
 
-## Android release status
+## Android debug build
 
-The viewport and landscape orientation are configured, but a physical Android test device, Android export environment, release package identity, signing credentials, and store branding still need to be prepared. Never commit signing keys or passwords.
+The Android SDK/JDK paths are configured in the local Godot editor settings. Export the local debug APK with:
+
+```sh
+godot --headless --path . --export-debug "Android Debug" export/android/open_range_debug.apk
+```
+
+The preset uses package ID `dev.imrn.duckhunt` and the development label `Open Range (Development)`. The APK is signed with Godot's local debug key and is ignored by Git. It was installed and launched in a Pixel 6 API 35 emulator; a real-device test remains outstanding. No release signing key is configured. Public title and store branding still need legal clearance. Never commit signing keys or passwords.

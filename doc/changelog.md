@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13 — Android debug export and emulator check
+
+### Added
+
+- Android Debug export preset for package `dev.imrn.duckhunt`, with landscape mode, ARM64, and a development display label.
+- Android ETC2/ASTC texture import setting required for Android exports; corrected the project orientation value to landscape.
+- README instructions for exporting a local debug APK.
+
+### Verified
+
+- Godot 4.7.2 exported a signed debug APK; package ID, API levels, signature, and landscape manifest were inspected.
+- Installed and launched the APK in a Pixel 6 API 35 emulator, entered Classic Mode, and fired at a target. HUD hit/quota and automatic reload updates were visible; no Godot script errors appeared in startup logs.
+
+### Follow-up
+
+- Original art/audio and physical Android device validation remain outstanding. Public title/branding and release signing are not finalized.
+
 ## 2026-11-13 — `292e39e`
 
 ### Changed

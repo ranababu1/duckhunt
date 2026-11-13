@@ -13,7 +13,9 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 ## Implemented features
 
-- Landscape 960 x 540 Godot project configuration with canvas-item stretching and nearest texture filtering.
+- Landscape 960 x 540 Godot project configuration with canvas-item stretching, nearest texture filtering, and Android ETC2/ASTC texture import enabled.
+- Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
+- Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
 - Original code-drawn greybox range with a moving target.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
 - Retired targets stop processing after their terminal animation completes.
@@ -77,20 +79,22 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion with translation and non-uniform scaling.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
+- Passed: Android debug APK exported and verified as signed; package ID and landscape manifest orientation inspected.
+- Passed: APK installed and launched in a Pixel 6 API 35 emulator; entered Classic Mode, fired at a target, and observed hit/quota/reload HUD updates with no Godot script errors in startup logs.
 
 ## Current blockers
 
 - The agreed original art/audio files have not been supplied yet.
-- No Android device or `adb` executable is available for physical-device validation.
-- Godot Android export templates are installed, but `/Users/imran/Library/Android/sdk` is missing and no Java runtime is available.
+- No physical Android handset has been tested; emulator validation does not replace device coverage.
+- Original production art and audio have not been supplied; the game still uses geometric placeholder visuals and empty sound slots.
 
 ## Exact next actions
 
 1. Integrate the user-provided original art and audio files, assign them through the main scene's `AudioManager`, and update `assets.md`.
-2. Install/configure Android SDK and Java, then set a legal-cleared package identity and Android export preset after the product title is decided.
-3. Build and install the Android package, then verify touch input, pause/background behavior, and layouts on physical devices at common landscape ratios.
+2. Run the Android build on at least one physical handset and review touch, pause/background behavior, and common landscape aspect ratios.
+3. Choose and clear the public title/branding; keep release signing credentials local and outside Git.
 
 ## Decisions awaiting approval
 
 - Public game title requires legal clearance; “Duck Hunt Arcade” remains a working title.
-- Android package identity and signing setup remain release decisions; signing secrets must stay local.
+- The user selected package ID `dev.imrn.duckhunt`; confirm global store availability before publishing. Release signing setup remains pending and signing secrets must stay local.

@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for touch-coordinate handling.
+- Latest implementation commit: `2d949f0` (`Add touch input coordinate controller`).
 
 ## Implemented features
 

@@ -20,6 +20,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Tap/click shooting within the playfield with one-target-per-shot resolution and basic hit/miss/reload feedback.
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
+- Gameplay HUD shows the active round's hit quota and escape allowance alongside combo and lives.
 - Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
 - Title screen displays the locally saved best score; returning to title saves the run's current best.
 - Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
@@ -52,6 +53,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
+- Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion using a non-zero canvas offset.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.

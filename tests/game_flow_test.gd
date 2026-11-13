@@ -16,6 +16,7 @@ func _run_flow() -> void:
 	main.ui.play_requested.emit()
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING, "Play should start a run")
 	_assert(main.round.active_ducks == 1, "first round should spawn its opening target")
+	_assert(main._hud_status_text() == "HITS 0/2   ESCAPES 0/2   COMBO 0   LIVES 3", "HUD should show the current escape allowance")
 	var duck = main.ducks[0]
 	duck.position = Vector2(420.0, 280.0)
 	var overlapping_duck = main.ducks[1]
@@ -25,6 +26,7 @@ func _run_flow() -> void:
 	overlapping_duck.deactivate()
 	_assert(main.weapon.request_fire(duck.global_position), "weapon should accept the test shot")
 	_assert(main.run.hits == 1 and main.run.score == 100, "shot should resolve through the main scene")
+	_assert(main._hud_status_text().begins_with("HITS 1/2   ESCAPES 0/2"), "HUD should update hit quota after a successful shot")
 	duck._process(duck.TERMINAL_ANIMATION_DURATION)
 	main.round._process(main.round.spawn_interval)
 	_assert(main.round.active_ducks == 1, "completed target should be replaced by the next scheduled target")

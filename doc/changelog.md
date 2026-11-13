@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — HUD escape quota (in progress)
+
+### Changed
+
+- Added the current round's escape count and allowance to the gameplay HUD.
+- Centralized the HUD status text so the live values can be checked in the game-flow test.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+
+### Follow-up
+
+- Continue toward original art/audio integration and Android validation.
+
 ## 2026-11-13 — `e295114`
 
 ### Changed

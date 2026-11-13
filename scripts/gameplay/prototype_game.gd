@@ -325,7 +325,17 @@ func _draw_hud() -> void:
 	if weapon.is_reloading:
 		_draw_centered_text("RELOADING", Vector2(480, 520), 16, Color("fff4b5"))
 	else:
-		_draw_centered_text("HITS %d/%d  COMBO %d  LIVES %d" % [round.round_hits, round.required_hits, run.combo, run.lives], Vector2(480, 520), 16, Color("d9f0ff"))
+		_draw_centered_text(_hud_status_text(), Vector2(480, 520), 16, Color("d9f0ff"))
+
+func _hud_status_text() -> String:
+	return "HITS %d/%d   ESCAPES %d/%d   COMBO %d   LIVES %d" % [
+		round.round_hits,
+		round.required_hits,
+		round.escapes,
+		round.allowed_escapes,
+		run.combo,
+		run.lives
+	]
 
 func _draw_text(text: String, position: Vector2, font_size: int, color: Color) -> void:
 	draw_string(ThemeDB.fallback_font, position, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)

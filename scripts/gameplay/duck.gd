@@ -9,15 +9,14 @@ enum State { ENTERING, FLYING, HIT, ESCAPING, OFFSCREEN }
 
 const HIT_RADIUS := 26.0
 const TERMINAL_ANIMATION_DURATION := 0.35
-const REROUTE_MIN_SECONDS := 0.28
-const REROUTE_MAX_SECONDS := 0.55
-
 var state := State.ENTERING
 var flight_velocity := Vector2(180.0, 0.0)
 var playfield := Rect2(24.0, 76.0, 912.0, 420.0)
 var flight_time := 0.0
 var flight_speed := 180.0
 var reroute_remaining := 0.0
+var reroute_min_seconds := 0.72
+var reroute_max_seconds := 0.95
 var terminal_time := 0.0
 var terminal_animation_duration := TERMINAL_ANIMATION_DURATION
 var resolution_sent := false
@@ -42,12 +41,14 @@ func set_sprite_frames(frames: SpriteFrames) -> void:
 func set_hit_effect_texture(texture: Texture2D) -> void:
 	hit_effect_texture = texture
 
-func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2, new_pattern := "sine") -> void:
+func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2, new_pattern := "sine", new_reroute_min := 0.72, new_reroute_max := 0.95) -> void:
 	position = start_position
 	playfield = new_playfield
 	flight_velocity = new_velocity
 	flight_speed = new_velocity.length()
-	reroute_remaining = randf_range(REROUTE_MIN_SECONDS, REROUTE_MAX_SECONDS)
+	reroute_min_seconds = new_reroute_min
+	reroute_max_seconds = new_reroute_max
+	reroute_remaining = randf_range(reroute_min_seconds, reroute_max_seconds)
 	base_y = start_position.y
 	movement_pattern = new_pattern
 	flight_time = 0.0
@@ -122,7 +123,7 @@ func _reroute_course(vertical_direction := 0.0) -> void:
 		vertical_angle = absf(vertical_angle) * signf(vertical_direction)
 	flight_velocity = Vector2(horizontal_direction * cos(vertical_angle), sin(vertical_angle)) * flight_speed
 	scale.x = horizontal_direction
-	reroute_remaining = randf_range(REROUTE_MIN_SECONDS, REROUTE_MAX_SECONDS)
+	reroute_remaining = randf_range(reroute_min_seconds, reroute_max_seconds)
 
 func _resolve_hit() -> void:
 	if resolution_sent:

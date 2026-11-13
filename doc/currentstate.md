@@ -9,7 +9,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `03201b5` (`Speed up duck flights with sharp reroutes`).
+- Latest implementation commit: pending difficulty-curve adjustment.
 
 ## Implemented features
 
@@ -23,7 +23,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 - Original 64 × 48 pixel-grid duck fly/hit/escape sprites, shot-flash/hit-spark effects, and a rectangular arcade Theme, assigned through the existing art resource.
 - Original menu/gameplay chiptune loops and eight sound effects, generated deterministically from `tools/generate_audio.py` using only Python's standard library and wired into the scene's `AudioManager`.
 - Original pixel-art target and feedback animation, with code-drawn fallbacks retained for unassigned resources.
-- Faster duck flights ramp from 300 to 435 logical pixels/second across the 10 rounds, with instantaneous randomized course changes every 0.28–0.55 seconds.
+- Duck speed ramps from 210–230 logical pixels/second in Round 1 to 390–410 in Round 10; randomized course-change intervals tighten gradually from 0.72–0.95 seconds to 0.24–0.42 seconds.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
 - Retired targets stop processing after their terminal animation completes.
 - Hit/escape target lifetime follows assigned SpriteFrames timing, with a 0.35 second placeholder fallback.
@@ -56,6 +56,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 
 - Presentation uses original project art and audio, which remain replaceable by the user's final asset pack.
 - No Android handset has been tested; the local Pixel emulator is the current Android device check.
+- Difficulty values still need player feel-testing and may need adjustment.
 
 ## Tests run
 

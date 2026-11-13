@@ -10,7 +10,7 @@ Open this folder in Godot 4 or run:
 godot --path .
 ```
 
-Tap or click inside the playfield to shoot. Escape or Android Back pauses a run. The game includes a 10-round Classic Mode, title/tutorial/settings screens, pause/retry/title flows, round-clear screens, results, local best score, two-shot reloads, lives, combo scoring, and configurable target waves.
+Tap or click inside the playfield to shoot. Escape or Android Back pauses a run. The game includes a 10-round Classic Mode whose duck speed and course-change frequency increase round by round, title/tutorial/settings screens, pause/retry/title flows, round-clear screens, results, local best score, two-shot reloads, lives, combo scoring, and configurable target waves.
 
 ## Validate
 

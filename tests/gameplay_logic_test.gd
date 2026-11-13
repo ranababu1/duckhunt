@@ -111,9 +111,14 @@ func _test_classic_round_progression() -> void:
 	var configs: Array = RoundCatalogScript.classic_mode()
 	_assert(configs.size() == 10, "classic mode must provide ten rounds")
 	_assert(configs[0].round_number == 1 and configs[9].round_number == 10, "round numbers must span one through ten")
-	_assert(configs[0].min_flight_speed >= 300.0, "first-round ducks should use the faster flight pace")
+	_assert(configs[0].min_flight_speed >= 200.0 and configs[0].min_flight_speed < 240.0, "first-round ducks should start at an approachable speed")
 	_assert(configs[9].min_flight_speed > configs[0].min_flight_speed, "later rounds must increase flight speed")
 	_assert(configs.all(func(config): return "zigzag" in config.movement_pattern_pool), "every round should allow instant zigzag course changes")
+	_assert(configs[0].min_reroute_interval > configs[9].min_reroute_interval, "later rounds should reroute more often than round one")
+	_assert(configs[9].max_reroute_interval < configs[0].max_reroute_interval, "maximum reroute interval should shorten across the campaign")
+	for index in range(1, configs.size()):
+		_assert(configs[index].min_flight_speed > configs[index - 1].min_flight_speed, "flight speed should rise every round")
+		_assert(configs[index].min_reroute_interval < configs[index - 1].min_reroute_interval, "reroutes should become more frequent every round")
 	var manager = GameManagerScript.new()
 	manager.configure(configs)
 	manager.start_run()
@@ -130,10 +135,10 @@ func _test_classic_round_progression() -> void:
 
 func _test_duck_rerouting() -> void:
 	var duck = DuckScript.new()
-	duck.start_flight(Vector2(480.0, 270.0), Rect2(-10000.0, 0.0, 20000.0, 540.0), Vector2(300.0, 0.0), "zigzag")
+	duck.start_flight(Vector2(480.0, 270.0), Rect2(-10000.0, 0.0, 20000.0, 540.0), Vector2(300.0, 0.0), "zigzag", 0.4, 0.6)
 	duck._reroute_course()
 	_assert(is_equal_approx(duck.flight_velocity.length(), 300.0), "instant course changes should preserve target speed")
-	_assert(duck.reroute_remaining >= duck.REROUTE_MIN_SECONDS and duck.reroute_remaining <= duck.REROUTE_MAX_SECONDS, "reroutes should happen on a short interval")
+	_assert(duck.reroute_remaining >= 0.4 and duck.reroute_remaining <= 0.6, "reroutes should happen on the configured interval")
 	for _step in 20:
 		duck._process(0.1)
 		_assert(duck.position.y >= 26.0 and duck.position.y <= 514.0, "rerouting targets should stay inside the vertical playfield")

@@ -7,6 +7,8 @@ extends Resource
 @export var spawn_interval := 0.8
 @export var min_flight_speed := 180.0
 @export var max_flight_speed := 180.0
+@export var min_reroute_interval := 0.72
+@export var max_reroute_interval := 0.95
 @export var movement_pattern_pool: Array[String] = ["sine"]
 @export var required_hits := 2
 @export var allowed_escapes := 2

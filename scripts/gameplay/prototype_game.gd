@@ -284,7 +284,7 @@ func _spawn_wave(count: int) -> void:
 		if pattern == "diagonal":
 			vertical_speed = -70.0 if spawned % 2 == 0 else 70.0
 		duck.scale.x = direction
-		duck.start_flight(Vector2(start_x, y), PLAYFIELD, Vector2(speed * direction, vertical_speed), pattern)
+		duck.start_flight(Vector2(start_x, y), PLAYFIELD, Vector2(speed * direction, vertical_speed), pattern, active_round_config.min_reroute_interval, active_round_config.max_reroute_interval)
 		duck.set_process(true)
 		spawned += 1
 

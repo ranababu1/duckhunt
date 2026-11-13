@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-13 — Progressive difficulty curve
+
+### Changed
+
+- Rebalanced Round 1 to an approachable 210–230 logical pixels/second, then increase speed by 20 pixels/second per round through 390–410 in Round 10.
+- Gradually shorten course-change intervals from 0.72–0.95 seconds in Round 1 to 0.24–0.42 seconds in Round 10.
+
+### Verification
+
+- Gameplay logic and full-flow tests pass; logic assertions verify both speed and reroute frequency increase on each round.
+- Re-exported and installed the `dev.imrn.duckhunter` APK in the visible API 35 AVD; launched into Round 1.
+
 ## 2026-11-13 — `03201b5` Faster, rerouting duck flights and package ID update
 
 ### Changed

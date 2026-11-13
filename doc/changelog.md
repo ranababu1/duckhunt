@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Original background art integration
+## 2026-11-13 — `a33fea2` Original background art integration
 
 ### Added
 

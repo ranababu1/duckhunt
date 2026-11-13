@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `b0a67a9` (`Add Android debug export preset`).
+- Latest implementation commit: `a33fea2` (`Integrate original pixel-art range background`).
 
 ## Implemented features
 

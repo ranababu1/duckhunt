@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Action-effect art slots (in progress)
+## 2026-11-13 — `80f8bf4`
 
 ### Added
 

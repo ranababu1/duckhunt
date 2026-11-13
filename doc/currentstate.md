@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `4660598` (`Record UI theme integration`); action-effect art slots are in progress.
+- Latest implementation commit: `80f8bf4` (`Add action effect art slots`).
 
 ## Implemented features
 

@@ -62,6 +62,18 @@ func _run_flow() -> void:
 	_assert(main.game_manager.current_round_index == 1, "Continue should advance to round two")
 	_assert(main.game_manager.state == main.game_manager.State.PLAYING and not paused, "next round should resume play")
 	_assert(main.round.active_ducks == 1 and main.round.ducks_remaining_to_spawn == 2, "new round should reset finite wave state without stale targets")
+	for _progression_step in 9:
+		var quota_remaining: int = main.round.required_hits - main.round.round_hits
+		for _hit_index in quota_remaining:
+			main.run.record_shot()
+			main._on_duck_hit(null)
+		if main.game_manager.state == main.game_manager.State.RUN_COMPLETE:
+			break
+		_assert(main.game_manager.state == main.game_manager.State.ROUND_CLEAR, "meeting each round quota should present the round-clear screen")
+		main.ui.continue_requested.emit()
+	_assert(main.game_manager.state == main.game_manager.State.RUN_COMPLETE, "prototype game should complete all ten rounds")
+	_assert(main.ui.screens["results"].visible, "full ten-round run should present the results screen")
+	_assert(main.ui.screens["results"].find_child("results_summary", true, false).text.contains("ROUNDS  10 / 10"), "complete-run results should report all ten rounds")
 	paused = false
 	main.queue_free()
 	await process_frame

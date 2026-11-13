@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `67b888b` (`Show remaining targets in HUD`).
+- Latest commit: `e0539e4` (`Record remaining-target HUD count`); complete-run flow coverage is in progress.
 
 ## Implemented features
 
@@ -59,6 +59,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
+- Passed: end-to-end prototype flow completes the configured quotas across all ten rounds and presents results with `10 / 10` rounds cleared.
 - Passed: end-to-end flow checks confirm the HUD updates hit progress and displays escapes used versus allowed.
 - Passed: end-to-end flow confirms the remaining-target count decreases after a hit.
 - Passed: end-to-end flow confirms the tutorial opens from title and explains the round escape limit.

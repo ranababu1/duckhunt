@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-13 — Ten-round end-to-end coverage (in progress)
+
+### Tests
+
+- Expanded the integrated game-flow test to clear all ten configured rounds through `PrototypeGame` and verify the completed-run results screen reports 10/10.
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+
+### Follow-up
+
+- Complete manual gameplay and Android device QA when a device and export environment are available.
+
 ## 2026-11-13 — `67b888b`
 
 ### Changed

@@ -4,6 +4,26 @@
 
 ### Added
 
+- End-to-end game-flow smoke test covering title, first shot, pause/settings/resume, round clear, and next-round state.
+- Automatic pause on mobile background and window focus loss.
+
+### Fixed
+
+- Remaining ducks are retired before a new round, preventing targets from leaking across round boundaries.
+- Escape navigation prioritizes closing Settings/Tutorial before changing gameplay state.
+
+### Tests
+
+- Passed gameplay logic suite, complete game-flow test, and three-second headless scene smoke test.
+
+### Follow-up
+
+- Integrate original visual/audio assets when supplied and verify on physical Android devices.
+
+## 2026-11-13 — Earlier finite-wave implementation
+
+### Added
+
 - Finite target counts, configurable spawn intervals, and one- or two-target waves.
 - Sine and diagonal duck movement patterns selected from each round’s configuration.
 - Closest-hit resolution for overlapping target hit areas.

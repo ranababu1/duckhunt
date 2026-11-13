@@ -93,8 +93,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		_handle_back_navigation()
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_WM_GO_BACK_REQUEST and is_inside_tree():
+	if not is_inside_tree():
+		return
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
 		_handle_back_navigation()
+	elif what == NOTIFICATION_APPLICATION_PAUSED or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		if game_manager != null and game_manager.state == game_manager.State.PLAYING:
+			_pause_run()
 
 func _handle_back_navigation() -> void:
 	if ui.screens["settings"].visible:
@@ -160,6 +165,8 @@ func _on_round_failed() -> void:
 
 func _apply_round_config(config: Resource) -> void:
 	active_round_config = config
+	for target in ducks:
+		target.deactivate()
 	round.start_round(config)
 	weapon.configure(config.ammo_per_magazine, config.reload_duration)
 

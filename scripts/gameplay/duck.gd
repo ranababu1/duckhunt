@@ -31,6 +31,12 @@ func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: V
 	state = State.ENTERING
 	queue_redraw()
 
+func deactivate() -> void:
+	state = State.OFFSCREEN
+	resolution_sent = true
+	set_process(false)
+	queue_redraw()
+
 func try_hit(shot_position: Vector2) -> bool:
 	if state != State.ENTERING and state != State.FLYING:
 		return false

@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `cc6d241` (`Add finite multi-target rounds`).
+- Latest implementation commit: pending commit for full game-flow smoke coverage and lifecycle fixes.
 
 ## Implemented features
 
@@ -26,6 +26,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Finite round duck counts, timed wave spawning, later-round simultaneous pairs, and sine/diagonal movement patterns.
 - Closest-target shot resolution when hit areas overlap.
 - Music and SFX buses with event playback hooks ready for provided original audio streams.
+- App background/window focus loss automatically pauses active play, and remaining targets are retired when a new round starts.
 - Initial Godot-oriented folder layout and ignore rules.
 
 ## Known limitations
@@ -44,6 +45,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
 - Passed: finite-wave spawn/count tests, explicit round continuation, and complete ten-round state progression.
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
+- Passed: end-to-end headless flow from title through shooting, pause/settings/resume, round clear, and next-round reset.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers

@@ -79,6 +79,8 @@ func _test_duck_terminal_states() -> void:
 	duck._process(0.01)
 	_assert(duck.state == duck.State.ESCAPING, "offscreen flying duck should escape")
 	_assert(not duck.try_hit(duck.position), "escaped duck must reject attempted hits")
+	duck.deactivate()
+	_assert(duck.state == duck.State.OFFSCREEN and not duck.try_hit(duck.position), "deactivated target must not move or accept hits")
 	duck.free()
 
 func _test_classic_round_progression() -> void:

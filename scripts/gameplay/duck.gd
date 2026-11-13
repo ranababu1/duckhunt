@@ -22,6 +22,7 @@ var reduced_flash := false
 var visual_frames: SpriteFrames
 var animated_visual: AnimatedSprite2D
 var placeholder_visible := true
+var hit_effect_texture: Texture2D
 
 func set_sprite_frames(frames: SpriteFrames) -> void:
 	visual_frames = frames
@@ -32,6 +33,9 @@ func set_sprite_frames(frames: SpriteFrames) -> void:
 	animated_visual.sprite_frames = visual_frames
 	animated_visual.visible = false
 	add_child(animated_visual)
+
+func set_hit_effect_texture(texture: Texture2D) -> void:
+	hit_effect_texture = texture
 
 func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: Vector2, new_pattern := "sine") -> void:
 	position = start_position
@@ -116,7 +120,11 @@ func _play_visual_animation(animation_name: String) -> void:
 		animated_visual.play(animation_name)
 
 func _draw() -> void:
-	if state == State.OFFSCREEN or not placeholder_visible:
+	if state == State.OFFSCREEN:
+		return
+	if state == State.HIT and not reduced_flash and hit_effect_texture != null:
+		draw_texture_rect(hit_effect_texture, Rect2(Vector2(-32.0, -32.0), Vector2(64.0, 64.0)), false)
+	if not placeholder_visible:
 		return
 	var flap := sin(flight_time * 12.0) * 8.0
 	var body_color := Color("31475e") if state != State.HIT else Color("ca5d58")

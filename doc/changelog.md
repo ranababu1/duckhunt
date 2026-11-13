@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Action-effect art slots (in progress)
+
+### Added
+
+- Optional shot-flash and hit-spark textures to `ArtAssetSet`.
+- Existing geometric feedback remains active when textures are absent; reduced-flash continues to suppress the effects.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+
+### Follow-up
+
+- Assign original action-effect textures when supplied and inspect their visual scale on device.
+
 ## 2026-11-13 — `6af1611`
 
 ### Added

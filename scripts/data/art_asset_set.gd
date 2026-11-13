@@ -7,6 +7,8 @@ extends Resource
 @export var far_hills: Texture2D
 @export var tree_line: Texture2D
 @export var foreground: Texture2D
+@export var shot_effect: Texture2D
+@export var hit_spark: Texture2D
 
 ## SpriteFrames animations are named `fly`, `hit`, and `escape`.
 @export var duck_frames: SpriteFrames

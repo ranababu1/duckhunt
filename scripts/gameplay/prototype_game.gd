@@ -251,6 +251,8 @@ func _create_duck():
 	if art_assets != null:
 		duck_frames = art_assets.get("duck_frames") as SpriteFrames
 	duck.set_sprite_frames(duck_frames)
+	if art_assets != null:
+		duck.set_hit_effect_texture(art_assets.get("hit_spark") as Texture2D)
 	duck.process_mode = Node.PROCESS_MODE_PAUSABLE
 	duck.state = DuckScript.State.OFFSCREEN
 	duck.set_reduced_flash(bool(ui.current_settings().get("reduced_flash", false)))
@@ -318,7 +320,13 @@ func _draw() -> void:
 	draw_rect(PLAYFIELD, Color("173b4b"), false, 3.0)
 	_draw_hud()
 	if shot_marker_time > 0.0:
-		draw_arc(shot_marker, 18.0, 0.0, TAU, 16, Color("fff4b5"), 3.0)
+		var shot_effect: Texture2D
+		if art_assets != null:
+			shot_effect = art_assets.get("shot_effect") as Texture2D
+		if shot_effect != null:
+			draw_texture_rect(shot_effect, Rect2(shot_marker - Vector2(16.0, 16.0), Vector2(32.0, 32.0)), false)
+		else:
+			draw_arc(shot_marker, 18.0, 0.0, TAU, 16, Color("fff4b5"), 3.0)
 	if feedback_time > 0.0:
 		_draw_centered_text(feedback, Vector2(480.0, 122.0), 24, Color("fff4b5"))
 

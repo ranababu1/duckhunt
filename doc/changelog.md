@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Non-finite settings validation (in progress)
+## 2026-11-13 — `53a79eb`
 
 ### Fixed
 

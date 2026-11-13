@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `99000ff` (`Record scaled touch coordinate QA`); non-finite save-value validation is in progress.
+- Latest implementation commit: `53a79eb` (`Reject non-finite audio settings`).
 
 ## Implemented features
 

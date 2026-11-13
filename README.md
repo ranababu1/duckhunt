@@ -1,6 +1,6 @@
 # Open Range
 
-An offline-first, landscape arcade shooting game built with Godot 4 and GDScript. “Duck Hunt Arcade” is an internal working name only; public naming and store branding still need legal clearance.
+An offline-first, landscape arcade shooting game built with Godot 4 and GDScript. “Open Range” is the provisional development title; public naming and store branding still need legal clearance.
 
 ## Run locally
 
@@ -38,4 +38,4 @@ The Android SDK/JDK paths are configured in the local Godot editor settings. Exp
 godot --headless --path . --export-debug "Android Debug" export/android/open_range_debug.apk
 ```
 
-The preset uses package ID `dev.imrn.duckhunt`, development label `Open Range (Development)`, version name `0.1.0-dev`, and version code `1`. Increment the version code for each store release. The APK is signed with Godot's local debug key and is ignored by Git. It was installed and launched in a Pixel API 35 emulator; a real-device test remains outstanding. No release signing key is configured. Public title and store branding still need legal clearance. Never commit signing keys or passwords.
+The preset uses package ID `dev.imrn.duckhunter`, development label `Open Range (Development)`, version name `0.1.0-dev`, and version code `1`. Increment the version code for each store release. The APK is signed with Godot's local debug key and is ignored by Git. It was installed and launched in a Pixel API 35 emulator; a real-device test remains outstanding. No release signing key is configured. Public title and store branding still need legal clearance. Never commit signing keys or passwords.

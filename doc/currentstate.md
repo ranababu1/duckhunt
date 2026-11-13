@@ -9,12 +9,12 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `9b91f22` (`Set Android development version metadata`).
+- Latest implementation commit: pending commit for faster duck movement and package ID update.
 
 ## Implemented features
 
 - Landscape 960 x 540 Godot project configuration with canvas-item stretching, nearest texture filtering, and Android ETC2/ASTC texture import enabled.
-- Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
+- Android debug export preset using the user-provided package ID `dev.imrn.duckhunter`; app label is `Open Range (Development)` while public naming is pending clearance.
 - Android debug build version is `0.1.0-dev` (version code 1); increment the code before each store release upload.
 - Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
 - Original pixel-art daytime range background integrated through the replaceable `ArtAssetSet.background` slot; separate parallax-layer slots remain available for future supplied art.
@@ -23,6 +23,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 - Original 64 × 48 pixel-grid duck fly/hit/escape sprites, shot-flash/hit-spark effects, and a rectangular arcade Theme, assigned through the existing art resource.
 - Original menu/gameplay chiptune loops and eight sound effects, generated deterministically from `tools/generate_audio.py` using only Python's standard library and wired into the scene's `AudioManager`.
 - Original pixel-art target and feedback animation, with code-drawn fallbacks retained for unassigned resources.
+- Faster duck flights ramp from 300 to 435 logical pixels/second across the 10 rounds, with instantaneous randomized course changes every 0.28–0.55 seconds.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
 - Retired targets stop processing after their terminal animation completes.
 - Hit/escape target lifetime follows assigned SpriteFrames timing, with a 0.35 second placeholder fallback.
@@ -105,5 +106,5 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 
 ## Decisions awaiting approval
 
-- Public game title requires legal clearance; “Duck Hunt Arcade” remains a working title.
-- The user selected package ID `dev.imrn.duckhunt`; confirm global store availability before publishing. Release signing setup remains pending and signing secrets must stay local.
+- `Open Range` is the provisional user-facing development title; complete a trademark clearance search before public release.
+- The user selected package ID `dev.imrn.duckhunter`; confirm global store availability before publishing. Release signing setup remains pending and signing secrets must stay local.

@@ -9,11 +9,15 @@ enum State { ENTERING, FLYING, HIT, ESCAPING, OFFSCREEN }
 
 const HIT_RADIUS := 26.0
 const TERMINAL_ANIMATION_DURATION := 0.35
+const REROUTE_MIN_SECONDS := 0.28
+const REROUTE_MAX_SECONDS := 0.55
 
 var state := State.ENTERING
 var flight_velocity := Vector2(180.0, 0.0)
 var playfield := Rect2(24.0, 76.0, 912.0, 420.0)
 var flight_time := 0.0
+var flight_speed := 180.0
+var reroute_remaining := 0.0
 var terminal_time := 0.0
 var terminal_animation_duration := TERMINAL_ANIMATION_DURATION
 var resolution_sent := false
@@ -42,6 +46,8 @@ func start_flight(start_position: Vector2, new_playfield: Rect2, new_velocity: V
 	position = start_position
 	playfield = new_playfield
 	flight_velocity = new_velocity
+	flight_speed = new_velocity.length()
+	reroute_remaining = randf_range(REROUTE_MIN_SECONDS, REROUTE_MAX_SECONDS)
 	base_y = start_position.y
 	movement_pattern = new_pattern
 	flight_time = 0.0
@@ -77,9 +83,22 @@ func _process(delta: float) -> void:
 		State.ENTERING, State.FLYING:
 			flight_time += delta
 			state = State.FLYING
-			position += flight_velocity * delta
 			if movement_pattern == "sine":
+				position += flight_velocity * delta
 				position.y = base_y + sin(flight_time * 3.0) * 42.0
+			else:
+				reroute_remaining -= delta
+				if reroute_remaining <= 0.0:
+					_reroute_course()
+				position += flight_velocity * delta
+				var top_edge := playfield.position.y + HIT_RADIUS
+				var bottom_edge := playfield.end.y - HIT_RADIUS
+				if position.y < top_edge:
+					position.y = top_edge
+					_reroute_course(1.0)
+				elif position.y > bottom_edge:
+					position.y = bottom_edge
+					_reroute_course(-1.0)
 			if not playfield.grow(HIT_RADIUS).has_point(position):
 				_resolve_escape()
 		State.HIT, State.ESCAPING:
@@ -93,6 +112,17 @@ func _process(delta: float) -> void:
 					animated_visual.visible = false
 				terminal_animation_finished.emit(self)
 	queue_redraw()
+
+func _reroute_course(vertical_direction := 0.0) -> void:
+	var horizontal_direction := signf(flight_velocity.x)
+	if randf() < 0.32:
+		horizontal_direction *= -1.0
+	var vertical_angle := randf_range(-0.88, 0.88)
+	if vertical_direction != 0.0:
+		vertical_angle = absf(vertical_angle) * signf(vertical_direction)
+	flight_velocity = Vector2(horizontal_direction * cos(vertical_angle), sin(vertical_angle)) * flight_speed
+	scale.x = horizontal_direction
+	reroute_remaining = randf_range(REROUTE_MIN_SECONDS, REROUTE_MAX_SECONDS)
 
 func _resolve_hit() -> void:
 	if resolution_sent:

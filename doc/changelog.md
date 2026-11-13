@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-13 — Faster, rerouting duck flights and package ID update
+
+### Changed
+
+- Increased Classic Mode flight speeds from 170–305 to 300–455 logical pixels/second across the rounds.
+- Added instant randomized course changes every 0.28–0.55 seconds, with vertical edge correction and mirrored sprite direction.
+- Updated the Android package ID to the user-provided `dev.imrn.duckhunter`.
+
+### Verification
+
+- Project display name set to the provisional `Open Range` title.
+- Gameplay logic and full game-flow checks pass, including route interval, retained speed, vertical bounds, and faster-round progression.
+- Android APK exported with package `dev.imrn.duckhunter`, installed in the visible AVD, and launched into Classic Mode for a visual movement check. No startup script/runtime errors were present.
+
 ## 2026-11-13 — `9b91f22` Android development version metadata
 
 ### Added
@@ -8,7 +22,7 @@
 
 ### Verification
 
-- Re-exported and signed the Android debug APK; inspected its manifest and confirmed package `dev.imrn.duckhunt`, version name `0.1.0-dev`, and version code `1`.
+- Re-exported and signed the Android debug APK; inspected its manifest and confirmed version name `0.1.0-dev` and version code `1` (the package ID was subsequently updated).
 - Installed and launched the new APK in the visible Pixel API 35 AVD.
 - Confirmed the APK requests no Android permissions and its signature verifies with APK v2/v3.
 

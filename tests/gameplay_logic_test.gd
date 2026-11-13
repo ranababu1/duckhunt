@@ -18,6 +18,7 @@ func _init() -> void:
 	_test_round_outcomes()
 	_test_duck_terminal_states()
 	_test_sprite_animation_lifecycle()
+	_test_duck_rerouting()
 	_test_classic_round_progression()
 	_test_finite_round_waves()
 	_test_scoring_and_lives()
@@ -110,7 +111,9 @@ func _test_classic_round_progression() -> void:
 	var configs: Array = RoundCatalogScript.classic_mode()
 	_assert(configs.size() == 10, "classic mode must provide ten rounds")
 	_assert(configs[0].round_number == 1 and configs[9].round_number == 10, "round numbers must span one through ten")
+	_assert(configs[0].min_flight_speed >= 300.0, "first-round ducks should use the faster flight pace")
 	_assert(configs[9].min_flight_speed > configs[0].min_flight_speed, "later rounds must increase flight speed")
+	_assert(configs.all(func(config): return "zigzag" in config.movement_pattern_pool), "every round should allow instant zigzag course changes")
 	var manager = GameManagerScript.new()
 	manager.configure(configs)
 	manager.start_run()
@@ -124,6 +127,18 @@ func _test_classic_round_progression() -> void:
 		manager.continue_round()
 	_assert(manager.state == manager.State.RUN_COMPLETE, "clearing all ten rounds should complete the run")
 	manager.free()
+
+func _test_duck_rerouting() -> void:
+	var duck = DuckScript.new()
+	duck.start_flight(Vector2(480.0, 270.0), Rect2(-10000.0, 0.0, 20000.0, 540.0), Vector2(300.0, 0.0), "zigzag")
+	duck._reroute_course()
+	_assert(is_equal_approx(duck.flight_velocity.length(), 300.0), "instant course changes should preserve target speed")
+	_assert(duck.reroute_remaining >= duck.REROUTE_MIN_SECONDS and duck.reroute_remaining <= duck.REROUTE_MAX_SECONDS, "reroutes should happen on a short interval")
+	for _step in 20:
+		duck._process(0.1)
+		_assert(duck.position.y >= 26.0 and duck.position.y <= 514.0, "rerouting targets should stay inside the vertical playfield")
+	_assert(duck.flight_speed >= 300.0, "flight speed should be retained through repeated course changes")
+	duck.free()
 
 func _test_finite_round_waves() -> void:
 	var config = RoundCatalogScript.classic_mode()[0]

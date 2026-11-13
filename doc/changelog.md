@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Added
+
+- Title, tutorial, pause, round-clear, results, and settings screens with button navigation.
+- Return-to-title confirmation from pause and retry flow from results.
+- Local settings and best-score persistence using `ConfigFile`.
+- Game pause/resume behavior for duck and weapon timers, including keyboard/back navigation.
+- Haptics toggle connected to hit/escape feedback where mobile vibration is supported.
+
+### Changed
+
+- A run now begins from the title screen; round advancement waits for an explicit continue action.
+
+### Tests
+
+- Passed gameplay logic suite, including pause/resume/title state checks.
+- Passed settings and best-score persistence round-trip check, including preserving the existing best score.
+- Passed three-second headless game scene smoke test.
+
+### Follow-up
+
+- Add multi-target wave logic and connect audio buses for future provided assets.
+
 ## 2026-11-13 — `c7cc901`
 
 ### Added

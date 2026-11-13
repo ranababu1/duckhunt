@@ -7,6 +7,7 @@ const RoundControllerScript = preload("res://scripts/gameplay/round_controller.g
 const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 const GameManagerScript = preload("res://scripts/core/game_manager.gd")
 const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
+const SaveServiceScript = preload("res://scripts/core/save_service.gd")
 
 var failures: Array[String] = []
 
@@ -17,6 +18,8 @@ func _init() -> void:
 	_test_duck_terminal_states()
 	_test_classic_round_progression()
 	_test_scoring_and_lives()
+	_test_pause_navigation()
+	_test_save_persistence()
 	if failures.is_empty():
 		print("PASS: gameplay logic tests")
 		quit(0)
@@ -87,7 +90,8 @@ func _test_classic_round_progression() -> void:
 	manager.start_run()
 	_assert(manager.state == manager.State.PLAYING, "starting a configured run should enter playing state")
 	manager.on_round_cleared()
-	manager._process(manager.ROUND_TRANSITION_DURATION)
+	_assert(manager.state == manager.State.ROUND_CLEAR, "round clear should wait for player continuation")
+	manager.continue_round()
 	_assert(manager.current_round_index == 1, "cleared round should advance to the next round")
 	manager.free()
 
@@ -103,6 +107,30 @@ func _test_scoring_and_lives() -> void:
 	run.record_escape()
 	_assert(run.combo == 0 and run.lives == 2, "escape should reset combo and consume one life")
 	run.free()
+
+func _test_pause_navigation() -> void:
+	var manager = GameManagerScript.new()
+	manager.configure(RoundCatalogScript.classic_mode())
+	manager.start_run()
+	manager.pause_run()
+	_assert(manager.state == manager.State.PAUSED, "pause request should enter paused state")
+	manager.resume_run()
+	_assert(manager.state == manager.State.PLAYING, "resume should restore playing state")
+	manager.return_to_title()
+	_assert(manager.state == manager.State.MENU, "return-to-title request should enter menu state")
+	manager.free()
+
+func _test_save_persistence() -> void:
+	const TEST_SAVE_PATH := "user://duckhunt_test_settings.cfg"
+	var expected_settings := {"music_volume": 0.35, "sfx_volume": 0.6, "haptics": false, "reduced_flash": true}
+	_assert(SaveServiceScript.save_settings(expected_settings, TEST_SAVE_PATH) == OK, "settings should save successfully")
+	_assert(SaveServiceScript.load_settings(TEST_SAVE_PATH) == expected_settings, "settings should survive a save/load cycle")
+	_assert(SaveServiceScript.save_best_score(1200, TEST_SAVE_PATH) == OK, "best score should save successfully")
+	_assert(SaveServiceScript.save_best_score(900, TEST_SAVE_PATH) == OK, "lower score should not replace the best")
+	_assert(SaveServiceScript.load_best_score(TEST_SAVE_PATH) == 1200, "best score should remain persistent and monotonic")
+	var absolute_path := ProjectSettings.globalize_path(TEST_SAVE_PATH)
+	if FileAccess.file_exists(TEST_SAVE_PATH):
+		DirAccess.remove_absolute(absolute_path)
 
 func _assert(condition: bool, description: String) -> void:
 	if not condition:

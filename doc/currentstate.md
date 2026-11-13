@@ -4,12 +4,12 @@
 
 ## Milestone and status
 
-M2 (Complete Classic Mode loop) is in progress. The repository has a controller-based greybox shooting range with a data-driven 10-round Classic Mode progression; Android/device validation remains outstanding.
+M3 (Menus, UX, and persistence) is in progress. The game now starts at a title screen and includes tutorial, pause, round-clear, results, and settings flows. Android/device validation remains outstanding.
 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `c7cc901` (`Add scoring and run lives`)
+- Latest implementation commit: pending commit for M3 UI and persistence flow.
 
 ## Implemented features
 
@@ -20,11 +20,15 @@ M2 (Complete Classic Mode loop) is in progress. The repository has a controller-
 - Tap/click shooting within the playfield with one-target-per-shot resolution and basic hit/miss/reload feedback.
 - A 10-round Classic Mode configuration catalog and a game manager that owns playing, round-clear, game-over, and run-complete transitions.
 - Three run lives, capped combo scoring, and round-clear/perfect-round bonuses.
+- Title screen, accessible tutorial, pause menu, return-to-title confirmation, round-clear continue screen, results/retry flow, and settings screen.
+- Local persistence for music/SFX volume, haptics, reduced-flash preference, and best score.
+- Back/escape navigation for pause, settings, and tutorial; gameplay timers pause behind modal screens.
 - Initial Godot-oriented folder layout and ignore rules.
 
 ## Known limitations
 
-- The presentation script remains a temporary M1 greybox; menus, persistence, audio, final assets, and full run state are not implemented.
+- Presentation uses replaceable code-created art and UI; production art/audio assets have been deferred until provided.
+- Music and SFX volume values persist, but audio playback integration is deferred until original audio assets are supplied.
 - Round transitions are greybox-only; results/menu screens and full multi-target waves are not implemented.
 - No Android build/device test has been performed.
 
@@ -33,6 +37,8 @@ M2 (Complete Classic Mode loop) is in progress. The repository has a controller-
 - Passed: Godot 4.7.2 headless project import.
 - Passed: Godot 4.7.2 headless game launch for two seconds, with no parse or runtime errors after the controller split.
 - Passed: headless gameplay logic tests for reload behavior, zero-shot accuracy, round completion/failure, one-time duck terminal states, 10-round progression, scoring, and lives.
+- Passed: pause/resume/title state checks and headless project launch after UI flow implementation.
+- Passed: settings and high-score save/load cycle using an isolated temporary file that is removed after the test.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers
@@ -41,9 +47,9 @@ M2 (Complete Classic Mode loop) is in progress. The repository has a controller-
 
 ## Exact next actions
 
-1. Add results/menu screens to complete M2/M3 flow.
-2. Add multi-target waves and movement-pattern execution.
-3. Verify touch input and safe bounds on a physical Android device.
+1. Implement simultaneous targets/waves and configured movement patterns.
+2. Connect audio buses and event playback, ready for provided audio assets.
+3. Verify touch input and safe bounds on physical Android devices and common landscape ratios.
 
 ## Decisions awaiting approval
 

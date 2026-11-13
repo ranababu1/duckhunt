@@ -337,13 +337,17 @@ func _draw() -> void:
 func _draw_art_background() -> bool:
 	if art_assets == null:
 		return false
+	var background := art_assets.get("background") as Texture2D
+	var bounds := Rect2(Vector2.ZERO, Vector2(960.0, 540.0))
+	if background != null:
+		draw_texture_rect(background, bounds, false)
+		return true
 	var sky := art_assets.get("sky") as Texture2D
 	var far_hills := art_assets.get("far_hills") as Texture2D
 	var tree_line := art_assets.get("tree_line") as Texture2D
 	var foreground := art_assets.get("foreground") as Texture2D
 	if sky == null or far_hills == null or tree_line == null or foreground == null:
 		return false
-	var bounds := Rect2(Vector2.ZERO, Vector2(960.0, 540.0))
 	draw_texture_rect(sky, bounds, false)
 	draw_texture_rect(far_hills, bounds, false)
 	draw_texture_rect(tree_line, bounds, false)

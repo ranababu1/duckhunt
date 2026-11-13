@@ -3,6 +3,7 @@ extends Resource
 
 ## Original art assigned to the prototype scene. Background layers use 960x540
 ## transparent PNG compositions so they can be stacked without code changes.
+@export var background: Texture2D
 @export var sky: Texture2D
 @export var far_hills: Texture2D
 @export var tree_line: Texture2D

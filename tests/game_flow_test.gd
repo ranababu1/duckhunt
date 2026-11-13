@@ -14,8 +14,9 @@ func _run_flow() -> void:
 	root.add_child(main)
 	await process_frame
 	_assert(main.art_assets != null, "main scene should expose an ArtAssetSet for future original art")
-	_assert(main.art_assets.get("sky") == null, "empty art slots should preserve the geometric fallback")
-	_assert(not main._draw_art_background(), "incomplete background layers should keep the geometric fallback")
+	var background := main.art_assets.get("background") as Texture2D
+	_assert(background != null and background.get_width() > 0 and background.get_height() > 0, "main scene should load the original full-scene background")
+	_assert(main.art_assets.get("sky") == null, "separate parallax layers should remain available for supplied art")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
 	for screen_name in ["title", "tutorial", "pause", "round_clear", "results", "settings"]:

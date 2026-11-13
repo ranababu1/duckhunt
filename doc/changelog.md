@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13 — Original background art integration
+
+### Added
+
+- Original AI-generated pixel-art daytime landscape at `assets/backgrounds/open_range_day.png`, integrated as an optional full-scene background through `ArtAssetSet`.
+- Asset provenance and the new complete-background resource slot are documented.
+- Flow test now checks that the scene loads its configured original background without invoking draw functions outside Godot's render callback.
+
+### Tests
+
+- Passed Godot asset import and gameplay logic suite.
+- Game-flow suite initially exposed an obsolete greybox-only assertion; updated it to verify the loaded background resource, then re-ran successfully.
+
+### Follow-up
+
+- Add original duck animation/effects and audio; supplied final assets can replace the temporary art at the existing resource slots.
+
 ## 2026-11-13 — `b0a67a9` Android debug export and emulator check
 
 ### Added

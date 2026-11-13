@@ -230,6 +230,7 @@ For each delivery:
 ### Godot assignment slots
 
 - The main scene references `resources/art/open_range_art_set.tres`, an `ArtAssetSet` resource exposed as `art_assets` on the root `PrototypeGame` node.
+- Assign `background` for one complete 960 × 540 composition, or use the separate sky/hills/tree/foreground layers below. The current original AI-generated daytime range composition is `assets/backgrounds/open_range_day.png` (1672 × 941 PNG); it is stretched to the logical viewport with pixel-friendly filtering. Its provenance is OpenAI image generation for this project; no third-party source assets are included.
 - Assign `sky`, `far_hills`, `tree_line`, and `foreground` textures there. Each is drawn over a 960 × 540 canvas; the sky should be opaque and the three nearer layers should use transparency where needed. The game keeps the geometric range if any required background layer is missing.
 - Assign optional 32 × 32 `shot_effect` and 64 × 64 `hit_spark` textures for tap and hit feedback. Missing textures keep the drawn shot ring and duck outline; reduced-flash hides both effects.
 - Assign optional `title_logo` artwork to replace the text title on the title screen. Leave it empty to retain the working-title text.

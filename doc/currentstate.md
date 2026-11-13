@@ -16,6 +16,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Landscape 960 x 540 Godot project configuration with canvas-item stretching, nearest texture filtering, and Android ETC2/ASTC texture import enabled.
 - Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
 - Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
+- Original pixel-art daytime range background integrated through the replaceable `ArtAssetSet.background` slot; separate parallax-layer slots remain available for future supplied art.
 - Original code-drawn greybox range with a moving target.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
 - Retired targets stop processing after their terminal animation completes.
@@ -78,6 +79,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: end-to-end flow confirms a retired target stops processing after its terminal animation.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
 - Passed: viewport-to-canvas touch coordinate conversion with translation and non-uniform scaling.
+- Passed: the game-flow test loads the configured original full-scene background texture; Android export and emulator rendering were confirmed.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 - Passed: Android debug APK exported and verified as signed; package ID and landscape manifest orientation inspected.
 - Passed: APK installed and launched in a Pixel 6 API 35 emulator; entered Classic Mode, fired at a target, and observed hit/quota/reload HUD updates with no Godot script errors in startup logs.

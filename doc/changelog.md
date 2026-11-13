@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-13 — Original rectangular arcade UI theme
+
+### Added
+
+- Original square-corner navy panel and gold-button Theme assigned through `ArtAssetSet.ui_theme`.
+- Reduced the title subtitle's minimum height to fit the themed panel safely at the base landscape viewport.
+- Updated the flow check to assert the assigned Theme is active.
+
+### Tests
+
+- Passed full game-flow and panel-bound checks with the Theme active.
+- Exported and launched the Android build, then visually reviewed the themed title and gameplay HUD in the emulator.
+
+### Follow-up
+
+- Complete local icon/branding once the public title is cleared; review touch and device-specific layout on a physical handset.
+
 ## 2026-11-13 — `a1eab44` Original duck animation and effects
 
 ### Added

@@ -4,7 +4,7 @@
 
 ## Milestone and status
 
-M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, an original background, and synthesized music/effects are implemented. Original duck animation/UI art and physical-device QA remain outstanding.
+M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, menus, persistence, finite waves, original background/target/effect art, an arcade UI theme, and synthesized music/effects are implemented. Final branding and physical-device QA remain outstanding.
 
 ## Branch and latest commit
 
@@ -17,7 +17,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
 - Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
 - Original pixel-art daytime range background integrated through the replaceable `ArtAssetSet.background` slot; separate parallax-layer slots remain available for future supplied art.
-- Original 64 × 48 pixel-grid duck fly/hit/escape sprites, plus shot-flash and hit-spark effects, assigned through the existing art resource.
+- Original 64 × 48 pixel-grid duck fly/hit/escape sprites, shot-flash/hit-spark effects, and a rectangular arcade Theme, assigned through the existing art resource.
 - Original menu/gameplay chiptune loops and eight sound effects, generated deterministically from `tools/generate_audio.py` using only Python's standard library and wired into the scene's `AudioManager`.
 - Original pixel-art target and feedback animation, with code-drawn fallbacks retained for unassigned resources.
 - Duck terminal-state handling that resolves a target exactly once as hit or escaped before respawn.
@@ -83,6 +83,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: viewport-to-canvas touch coordinate conversion with translation and non-uniform scaling.
 - Passed: the game-flow test loads the configured original full-scene background texture; Android export and emulator rendering were confirmed.
 - Passed: the game-flow test loads all fly/hit/escape sprite frames and shot/hit effect textures.
+- Passed: themed title and gameplay screens render in the Android emulator; square-corner panel/button states are visible.
 - Passed: Android export and emulator launch display the original duck animation over the new background without startup script errors.
 - Passed: flow test verifies all ten generated music/effect resources load, menu/gameplay music contexts switch, and an SFX event starts playback.
 - Passed: audio-enabled Android APK exported, signed, installed, and launched in the Pixel 6 API 35 emulator without Godot startup errors.
@@ -94,11 +95,11 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 
 - The agreed original art/audio files have not been supplied yet.
 - No physical Android handset has been tested; emulator validation does not replace device coverage.
-- Final duck animation/effects and branded UI artwork have not been supplied; targets and action feedback still use geometric placeholders.
+- No user-supplied final asset pack, logo, or app icon is available yet; current original project art uses the generated background, authored SVG sprites/theme, and geometric gameplay fallback.
 
 ## Exact next actions
 
-1. Integrate the user-provided original duck/UI art and replace any preferred audio through the documented resource slots, updating `assets.md`.
+1. Integrate any user-provided final logo/app icon/art/audio through the documented resource slots, updating `assets.md`.
 2. Run the Android build on at least one physical handset and review touch, pause/background behavior, and common landscape aspect ratios.
 3. Choose and clear the public title/branding; keep release signing credentials local and outside Git.
 

@@ -178,7 +178,8 @@ func _make_screen(screen_id: String, heading: String, subtitle: String, detail_n
 	content.add_child(title)
 	if not subtitle.is_empty():
 		var subtitle_label := _label(subtitle, 20, Color("dbedf5"))
-		subtitle_label.custom_minimum_size = Vector2(400, 100)
+		var subtitle_height := 56.0 if screen_id == "title" else 100.0
+		subtitle_label.custom_minimum_size = Vector2(400, subtitle_height)
 		subtitle_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		content.add_child(subtitle_label)
 	if not detail_name.is_empty():

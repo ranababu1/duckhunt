@@ -236,7 +236,7 @@ For each delivery:
 - Assign optional 32 × 32 `shot_effect` and 64 × 64 `hit_spark` textures for tap and hit feedback. Missing textures keep the drawn shot ring and duck outline; reduced-flash hides both effects.
 - Assign optional `title_logo` artwork to replace the text title on the title screen. Leave it empty to retain the working-title text.
 - `duck_frames` is assigned to `resources/art/duck_sprite_frames.tres`: three 64 × 48 fly frames at 10 FPS, two hit frames at 12 FPS, and one escape pose at 5 FPS. The 64 × 48 source sprites are original SVG pixel art with a four-pixel grid. The duck keeps its geometric fallback for any missing or empty animation. Hit/escape lifetime follows the animation's frame durations and speed; without those animations it uses a 0.35 second fallback.
-- Optionally assign a `Theme` to `ui_theme` to provide original panel/button styles and typography. When a theme is assigned, built-in panel/button style overrides are omitted so Theme styles can take effect.
+- `ui_theme` is assigned to `resources/art/open_range_ui_theme.tres`, which provides square-corner navy panels, cream borders, gold buttons, and matching interaction states. The fallback code styles remain available if the theme is removed; a supplied UI Theme can replace this resource later.
 - Music and effect streams remain assigned on the main scene's `AudioManager` child. No asset paths are hard-coded into gameplay scripts.
 
 - Verify every referenced asset path exists.

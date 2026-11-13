@@ -19,6 +19,7 @@ func _run_flow() -> void:
 	var duck_frames := main.art_assets.get("duck_frames") as SpriteFrames
 	_assert(duck_frames != null and duck_frames.get_frame_count("fly") == 3 and duck_frames.get_frame_count("hit") == 2 and duck_frames.get_frame_count("escape") == 1, "main scene should load the original duck lifecycle animations")
 	_assert(main.art_assets.get("shot_effect") != null and main.art_assets.get("hit_spark") != null, "main scene should load original shot and hit effects")
+	_assert(main.art_assets.get("ui_theme") != null and main.ui.root.theme == main.art_assets.get("ui_theme"), "main scene should apply the original rectangular arcade UI theme")
 	_assert(main.art_assets.get("sky") == null, "separate parallax layers should remain available for supplied art")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")

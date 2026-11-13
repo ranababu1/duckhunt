@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Art assignment slots (in progress)
+## 2026-11-13 — `8a5a32c`
 
 ### Added
 

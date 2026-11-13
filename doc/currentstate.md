@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `1784f50` (`Record tutorial escape rule update`); art assignment slots are in progress.
+- Latest implementation commit: `8a5a32c` (`Add replaceable art asset slots`).
 
 ## Implemented features
 

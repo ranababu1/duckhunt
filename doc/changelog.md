@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Added
+
+- Dedicated input controller for touch/mouse shooting and viewport-to-canvas coordinate conversion.
+
+### Tests
+
+- Passed coordinate-conversion test, gameplay logic suite, end-to-end game-flow smoke test, and full scene smoke test.
+
+### Follow-up
+
+- Integrate provided art/audio and complete Android device validation when the release environment is available.
+
 ## 2026-11-13 — `d1df331`
 
 ### Added

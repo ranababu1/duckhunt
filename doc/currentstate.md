@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `d1df331` (`Prepare asset handoff and local workflow`).
+- Latest implementation commit: pending commit for touch-coordinate handling.
 
 ## Implemented features
 
@@ -27,6 +27,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Closest-target shot resolution when hit areas overlap.
 - Music and SFX buses with event playback hooks ready for provided original audio streams.
 - App background/window focus loss automatically pauses active play, and remaining targets are retired when a new round starts.
+- Dedicated input controller converts viewport taps through the inverse canvas transform and emits shots only for unhandled playfield touches.
 - Initial Godot-oriented folder layout and ignore rules.
 
 ## Known limitations
@@ -48,6 +49,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Passed: Godot headless project launch after audio bus and Android back-navigation integration.
 - Passed: end-to-end headless flow from title through closest overlapping-target selection, shooting, pause/settings/resume, automatic background pause, round clear, and next-round reset.
 - Passed: simultaneous-pair wave configuration and resume without duplicate round-start signals.
+- Passed: viewport-to-canvas touch coordinate conversion using a non-zero canvas offset.
 - GUI smoke test was attempted, but the launched process did not remain visible for inspection in this environment.
 
 ## Current blockers

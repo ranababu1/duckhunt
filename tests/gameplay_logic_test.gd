@@ -8,6 +8,7 @@ const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 const GameManagerScript = preload("res://scripts/core/game_manager.gd")
 const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
 const SaveServiceScript = preload("res://scripts/core/save_service.gd")
+const InputControllerScript = preload("res://scripts/gameplay/input_controller.gd")
 
 var failures: Array[String] = []
 
@@ -21,6 +22,7 @@ func _init() -> void:
 	_test_scoring_and_lives()
 	_test_pause_navigation()
 	_test_save_persistence()
+	_test_input_coordinate_conversion()
 	if failures.is_empty():
 		print("PASS: gameplay logic tests")
 		quit(0)
@@ -164,6 +166,11 @@ func _test_save_persistence() -> void:
 	var absolute_path := ProjectSettings.globalize_path(TEST_SAVE_PATH)
 	if FileAccess.file_exists(TEST_SAVE_PATH):
 		DirAccess.remove_absolute(absolute_path)
+
+func _test_input_coordinate_conversion() -> void:
+	var canvas_transform := Transform2D(0.0, Vector2(100.0, 50.0))
+	var playfield_position := InputControllerScript.viewport_to_canvas(Vector2(420.0, 300.0), canvas_transform)
+	_assert(playfield_position == Vector2(320.0, 250.0), "viewport touch should be converted through the inverse canvas transform")
 
 func _assert(condition: bool, description: String) -> void:
 	if not condition:

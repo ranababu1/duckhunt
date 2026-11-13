@@ -13,9 +13,11 @@ const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 const ScoreServiceScript = preload("res://scripts/gameplay/score_service.gd")
 const GameUIScript = preload("res://scripts/ui/game_ui.gd")
 const SaveServiceScript = preload("res://scripts/core/save_service.gd")
+const InputControllerScript = preload("res://scripts/gameplay/input_controller.gd")
 
 var ui
 var audio
+var input_controller
 var ducks: Array = []
 var weapon
 var run
@@ -35,11 +37,13 @@ func _ready() -> void:
 	game_manager = GameManagerScript.new()
 	ui = GameUIScript.new()
 	audio = get_node("AudioManager")
+	input_controller = InputControllerScript.new()
 	add_child(weapon)
 	add_child(run)
 	add_child(round)
 	add_child(game_manager)
 	add_child(ui)
+	add_child(input_controller)
 	weapon.process_mode = Node.PROCESS_MODE_PAUSABLE
 	round.process_mode = Node.PROCESS_MODE_PAUSABLE
 	game_manager.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -57,6 +61,7 @@ func _ready() -> void:
 	run.life_depleted.connect(game_manager.on_lives_depleted)
 	game_manager.round_started.connect(_apply_round_config)
 	game_manager.state_changed.connect(_on_game_state_changed)
+	input_controller.shot_requested.connect(_try_fire)
 	ui.play_requested.connect(_start_run)
 	ui.pause_requested.connect(_pause_run)
 	ui.resume_requested.connect(_resume_run)
@@ -83,11 +88,7 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventScreenTouch and event.pressed:
-		_try_fire(event.position)
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		_try_fire(event.position)
-	elif event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause"):
 		_handle_back_navigation()
 
 func _notification(what: int) -> void:

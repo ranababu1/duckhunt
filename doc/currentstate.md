@@ -9,7 +9,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for Android development version metadata.
+- Latest implementation commit: `9b91f22` (`Set Android development version metadata`).
 
 ## Implemented features
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Android development version metadata
+## 2026-11-13 — `9b91f22` Android development version metadata
 
 ### Added
 

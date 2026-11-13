@@ -9,7 +9,7 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending difficulty-curve adjustment.
+- Latest implementation commit: `3c01c15` (`Ramp duck difficulty across Classic Mode`).
 
 ## Implemented features
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Progressive difficulty curve
+## 2026-11-13 — `3c01c15` Progressive difficulty curve
 
 ### Changed
 

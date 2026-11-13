@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: pending commit for expanded collision/wave/background tests.
+- Latest implementation commit: `3904314` (`Test background and wave edge cases`).
 
 ## Implemented features
 

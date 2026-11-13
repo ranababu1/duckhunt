@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — `036b640`
+## 2026-11-13 — `3904314`
 
 ### Added
 
@@ -14,7 +14,7 @@
 
 - Integrate supplied art/audio and proceed to Android device QA.
 
-## 2026-11-13 — Previous flow test increment
+## 2026-11-13 — `036b640`
 
 ### Added
 

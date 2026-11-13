@@ -17,6 +17,14 @@ func _ready() -> void:
 	current_ammo = magazine_capacity
 	ammo_changed.emit(current_ammo, magazine_capacity)
 
+func configure(new_capacity: int, new_reload_duration: float) -> void:
+	magazine_capacity = new_capacity
+	reload_duration = new_reload_duration
+	current_ammo = magazine_capacity
+	is_reloading = false
+	reload_remaining = 0.0
+	ammo_changed.emit(current_ammo, magazine_capacity)
+
 func request_fire(shot_position: Vector2) -> bool:
 	if is_reloading:
 		return false

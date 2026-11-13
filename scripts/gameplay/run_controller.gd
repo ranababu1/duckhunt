@@ -8,6 +8,13 @@ var hits := 0
 var misses := 0
 var score := 0
 
+func reset_run() -> void:
+	shots_fired = 0
+	hits = 0
+	misses = 0
+	score = 0
+	_emit_counters()
+
 func record_shot() -> void:
 	shots_fired += 1
 	_emit_counters()

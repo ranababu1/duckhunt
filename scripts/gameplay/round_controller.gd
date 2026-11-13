@@ -13,6 +13,14 @@ var round_hits := 0
 var escapes := 0
 var is_finished := false
 
+func start_round(config: Resource) -> void:
+	required_hits = config.required_hits
+	allowed_escapes = config.allowed_escapes
+	round_hits = 0
+	escapes = 0
+	is_finished = false
+	quota_changed.emit(round_hits, required_hits)
+
 func register_hit() -> void:
 	if is_finished:
 		return

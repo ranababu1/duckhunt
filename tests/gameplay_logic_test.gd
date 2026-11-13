@@ -4,6 +4,8 @@ const DuckScript = preload("res://scripts/gameplay/duck.gd")
 const WeaponControllerScript = preload("res://scripts/gameplay/weapon_controller.gd")
 const RunControllerScript = preload("res://scripts/gameplay/run_controller.gd")
 const RoundControllerScript = preload("res://scripts/gameplay/round_controller.gd")
+const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
+const GameManagerScript = preload("res://scripts/core/game_manager.gd")
 
 var failures: Array[String] = []
 
@@ -12,6 +14,7 @@ func _init() -> void:
 	_test_accuracy_with_zero_shots()
 	_test_round_outcomes()
 	_test_duck_terminal_states()
+	_test_classic_round_progression()
 	if failures.is_empty():
 		print("PASS: gameplay logic tests")
 		quit(0)
@@ -71,6 +74,20 @@ func _test_duck_terminal_states() -> void:
 	_assert(duck.state == duck.State.ESCAPING, "offscreen flying duck should escape")
 	_assert(not duck.try_hit(duck.position), "escaped duck must reject attempted hits")
 	duck.free()
+
+func _test_classic_round_progression() -> void:
+	var configs: Array = RoundCatalogScript.classic_mode()
+	_assert(configs.size() == 10, "classic mode must provide ten rounds")
+	_assert(configs[0].round_number == 1 and configs[9].round_number == 10, "round numbers must span one through ten")
+	_assert(configs[9].min_flight_speed > configs[0].min_flight_speed, "later rounds must increase flight speed")
+	var manager = GameManagerScript.new()
+	manager.configure(configs)
+	manager.start_run()
+	_assert(manager.state == manager.State.PLAYING, "starting a configured run should enter playing state")
+	manager.on_round_cleared()
+	manager._process(manager.ROUND_TRANSITION_DURATION)
+	_assert(manager.current_round_index == 1, "cleared round should advance to the next round")
+	manager.free()
 
 func _assert(condition: bool, description: String) -> void:
 	if not condition:

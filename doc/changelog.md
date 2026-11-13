@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-11-13 — Uncommitted
+
+### Added
+
+- Data-driven configuration table for ten Classic Mode rounds.
+- Game manager for high-level playing, round-clear, game-over, and run-complete state transitions.
+
+### Changed
+
+- Greybox HUD and spawn speed now follow the active round configuration.
+
+### Tests
+
+- Extended headless gameplay tests to verify the 10-round catalog and advancement after a round clear.
+
+### Follow-up
+
+- Implement lives, bonuses, menus/results, and multi-target waves.
+
 ## 2026-11-13 — `6297c59`, `7c45856`
 
 ### Added

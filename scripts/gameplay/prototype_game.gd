@@ -9,11 +9,15 @@ const DuckScript = preload("res://scripts/gameplay/duck.gd")
 const WeaponControllerScript = preload("res://scripts/gameplay/weapon_controller.gd")
 const RunControllerScript = preload("res://scripts/gameplay/run_controller.gd")
 const RoundControllerScript = preload("res://scripts/gameplay/round_controller.gd")
+const GameManagerScript = preload("res://scripts/core/game_manager.gd")
+const RoundCatalogScript = preload("res://scripts/data/round_catalog.gd")
 
 var duck
 var weapon
 var run
 var round
+var game_manager
+var active_round_config
 var feedback := "TAP THE DUCK"
 var feedback_time := 0.0
 var shot_marker := Vector2.ZERO
@@ -23,10 +27,12 @@ func _ready() -> void:
 	weapon = WeaponControllerScript.new()
 	run = RunControllerScript.new()
 	round = RoundControllerScript.new()
+	game_manager = GameManagerScript.new()
 	duck = DuckScript.new()
 	add_child(weapon)
 	add_child(run)
 	add_child(round)
+	add_child(game_manager)
 	add_child(duck)
 	weapon.shot_fired.connect(_resolve_shot)
 	weapon.reload_started.connect(func() -> void: _show_feedback("RELOADING"))
@@ -34,9 +40,13 @@ func _ready() -> void:
 	duck.resolved_hit.connect(_on_duck_hit)
 	duck.resolved_escape.connect(_on_duck_escaped)
 	duck.terminal_animation_finished.connect(_on_duck_terminal_finished)
-	round.round_cleared.connect(func() -> void: _show_feedback("ROUND CLEAR"))
-	round.round_failed.connect(func() -> void: _show_feedback("ROUND FAILED"))
-	_spawn_duck()
+	round.round_cleared.connect(_on_round_cleared)
+	round.round_failed.connect(_on_round_failed)
+	game_manager.round_started.connect(_apply_round_config)
+	game_manager.state_changed.connect(_on_game_state_changed)
+	game_manager.configure(RoundCatalogScript.classic_mode())
+	run.reset_run()
+	game_manager.start_run()
 	queue_redraw()
 
 func _process(delta: float) -> void:
@@ -54,6 +64,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _try_fire(shot_position: Vector2) -> void:
 	if not PLAYFIELD.has_point(shot_position):
+		return
+	if game_manager.state != game_manager.State.PLAYING:
 		return
 	if weapon.is_reloading:
 		_show_feedback("RELOADING")
@@ -78,11 +90,32 @@ func _on_duck_escaped(_duck: Node2D) -> void:
 	_show_feedback("ESCAPED")
 
 func _on_duck_terminal_finished(_duck: Node2D) -> void:
-	if not round.is_finished:
+	if game_manager.state == game_manager.State.PLAYING and not round.is_finished:
 		_spawn_duck()
 
+func _on_round_cleared() -> void:
+	game_manager.on_round_cleared()
+
+func _on_round_failed() -> void:
+	game_manager.on_round_failed()
+
+func _apply_round_config(config: Resource) -> void:
+	active_round_config = config
+	round.start_round(config)
+	weapon.configure(config.ammo_per_magazine, config.reload_duration)
+	_spawn_duck()
+
+func _on_game_state_changed(_previous_state: int, new_state: int) -> void:
+	if new_state == game_manager.State.ROUND_CLEAR:
+		_show_feedback("ROUND %d CLEAR" % active_round_config.round_number)
+	elif new_state == game_manager.State.GAME_OVER:
+		_show_feedback("GAME OVER")
+	elif new_state == game_manager.State.RUN_COMPLETE:
+		_show_feedback("CLASSIC MODE CLEAR")
+
 func _spawn_duck() -> void:
-	duck.start_flight(Vector2(PLAYFIELD.position.x - DUCK_RADIUS, 272.0), PLAYFIELD, Vector2(180.0, 0.0))
+	var speed: float = active_round_config.min_flight_speed
+	duck.start_flight(Vector2(PLAYFIELD.position.x - DUCK_RADIUS, 272.0), PLAYFIELD, Vector2(speed, 0.0))
 
 func _show_feedback(message: String) -> void:
 	feedback = message
@@ -104,7 +137,8 @@ func _draw() -> void:
 func _draw_hud() -> void:
 	draw_rect(Rect2(18, 14, 924, 50), Color("18334d"))
 	_draw_text("SCORE %05d" % run.score, Vector2(34, 47), 22, Color("fff4b5"))
-	_draw_centered_text("GREYBOX RANGE", Vector2(480, 47), 18, Color("d9f0ff"))
+	var round_label := "ROUND -- / 10" if active_round_config == null else "ROUND %d / 10" % active_round_config.round_number
+	_draw_centered_text(round_label, Vector2(480, 47), 18, Color("d9f0ff"))
 	_draw_text("AMMO", Vector2(726, 47), 18, Color("fff4b5"))
 	for index in weapon.magazine_capacity:
 		var bullet_color := Color("ffd35c") if index < weapon.current_ammo else Color("6d8291")

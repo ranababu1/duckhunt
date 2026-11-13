@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `a1eab44` (`Add original duck animation and action effects`).
+- Latest implementation commit: `444f8f8` (`Add rectangular arcade UI theme`).
 
 ## Implemented features
 

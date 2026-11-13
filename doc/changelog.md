@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Original rectangular arcade UI theme
+## 2026-11-13 — `444f8f8` Original rectangular arcade UI theme
 
 ### Added
 

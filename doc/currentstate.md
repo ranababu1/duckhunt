@@ -9,12 +9,13 @@ M5 (Android MVP polish) is in progress. Gameplay, 10 rounds, menus, persistence,
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `9829d05` (`Add Android development icon and boot splash`).
+- Latest implementation commit: pending commit for Android development version metadata.
 
 ## Implemented features
 
 - Landscape 960 x 540 Godot project configuration with canvas-item stretching, nearest texture filtering, and Android ETC2/ASTC texture import enabled.
 - Android debug export preset using the user-provided package ID `dev.imrn.duckhunt`; app label is `Open Range (Development)` while public naming is pending clearance.
+- Android debug build version is `0.1.0-dev` (version code 1); increment the code before each store release upload.
 - Locally installed Android SDK, JDK 17, and API 35 Pixel 6 emulator; Godot's local debug keystore is outside the repository.
 - Original pixel-art daytime range background integrated through the replaceable `ArtAssetSet.background` slot; separate parallax-layer slots remain available for future supplied art.
 - Original no-text development app icon assigned to Godot and the Android debug preset; public store branding remains provisional.

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-13 — Android development version metadata
+
+### Added
+
+- Project version `0.1.0` and Android debug version name `0.1.0-dev` with version code `1`.
+
+### Verification
+
+- Re-exported and signed the Android debug APK; inspected its manifest and confirmed package `dev.imrn.duckhunt`, version name `0.1.0-dev`, and version code `1`.
+- Installed and launched the new APK in the visible Pixel API 35 AVD.
+
 ## 2026-11-13 — `9829d05` Android development icon and boot splash
 
 ### Added

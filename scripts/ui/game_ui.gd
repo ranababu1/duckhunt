@@ -19,6 +19,7 @@ var root: Control
 var screens: Dictionary = {}
 var settings: Dictionary = {}
 var custom_theme: Theme
+var title_logo: Texture2D
 var settings_return_screen := "title"
 var title_confirm_visible := false
 
@@ -78,6 +79,17 @@ func current_settings() -> Dictionary:
 
 func _create_title() -> void:
 	var panel := _make_screen("title", "OPEN RANGE", "A quick arcade shooting game", "title_best")
+	if title_logo != null:
+		var content := panel.get_child(0).get_child(0) as VBoxContainer
+		(content.get_child(0) as Label).visible = false
+		var logo := TextureRect.new()
+		logo.name = "title_logo"
+		logo.texture = title_logo
+		logo.custom_minimum_size = Vector2(320.0, 76.0)
+		logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		logo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		content.add_child(logo)
+		content.move_child(logo, 0)
 	_add_button(panel, "PLAY CLASSIC", func() -> void: play_requested.emit())
 	_add_button(panel, "HOW TO PLAY", func() -> void: tutorial_requested.emit())
 	_add_button(panel, "SETTINGS", func() -> void: _open_settings())

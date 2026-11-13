@@ -9,6 +9,7 @@ extends Resource
 @export var foreground: Texture2D
 @export var shot_effect: Texture2D
 @export var hit_spark: Texture2D
+@export var title_logo: Texture2D
 
 ## SpriteFrames animations are named `fly`, `hit`, and `escape`.
 @export var duck_frames: SpriteFrames

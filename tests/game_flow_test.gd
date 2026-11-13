@@ -16,6 +16,10 @@ func _run_flow() -> void:
 	_assert(not main._draw_art_background(), "incomplete background layers should keep the geometric fallback")
 	_assert(main.game_manager.state == main.game_manager.State.MENU, "game should open on title")
 	_assert(main.ui.screens["title"].visible, "title screen should be visible on launch")
+	var title_text := ""
+	for label in main.ui.screens["title"].find_children("*", "Label", true, false):
+		title_text += label.text + " "
+	_assert(title_text.contains("OPEN RANGE"), "placeholder title should remain visible when no logo is assigned")
 	main.ui.tutorial_requested.emit()
 	_assert(main.ui.screens["tutorial"].visible, "How to Play should open from the title screen")
 	var tutorial_text := ""

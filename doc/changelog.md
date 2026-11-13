@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-13 — Title logo slot (in progress)
+
+### Added
+
+- Optional title-logo texture in `ArtAssetSet`; the placeholder text remains visible when no logo is assigned.
+
+### Tests
+
+- Passed gameplay logic tests, full game-flow smoke test, and three-second headless scene launch.
+- Flow test confirms the placeholder title remains available without supplied branding.
+
+### Follow-up
+
+- Assign legally cleared original branding when provided and review the title-screen layout visually.
+
 ## 2026-11-13 — `80f8bf4`
 
 ### Added

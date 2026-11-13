@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `80f8bf4` (`Add action effect art slots`).
+- Latest commit: `23b0803` (`Record action effect asset slots`); title-logo slot is in progress.
 
 ## Implemented features
 
@@ -35,6 +35,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 - Main scene exposes an `ArtAssetSet` resource for four background layers and named duck animation states, with geometric fallbacks until assets are assigned.
 - Assigned art sets can supply an optional Godot Theme for menu and HUD control styling.
 - Art sets also accept optional shot-flash and hit-spark textures, with existing effects retained as fallbacks and reduced-flash respected.
+- Art sets accept an optional title-logo texture that replaces the working-title text while retaining it as a fallback.
 - App background/window focus loss automatically pauses active play, and remaining targets are retired when a new round starts.
 - Dedicated input controller converts viewport taps through the inverse canvas transform and emits shots only for unhandled playfield touches.
 - Initial Godot-oriented folder layout and ignore rules.

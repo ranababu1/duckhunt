@@ -40,6 +40,7 @@ func _ready() -> void:
 	ui = GameUIScript.new()
 	if art_assets != null:
 		ui.custom_theme = art_assets.get("ui_theme") as Theme
+		ui.title_logo = art_assets.get("title_logo") as Texture2D
 	audio = get_node("AudioManager")
 	input_controller = InputControllerScript.new()
 	add_child(weapon)

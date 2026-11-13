@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Android debug export and emulator check
+## 2026-11-13 — `b0a67a9` Android debug export and emulator check
 
 ### Added
 

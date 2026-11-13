@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest implementation commit: `292e39e` (`Isolate game flow saves from player data`).
+- Latest implementation commit: `b0a67a9` (`Add Android debug export preset`).
 
 ## Implemented features
 

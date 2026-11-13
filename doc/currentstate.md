@@ -9,7 +9,7 @@ M4 (Art, animation, and audio integration) is in progress. Gameplay, 10 rounds, 
 ## Branch and latest commit
 
 - Branch: `main`
-- Latest commit: `544515a` (`Record full campaign flow coverage`); round-local scoring corrections are in progress.
+- Latest implementation commit: `41dcd0b` (`Use round-local clear scoring`).
 
 ## Implemented features
 

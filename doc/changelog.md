@@ -1,6 +1,6 @@
 # Changelog
 
-## 2026-11-13 — Round-local clear scoring (in progress)
+## 2026-11-13 — `41dcd0b`
 
 ### Fixed
 
